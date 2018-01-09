@@ -1,0 +1,797 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="xfermode是什么 Xfermode is the base class for objects that are called to implement custom “transfer-modes” in the drawing pipeline. The static function Create(Modes) can be called to return an instance o">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Paint的Xfermode属性知多少">
+<meta property="og:url" content="http://yoursite.com/2018/01/05/Paint的Xfermode属性知多少/index.html">
+<meta property="og:site_name" content="非常好听的名字">
+<meta property="og:description" content="xfermode是什么 Xfermode is the base class for objects that are called to implement custom “transfer-modes” in the drawing pipeline. The static function Create(Modes) can be called to return an instance o">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-29e60b2028ccb330.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-fc5256ef4f3971e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-9cff7cd85697790b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-de10b18c44359268.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-a2613c842b40750f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-64918eb496238a9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-8057441c391736f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-73377589966cb910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-d98a33ff7d04647a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-19f0cd732d1bcb83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-4710e57d4e04c703.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-f9dac44b2207156c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-1b3ee6e9c1ec9dd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-b5fc386a0a51bba8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-9bad95f81dfcff9d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-a85efb8c9959a3fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-79ee2fbeca3973a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-52e3b310cc791623.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-6bde01c0438a037b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-558b356c54374ea4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-55c465a68ed43983.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-09T07:27:02.258Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Paint的Xfermode属性知多少">
+<meta name="twitter:description" content="xfermode是什么 Xfermode is the base class for objects that are called to implement custom “transfer-modes” in the drawing pipeline. The static function Create(Modes) can be called to return an instance o">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4463150-29e60b2028ccb330.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/01/05/Paint的Xfermode属性知多少/"/>
+
+
+
+
+
+  <title>Paint的Xfermode属性知多少 | 非常好听的名字</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">非常好听的名字</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/01/05/Paint的Xfermode属性知多少/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="非常好听的名字">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Paint的Xfermode属性知多少</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-05T14:21:26+08:00">
+                2018-01-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h6 id="xfermode是什么"><a href="#xfermode是什么" class="headerlink" title="xfermode是什么"></a>xfermode是什么</h6><blockquote>
+<p>Xfermode is the base class for objects that are called to implement custom “transfer-modes” in the drawing pipeline. The static function Create(Modes) can be called to return an instance of any of the predefined subclasses as specified in the Modes enum. When an Xfermode is assigned to an Paint, then objects drawn with that paint have the xfermode applied.<br><a id="more"></a><br>上面是Google官方的解释，大概意思是<br>Xfermode是在绘图通道中自定义“传输模式”的基类。静态函数创建可以调用或者返回任意作为模式枚举指定的预定义子类实例。当Xfermode分配给Paint，然后绘制对象的Paint就具备了所添加的xfermode。</p>
+</blockquote>
+<p>呵呵，傻雕，根本不知道你在说啥……</p>
+<p>哈，没关系，没关系的，你走吧！</p>
+<h5 id="paint-setXfermode方法熟悉吗？"><a href="#paint-setXfermode方法熟悉吗？" class="headerlink" title="paint.setXfermode方法熟悉吗？"></a>paint.setXfermode方法熟悉吗？</h5><p>什么？熟悉，好吧，你可以滚了。我不爽了！<br>其实，xfermode也叫做图片混排模式，学过高中的数学没，就是两个数据取交集并集等的操作，这里是对图片的处理。<br>嗯，等会再说怎么用，急个鸡儿。</p>
+<p>来看看官方的资料：<br><img src="http://upload-images.jianshu.io/upload_images/4463150-29e60b2028ccb330.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="儿砸.png"></p>
+<p>妈卖批，怎么只剩下一个儿子了，传说中它有3个儿砸，老大是AvoidXfermode，老二是PixelXorXfermode，老三才是PorterDuffXfermode. 前两个都可能光荣牺牲了，剩下老三最得力。感性趣的自行Google前两个的光荣事迹。</p>
+<h5 id="我们来看看三儿崽PorterDuffXfermode"><a href="#我们来看看三儿崽PorterDuffXfermode" class="headerlink" title="我们来看看三儿崽PorterDuffXfermode"></a>我们来看看三儿崽PorterDuffXfermode</h5><p><img src="http://upload-images.jianshu.io/upload_images/4463150-fc5256ef4f3971e1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="狗造方法.png"><br>可以看到只有一个构造方法，参数也只有一个，PorterDuff.Mode。这个就是图片混排模式，Android最新的api提供了18中混排模式，<a href="https://developer.android.com/reference/android/graphics/PorterDuff.Mode.html" target="_blank" rel="noopener">地址这里</a>，官网的图片太大，我先拿其他童鞋的顶住先<br><img src="http://upload-images.jianshu.io/upload_images/4463150-9cff7cd85697790b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="盗图.png"></p>
+<p>这里的src是源图层，dst是目标图层。经过18中不同的混排模式混合，得到不一样的效果，下面对这些效果一一讲解。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><span class="line">public class XfermodeView extends View &#123;</span><br><span class="line"></span><br><span class="line">    private Xfermode mXfermode;</span><br><span class="line">	private Bitmap srcBitmap,dstBitmap;</span><br><span class="line">	private Paint paint;</span><br><span class="line"></span><br><span class="line">    public XfermodeView(Context context) &#123;</span><br><span class="line">        this(context,null);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public XfermodeView(Context context, @Nullable AttributeSet attrs) &#123;</span><br><span class="line">        super(context, attrs);</span><br><span class="line">        init();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">        mXfermode = new PorterDuffXfermode(PorterDuff.Mode.DST_OVER);</span><br><span class="line">        srcBitmap = makeSrcBitmap();</span><br><span class="line">        dstBitmap = makeDstBitmap();</span><br><span class="line">        initPaint();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void initPaint() &#123;</span><br><span class="line">        paint = new Paint();</span><br><span class="line">        paint.setAntiAlias(true);</span><br><span class="line">        paint.setStyle(Paint.Style.FILL);</span><br><span class="line">        paint.setFilterBitmap(false);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private Bitmap makeDstBitmap() &#123;</span><br><span class="line">        Bitmap bitmap = Bitmap.createBitmap(800,800, Bitmap.Config.ARGB_8888);</span><br><span class="line">        Canvas canvas = new Canvas(bitmap);</span><br><span class="line">        Paint paint = new Paint();</span><br><span class="line">        paint.setAntiAlias(true);</span><br><span class="line">        paint.setColor(Color.parseColor(&quot;#269647&quot;));</span><br><span class="line">        canvas.drawCircle(300,300,200,paint);</span><br><span class="line">        return bitmap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private Bitmap makeSrcBitmap() &#123;</span><br><span class="line">        Bitmap bitmap = Bitmap.createBitmap(800,800, Bitmap.Config.ARGB_8888);</span><br><span class="line">        Canvas canvas = new Canvas(bitmap);</span><br><span class="line">        Paint paint = new Paint();</span><br><span class="line">        paint.setAntiAlias(true);</span><br><span class="line">        paint.setColor(Color.parseColor(&quot;#E08F53&quot;));</span><br><span class="line">        canvas.drawRect(200,200,600,600,paint);</span><br><span class="line">        return bitmap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">        int sc = 0;</span><br><span class="line">        if (android.os.Build.VERSION.SDK_INT &gt;= android.os.Build.VERSION_CODES.LOLLIPOP) &#123;</span><br><span class="line">            sc = canvas.saveLayer(0,0,800,800,paint);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        canvas.drawBitmap(dstBitmap,0,0,paint);</span><br><span class="line">        paint.setXfermode(mXfermode);</span><br><span class="line"></span><br><span class="line">        canvas.drawBitmap(srcBitmap,0,0,paint);</span><br><span class="line">        paint.setXfermode(null);</span><br><span class="line">        canvas.restoreToCount(sc);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>上面的是代码，我们通过更改xfermode的属性来看看不同的效果显示。<br><img src="http://upload-images.jianshu.io/upload_images/4463150-de10b18c44359268.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.DST.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-a2613c842b40750f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.SRC.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-64918eb496238a9a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.DST_OVER.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-8057441c391736f4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.SRC_OVER.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-73377589966cb910.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.SRC_ATOP.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-d98a33ff7d04647a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.SRC_IN.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-19f0cd732d1bcb83.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.SRC_OUT.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-4710e57d4e04c703.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.DST_ATOP.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-f9dac44b2207156c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.DST_IN.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-1b3ee6e9c1ec9dd9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.DST_OUT.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-b5fc386a0a51bba8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.SCREEN.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-9bad95f81dfcff9d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.ADD.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-a85efb8c9959a3fb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.CLEAR.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-79ee2fbeca3973a2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.DARKEN.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-52e3b310cc791623.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.LIGHTEN.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-6bde01c0438a037b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.MULTIPLY.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-558b356c54374ea4.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.OVERLAY.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-55c465a68ed43983.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PorterDuff.Mode.XOR.png"></p>
+<h5 id="应用于哪些方面"><a href="#应用于哪些方面" class="headerlink" title="应用于哪些方面"></a>应用于哪些方面</h5><p>额，不太好说吧，需要这种骚操作的话都能用上，举个常见的栗子，圆形头像的处理，就可以用这种方法来完成。</p>
+<p>下面的完整的代码，如果需要用的话还是需要做一些处理的，不是很完善<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line">public class RoundImageView extends ImageView &#123;</span><br><span class="line"></span><br><span class="line">	private Xfermode xfermode;</span><br><span class="line">	private Paint mPaint;</span><br><span class="line"></span><br><span class="line">	public RoundImageView(Context context) &#123;</span><br><span class="line">		this(context, null);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public RoundImageView(Context context, @Nullable AttributeSet attrs) &#123;</span><br><span class="line">		this(context, attrs, 0);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public RoundImageView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) &#123;</span><br><span class="line">		super(context, attrs, defStyleAttr);</span><br><span class="line">		initPaint();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	protected void onDraw(Canvas canvas) &#123;</span><br><span class="line">		Drawable drawable = getDrawable();</span><br><span class="line">		if (drawable == null) &#123;</span><br><span class="line">			super.onDraw(canvas);</span><br><span class="line">			return;</span><br><span class="line">		&#125;</span><br><span class="line">		int widthAndHeightSize = Math.min(getWidth(), getHeight());</span><br><span class="line">		int left = (getWidth() - widthAndHeightSize) / 2;</span><br><span class="line">		int height = (getHeight() - widthAndHeightSize) / 2;</span><br><span class="line"></span><br><span class="line">		int layer = canvas.saveLayer(left, height, getWidth() - left, getHeight() - height, mPaint, Canvas.ALL_SAVE_FLAG);</span><br><span class="line"></span><br><span class="line">		canvas.drawBitmap(createDstBitmap(widthAndHeightSize), left, height, mPaint);// 目标dst</span><br><span class="line">		mPaint.setXfermode(xfermode);</span><br><span class="line"></span><br><span class="line">		canvas.drawBitmap(convertDrawable2BitmapByCanvas(drawable),0,0,mPaint);//源src</span><br><span class="line">		mPaint.setXfermode(null);</span><br><span class="line">		canvas.restoreToCount(layer);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	public Bitmap convertDrawable2BitmapByCanvas(Drawable drawable) &#123;</span><br><span class="line">		Bitmap bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicWidth(),</span><br><span class="line">				drawable.getOpacity() != PixelFormat.OPAQUE ? Bitmap.Config.ARGB_8888 : Bitmap.Config.RGB_565);</span><br><span class="line">		Canvas canvas = new Canvas(bitmap);</span><br><span class="line">		drawable.setBounds(0, 0, drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight());</span><br><span class="line">		drawable.draw(canvas);</span><br><span class="line">		return bitmap;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private Bitmap createDstBitmap(int widthAndHeight) &#123;</span><br><span class="line">		Bitmap bitmap = Bitmap.createBitmap(widthAndHeight, widthAndHeight, Bitmap.Config.ARGB_8888);</span><br><span class="line">		Canvas canvas = new Canvas(bitmap);</span><br><span class="line">		Paint paint = new Paint();</span><br><span class="line">		paint.setAntiAlias(true);</span><br><span class="line">		paint.setColor(Color.RED);</span><br><span class="line">		paint.setStyle(Paint.Style.FILL);</span><br><span class="line">		canvas.drawCircle(widthAndHeight / 2, widthAndHeight / 2, widthAndHeight / 2, paint);</span><br><span class="line">		return bitmap;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	private void initPaint() &#123;</span><br><span class="line">		mPaint = new Paint();</span><br><span class="line">		mPaint.setAntiAlias(true);</span><br><span class="line">		mPaint.setFilterBitmap(false);</span><br><span class="line">		mPaint.setStyle(Paint.Style.FILL);</span><br><span class="line">		xfermode = new PorterDuffXfermode(PorterDuff.Mode.SRC_IN);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>恩，你以为就这样完了吗，对没错，就是这样玩。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/26/ConstraintLayout从相识到白头/" rel="next" title="ConstraintLayout从相识到白头">
+                <i class="fa fa-chevron-left"></i> ConstraintLayout从相识到白头
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/th.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">帅比</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#xfermode是什么"><span class="nav-number">1.</span> <span class="nav-text">xfermode是什么</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#paint-setXfermode方法熟悉吗？"><span class="nav-number"></span> <span class="nav-text">paint.setXfermode方法熟悉吗？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#我们来看看三儿崽PorterDuffXfermode"><span class="nav-number"></span> <span class="nav-text">我们来看看三儿崽PorterDuffXfermode</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#应用于哪些方面"><span class="nav-number"></span> <span class="nav-text">应用于哪些方面</span></a></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
+  <script type="text/javascript" src="/_scripts/love.js"></script>
+</body>
+</html>

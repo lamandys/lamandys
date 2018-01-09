@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="1. 为什么要用枚举？在开发中我们是不是经常都自己定义一些固定不变的静态常量来作为其他方法的参数或者是判断的条件？比如：">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android性能优化慎用Enum的代替方法">
+<meta property="og:url" content="http://yoursite.com/2017/10/25/Android性能优化慎用Enum的代替方法/index.html">
+<meta property="og:site_name" content="非常好听的名字">
+<meta property="og:description" content="1. 为什么要用枚举？在开发中我们是不是经常都自己定义一些固定不变的静态常量来作为其他方法的参数或者是判断的条件？比如：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-a4975eb7494d7572.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-46da48a7d583064e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-3485879c5cc22c0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-40039e22d19ce53d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-09T07:20:57.438Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android性能优化慎用Enum的代替方法">
+<meta name="twitter:description" content="1. 为什么要用枚举？在开发中我们是不是经常都自己定义一些固定不变的静态常量来作为其他方法的参数或者是判断的条件？比如：">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4463150-a4975eb7494d7572.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/10/25/Android性能优化慎用Enum的代替方法/"/>
+
+
+
+
+
+  <title>Android性能优化慎用Enum的代替方法 | 非常好听的名字</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">非常好听的名字</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/10/25/Android性能优化慎用Enum的代替方法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="非常好听的名字">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Android性能优化慎用Enum的代替方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-25T23:13:23+08:00">
+                2017-10-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h6 id="1-为什么要用枚举？"><a href="#1-为什么要用枚举？" class="headerlink" title="1. 为什么要用枚举？"></a>1. 为什么要用枚举？</h6><p>在开发中我们是不是经常都自己定义一些固定不变的静态常量来作为其他方法的参数或者是判断的条件？比如：<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">private static final int SEX_GIRL = 0;</span><br><span class="line">private static final int SEX_BOY = 1;</span><br></pre></td></tr></table></figure></p>
+<p>当我们需要把这些作为参数传递的时候，就会出现取值范围不清楚的问题，调用者在不知道源码的情况下有可能会导致传值错误，比如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">    private static final int SEX_GIRL = 0;</span><br><span class="line">    private static final int SEX_BOY = 1;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    private int sex;</span><br><span class="line"></span><br><span class="line">    public int getSex() &#123;</span><br><span class="line">        return sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSex(int sex) &#123;</span><br><span class="line">        this.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">   Person person = new Person();</span><br><span class="line">   person.setSex(23333);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>噢，天哪，谁知道23333的性别是男的还是女的亦或者是gay？为此，在Java1.5版本之后，枚举就被隆重的请了出来主持大局。</p>
+<h6 id="2-使用enum来避免传入不合法的参数"><a href="#2-使用enum来避免传入不合法的参数" class="headerlink" title="2. 使用enum来避免传入不合法的参数"></a>2. 使用enum来避免传入不合法的参数</h6><p>为了避免上面的情况，下面用枚举来完善下，代码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">public class Person &#123;</span><br><span class="line">    public enum Sex &#123;</span><br><span class="line">        SEX_BOY,SEX_GIRL</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    private Sex sex;</span><br><span class="line"></span><br><span class="line">    public Sex getSex() &#123;</span><br><span class="line">        return sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public void setSex(Sex sex) &#123;</span><br><span class="line">        this.sex = sex;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line"></span><br><span class="line">    Person person = new Person();</span><br><span class="line">    person.setSex(Person.Sex.SEX_BOY);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里指定了参数的类型是Sex，而Sex也只有两个参数可选，避免了上面的传错参数的风险，比较直观。</p>
+<h6 id="3-为什么又不用了？"><a href="#3-为什么又不用了？" class="headerlink" title="3. 为什么又不用了？"></a>3. 为什么又不用了？</h6><p>上面的用法从表面上看起来是没有什么问题，的确也是这样！使用枚举真的很方便（至少我是这样认为的）</p>
+<p>但是为什么呢，原因是众所周知的了，Android官方文档中也有说明，enum中的每一个值其实都是一个Object对象，每声明一个值就会创建一部分的内存以使它能够被引用到这个对象，相比于静态常量，enum会花费近2倍的内存空间。</p>
+<p>到这里可能有人会问，现在的手机设备基本上都有比较大的内存空间，再多倍的内存创建也能顶的起吧？！emmu，这个不可否认，现在基本都是大内存的设备运行项目也流畅了许多，但是你不也不能否认的是，的确是还存在一部分人的设备还是比较小的内存的，开发不是只为一部分人……而且不要忘记，手机为一个应用所创建的内存空间还是有限的。</p>
+<p>好吧，扯多了，回到原来思路上。</p>
+<h6 id="4-要怎么做？"><a href="#4-要怎么做？" class="headerlink" title="4. 要怎么做？"></a>4. 要怎么做？</h6><p>刚才也说到，枚举在很大的程度上是限定了某些属性值得取值，当然还有其他别的作用。<br>既然是限定取值的，肯定有其他方法的是吧，咱们强大的Google大佬怎么会没有解决办法呢！</p>
+<p>下面要用到的知识是：@IntDef 、@StringDef、@Retention、@interface，先上代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">public class TestUtil &#123;</span><br><span class="line"></span><br><span class="line">    public static final int STRING_4G = 0;</span><br><span class="line">    public static final int STRING_3G = 1;</span><br><span class="line">    public static final int STRING_2G = 2;</span><br><span class="line">    public static final int STRING_WIFI = 3;</span><br><span class="line">    public static final int STRING_UNKNOWN = 4;</span><br><span class="line"></span><br><span class="line">    @IntDef(&#123;STRING_4G,STRING_3G,STRING_2G,STRING_WIFI,STRING_UNKNOWN&#125;)</span><br><span class="line">    @Retention(RetentionPolicy.SOURCE)</span><br><span class="line">    public @interface NetWorkStatus&#123;&#125;</span><br><span class="line"></span><br><span class="line">    public static String getNetWorkString(@NetWorkStatus int type) &#123;</span><br><span class="line">        if (type == STRING_4G) &#123;</span><br><span class="line">            return &quot;NETWORK_4G&quot;;</span><br><span class="line">        &#125; else if (type == STRING_3G) &#123;</span><br><span class="line">            return &quot;NETWORK_3G&quot;;</span><br><span class="line">        &#125; else if (type == STRING_2G) &#123;</span><br><span class="line">            return &quot;NETWORK_2G&quot;;</span><br><span class="line">        &#125; else if (type == STRING_WIFI) &#123;</span><br><span class="line">            return &quot;NETWORK_wifi&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return &quot;unknown&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>其中 @IntDef 定义了需要用到的固定常量，@Retention 注解告诉编译器在生成.class文件时不保留枚举注解数据。</p>
+<p>而当我们调用这个方法的时候，如果直接传递数值参数的时候，lint编译器就会爆红色警告，如图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-a4975eb7494d7572.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="警告.png"></p>
+<h6 id="5-其他说明"><a href="#5-其他说明" class="headerlink" title="5. 其他说明"></a>5. 其他说明</h6><ol>
+<li>项目中如果存在大量的枚举使用，不妨试试这种方式代替使用</li>
+<li>如果用到枚举操作复杂的逻辑处理，按难易程度继续适当使用</li>
+<li>这种方式在直接传递数值时会警告提示，但是不影响实际的运行效果，还是可以传递其他数值进行编译运行，感觉不太安全，而枚举可以杜绝这情况的出现</li>
+<li>Android内部很多都是差不多这样操作的，比如Toast的时间参数，如果直接传递0则会出现红色警告，进入源码会发现，多了个@的图标，如图：</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-46da48a7d583064e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Toast.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-3485879c5cc22c0c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="boom.png"></p>
+<p>这跟自己定义的是一样的，也有@图标，如图：</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-40039e22d19ce53d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="#￥#%.png"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/09/20/用一台手机去体验多个屏幕的UI/" rel="next" title="用一台手机去体验多个屏幕的UI">
+                <i class="fa fa-chevron-left"></i> 用一台手机去体验多个屏幕的UI
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/29/Git常用命令/" rel="prev" title="Git常用命令">
+                Git常用命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/th.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">帅比</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#1-为什么要用枚举？"><span class="nav-number">1.</span> <span class="nav-text">1. 为什么要用枚举？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#2-使用enum来避免传入不合法的参数"><span class="nav-number">2.</span> <span class="nav-text">2. 使用enum来避免传入不合法的参数</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#3-为什么又不用了？"><span class="nav-number">3.</span> <span class="nav-text">3. 为什么又不用了？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#4-要怎么做？"><span class="nav-number">4.</span> <span class="nav-text">4. 要怎么做？</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#5-其他说明"><span class="nav-number">5.</span> <span class="nav-text">5. 其他说明</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
+  <script type="text/javascript" src="/_scripts/love.js"></script>
+</body>
+</html>

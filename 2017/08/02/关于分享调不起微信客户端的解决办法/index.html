@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="所遇问题最近在项目开发中，需要用到一个分享的功能。当我千辛万苦的把整个页面的绘制出来转换成比bitmap的时候，算了下，大概最长的图片高度应该有9000+，点击分享到微信，嗯哼？！什么情况？调不起微信客户端，mmp.">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="关于分享调不起微信客户端的解决办法">
+<meta property="og:url" content="http://yoursite.com/2017/08/02/关于分享调不起微信客户端的解决办法/index.html">
+<meta property="og:site_name" content="非常好听的名字">
+<meta property="og:description" content="所遇问题最近在项目开发中，需要用到一个分享的功能。当我千辛万苦的把整个页面的绘制出来转换成比bitmap的时候，算了下，大概最长的图片高度应该有9000+，点击分享到微信，嗯哼？！什么情况？调不起微信客户端，mmp.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-268bae6fa2dee042.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-dadd0c2c97fef9ff.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-71060b28fcf9a61e.gif?imageMogr2/auto-orient/strip">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-73f4862dede85919.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-ca98a3088323a2f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-09T07:18:40.235Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="关于分享调不起微信客户端的解决办法">
+<meta name="twitter:description" content="所遇问题最近在项目开发中，需要用到一个分享的功能。当我千辛万苦的把整个页面的绘制出来转换成比bitmap的时候，算了下，大概最长的图片高度应该有9000+，点击分享到微信，嗯哼？！什么情况？调不起微信客户端，mmp.">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4463150-268bae6fa2dee042.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/08/02/关于分享调不起微信客户端的解决办法/"/>
+
+
+
+
+
+  <title>关于分享调不起微信客户端的解决办法 | 非常好听的名字</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">非常好听的名字</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/08/02/关于分享调不起微信客户端的解决办法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="非常好听的名字">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">关于分享调不起微信客户端的解决办法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-02T15:14:43+08:00">
+                2017-08-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h6 id="所遇问题"><a href="#所遇问题" class="headerlink" title="所遇问题"></a>所遇问题</h6><p>最近在项目开发中，需要用到一个分享的功能。当我千辛万苦的把整个页面的绘制出来转换成比bitmap的时候，算了下，大概最长的图片高度应该有9000+，点击分享到微信，嗯哼？！什么情况？调不起微信客户端，mmp.<br><a id="more"></a><br><img src="http://upload-images.jianshu.io/upload_images/4463150-268bae6fa2dee042.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="好烦.jpg"></p>
+<h6 id="找坑"><a href="#找坑" class="headerlink" title="找坑"></a>找坑</h6><p>查看微信官方开发者文档，里面有提到调不起的主要原因有：</p>
+<ol>
+<li>微信是否安装</li>
+<li>调用时的Apk包名和签名是否与开放平台填写的一致</li>
+<li>检查发送时的缩略图大小是否超过32k</li>
+</ol>
+<h6 id="发现坑"><a href="#发现坑" class="headerlink" title="发现坑"></a>发现坑</h6><p>对于上面的3点，第一点是不用看的嘛。来看看第2点：<br><code>调用时的Apk包名和签名是否与开放平台填写的一致</code>，意思是在申请微信分享key的时候所填写的包名是否与现在所打包出来的包名是否一致，还有打包出来的apk签名是否与后台所配置的签名MD5一致，可以去<a href="https://open.weixin.qq.com/cgi-bin/showdocument?action=dir_list&amp;t=resource/res_list&amp;verify=1&amp;id=open1419318060&amp;token=&amp;lang=zh_CN" target="_blank" rel="noopener">微信开发者</a>下载签名检验工具检验。</p>
+<p>经调试发现，分享整个应用的时候（就是有标题有内容有网页链接）时，微信分享是能调起来的，说明以上第二点所提到的问题不存在，那只有第3点了。来看看第三点：<br><code>检查发送时的缩略图大小是否超过32k</code>，这是什么gui，内牛满面.</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-dadd0c2c97fef9ff.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ图片20170802132034.jpg"></p>
+<p>由于项目中所分享的图片是整个页面的长图，初分享时只是简单的进行质量压缩，并没有进行深度压缩，导致的官方所说的缩略图大小不能大于32k的限制使得调不起微信来分享。</p>
+<h6 id="填坑"><a href="#填坑" class="headerlink" title="填坑"></a>填坑</h6><p>既然知道了问题在哪里，对于技术宅来说解决问题就再容易不过了，马上开干。说到底还是图片的压缩问题而已，下面说说常见的几种bitmap的压缩方式，条件是在使得能调起微信分享的情况下，最大化图片的质量，以防止深度压缩导致的模糊不清。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-71060b28fcf9a61e.gif?imageMogr2/auto-orient/strip" alt="QQ图片20170802142212.gif"></p>
+<ol>
+<li>使用RGB_565的config<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Bitmap.createBitmap(finalWidth, finalHeight, Bitmap.Config.RGB_565);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>在创建一个bitmap的时候，第三个参数有4种配置，分别是：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Bitmap.Config  ALPHA_8         表示8位Alpha位图,即A=8,一个像素点占用1个字节,它没有颜色,只有透明度 </span><br><span class="line">Bitmap.Config  ARGB_4444    表示16位ARGB位图，即A=4,R=4,G=4,B=4,一个像素点占4+4+4+4=16位，2个字节</span><br><span class="line">Bitmap.Config  ARGB_8888    表示32位ARGB位图，即A=8,R=8,G=8,B=8,一个像素点占8+8+8+8=32位，4个字节</span><br><span class="line">Bitmap.Config  RGB_565       表示16位RGB位图,即R=5,G=6,B=5,它没有透明度,一个像素点占5+6+5=16位，2个字节</span><br></pre></td></tr></table></figure></p>
+<p>ARGB 分别表示三原色+透明度，这个不展开了。<br>用Bitmap.Config.RGB_565处理的图片大小相比ARGB_8888减少了一半的内存，但是长宽并没有变化。</p>
+<ol>
+<li>质量压缩<br>先看代码<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public static Bitmap compressBitmap(Bitmap tmp) &#123;</span><br><span class="line">        ByteArrayOutputStream baos = new ByteArrayOutputStream();</span><br><span class="line">        tmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);</span><br><span class="line">        int op = 90;</span><br><span class="line">        while (baos.toByteArray().length &gt; 192 * 1024 &amp;&amp; op &gt;= 0) &#123;</span><br><span class="line">            baos.reset();</span><br><span class="line">            tmp.compress(Bitmap.CompressFormat.JPEG, op, baos);</span><br><span class="line">            op -= 10;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">        return decodeStream(isBm);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种压缩方式称之为质量压缩，宽度和高度不变，质量降低，相应的bitmap所占的内存也降低。</p>
+<p>这里的192是我项目中规定的，根据微信分享所规定的32k大小限制，我这边并不太理解，在调试中发现bitmap的<code>baos.toByteArray().length</code>大小只要小于196左右，就能调起微信的分享，所以我限制192也算是刚刚好吧，在这里希望有谁清楚这个的，不妨给我指点指点，它们之间有什么联系没有，不过不要把我p的太过哈，留点面子给我讨点饭吃，好穷的我。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-73f4862dede85919.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ图片20170802142310.jpg"></p>
+<ol>
+<li>采样率压缩<br>不知道大家还记不记得Bitmap.Options.inSampleSize这个属性，继续看看<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">ByteArrayOutputStream baos = new ByteArrayOutputStream();</span><br><span class="line">        tmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);</span><br><span class="line"></span><br><span class="line">        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">        BitmapFactory.Options options = new BitmapFactory.Options();</span><br><span class="line">        options.inJustDecodeBounds = true;</span><br><span class="line">        BitmapFactory.decodeStream(isBm, null, options);</span><br><span class="line">        options.inJustDecodeBounds = false;</span><br><span class="line"></span><br><span class="line">        float be = options.outWidth / 480;</span><br><span class="line">        options.inSampleSize = (int) Math.rint(be);</span><br><span class="line">        return BitmapFactory.decodeStream(isBm,null,options);</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种方式中，设置inSampleSize的值(int类型)后，假如设为2，则宽和高都为原来的1/2，宽高都减少了，自然内存也降低了。</p>
+<ol>
+<li>缩放法压缩<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public static Bitmap compressBitmap(Bitmap tmp) &#123;</span><br><span class="line">        ByteArrayOutputStream baos = new ByteArrayOutputStream();</span><br><span class="line">        tmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);</span><br><span class="line"></span><br><span class="line">        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">        BitmapFactory.Options options = new BitmapFactory.Options();</span><br><span class="line">        options.inJustDecodeBounds = true;</span><br><span class="line">        decodeStream(isBm, null, options);</span><br><span class="line">        options.inJustDecodeBounds = false;</span><br><span class="line"></span><br><span class="line">        Matrix matrix = new Matrix();</span><br><span class="line">        matrix.setScale(0.8f, 0.8f);</span><br><span class="line">        tmp = Bitmap.createBitmap(tmp, 0, 0, options.outWidth, options.outHeight, matrix, true);</span><br><span class="line"></span><br><span class="line">        baos.reset();</span><br><span class="line">        tmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);</span><br><span class="line">        </span><br><span class="line">        while (baos.toByteArray().length &gt; 192 * 1024) &#123;</span><br><span class="line">            matrix.setScale(0.9f, 0.9f);</span><br><span class="line">            tmp = Bitmap.createBitmap(tmp, 0, 0, options.outWidth, options.outHeight, matrix, true);</span><br><span class="line"></span><br><span class="line">            baos.reset();</span><br><span class="line">            tmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">        return BitmapFactory.decodeStream(isBm, null, options);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种方式可以慢慢的根据你设置的条件一点点的对图片的大小进行缩减，关于martix更多信息，自行谷歌。</p>
+<ol>
+<li>混合压缩<br>所谓的混合压缩，其实就是把上面的几种方式按照不一样的顺序进行重新整理。以下是我所做项目的压缩方法<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">public static Bitmap compressBitmap(Bitmap tmp) &#123;</span><br><span class="line">        ByteArrayOutputStream baos = new ByteArrayOutputStream();</span><br><span class="line">        tmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);</span><br><span class="line"></span><br><span class="line">        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">        BitmapFactory.Options options = new BitmapFactory.Options();</span><br><span class="line">        options.inJustDecodeBounds = true;</span><br><span class="line">        decodeStream(isBm, null, options);</span><br><span class="line">        options.inJustDecodeBounds = false;</span><br><span class="line"></span><br><span class="line">        Matrix matrix = new Matrix();</span><br><span class="line">        matrix.setScale(0.8f, 0.8f);</span><br><span class="line">        tmp = Bitmap.createBitmap(tmp, 0, 0, options.outWidth, options.outHeight, matrix, true);</span><br><span class="line"></span><br><span class="line">        baos.reset();</span><br><span class="line">        tmp.compress(Bitmap.CompressFormat.JPEG, 50, baos);</span><br><span class="line"></span><br><span class="line">        while (baos.toByteArray().length &gt; 192 * 1024) &#123;</span><br><span class="line">            isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">            tmp = decodeStream(isBm, null, options);</span><br><span class="line"></span><br><span class="line">            matrix.setScale(0.95f, 0.95f);</span><br><span class="line">            tmp = Bitmap.createBitmap(tmp, 0, 0, tmp.getWidth(), tmp.getHeight(), matrix, true);</span><br><span class="line"></span><br><span class="line">            baos.reset();</span><br><span class="line">            tmp.compress(Bitmap.CompressFormat.JPEG, 70, baos);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">        return decodeStream(isBm, null, options);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>这种对质量会比较好<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">public static Bitmap depthCompressBitmap(Bitmap tmp) &#123;</span><br><span class="line">        ByteArrayOutputStream baos = new ByteArrayOutputStream();</span><br><span class="line">        tmp.compress(Bitmap.CompressFormat.JPEG, 100, baos);</span><br><span class="line"></span><br><span class="line">        ByteArrayInputStream isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">        BitmapFactory.Options options = new BitmapFactory.Options();</span><br><span class="line">        options.inJustDecodeBounds = true;</span><br><span class="line">        decodeStream(isBm, null, options);</span><br><span class="line">        options.inJustDecodeBounds = false;</span><br><span class="line"></span><br><span class="line">        float be = options.outWidth / 480;</span><br><span class="line">        float scale = 0.55f;</span><br><span class="line">        if (be &gt;= 2) &#123;</span><br><span class="line">            scale = 0.35f;</span><br><span class="line">        &#125;</span><br><span class="line">        Matrix matrix = new Matrix();</span><br><span class="line">        matrix.setScale(scale, scale);</span><br><span class="line">        tmp = Bitmap.createBitmap(tmp, 0, 0, options.outWidth, options.outHeight, matrix, true);</span><br><span class="line"></span><br><span class="line">        baos.reset();</span><br><span class="line">        tmp.compress(Bitmap.CompressFormat.JPEG, 50, baos);</span><br><span class="line">        int op = 40;</span><br><span class="line">        while (baos.toByteArray().length &gt; 192 * 1024) &#123;</span><br><span class="line">            baos.reset();</span><br><span class="line">            tmp.compress(Bitmap.CompressFormat.JPEG, op, baos);</span><br><span class="line">            op -= 10;</span><br><span class="line">            if (op &lt;= 0) &#123;</span><br><span class="line">                break;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (baos.toByteArray().length &gt; 192 * 1024) &#123;</span><br><span class="line">            isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">            tmp = BitmapFactory.decodeStream(isBm, null, options);</span><br><span class="line"></span><br><span class="line">            matrix.setScale(0.8f, 0.8f);</span><br><span class="line">            tmp = Bitmap.createBitmap(tmp, 0, 0, tmp.getWidth(), tmp.getHeight(), matrix, true);</span><br><span class="line"></span><br><span class="line">            baos.reset();</span><br><span class="line">            tmp.compress(Bitmap.CompressFormat.JPEG, 70, baos);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        isBm = new ByteArrayInputStream(baos.toByteArray());</span><br><span class="line">        return decodeStream(isBm, null, options);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种是直接减半压缩，和上面对比，在不同的图片中所得到的效果不一样，自行试验，还有其他的自己组合，这里只提供思路。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-ca98a3088323a2f0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="QQ图片20170802151106.png"></p>
+<p>经过这种处理之后的图片，再点击分享，完美的调起微信分享，辣鸡人生。</p>
+<p>参考文章：<br><a href="http://blog.csdn.net/harryweasley/article/details/51955467" target="_blank" rel="noopener">bitmap的六种压缩方式，Android图片压缩</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/07/02/只能输入英文加汉字/" rel="next" title="Android 限制 EditText 只能输入英文加汉字">
+                <i class="fa fa-chevron-left"></i> Android 限制 EditText 只能输入英文加汉字
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/08/30/教你如何科（带）学（你）上（飞）网/" rel="prev" title="教你如何科（带）学（你）上（飞）网">
+                教你如何科（带）学（你）上（飞）网 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/th.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">帅比</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#所遇问题"><span class="nav-number">1.</span> <span class="nav-text">所遇问题</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#找坑"><span class="nav-number">2.</span> <span class="nav-text">找坑</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#发现坑"><span class="nav-number">3.</span> <span class="nav-text">发现坑</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#填坑"><span class="nav-number">4.</span> <span class="nav-text">填坑</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
+  <script type="text/javascript" src="/_scripts/love.js"></script>
+</body>
+</html>

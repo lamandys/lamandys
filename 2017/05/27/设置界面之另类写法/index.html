@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="前言话说，工作中总是会接到不同的需求，那么，在你看到需求时，你会去想该怎样去实现吗？有想过，实现这个功能大概有多少种方法吗？哪一种比较快？哪一种性能会好点？或者是哪一种做法比较优雅？">
+<meta name="keywords" content="android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设置界面之另类写法">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/设置界面之另类写法/index.html">
+<meta property="og:site_name" content="非常好听的名字">
+<meta property="og:description" content="前言话说，工作中总是会接到不同的需求，那么，在你看到需求时，你会去想该怎样去实现吗？有想过，实现这个功能大概有多少种方法吗？哪一种比较快？哪一种性能会好点？或者是哪一种做法比较优雅？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-18e762e784944ab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-f8720a6dc677db7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-43f9b68dc87ce5d0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-18e762e784944ab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-2bfd73e57c97d588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-45b9fd331921e274.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-38d4a1d11475aefc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-09T07:18:33.381Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设置界面之另类写法">
+<meta name="twitter:description" content="前言话说，工作中总是会接到不同的需求，那么，在你看到需求时，你会去想该怎样去实现吗？有想过，实现这个功能大概有多少种方法吗？哪一种比较快？哪一种性能会好点？或者是哪一种做法比较优雅？">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4463150-18e762e784944ab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2017/05/27/设置界面之另类写法/"/>
+
+
+
+
+
+  <title>设置界面之另类写法 | 非常好听的名字</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">非常好听的名字</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/05/27/设置界面之另类写法/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="非常好听的名字">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">设置界面之另类写法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-27T11:26:38+08:00">
+                2017-05-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h6 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h6><p>话说，工作中总是会接到不同的需求，那么，在你看到需求时，你会去想该怎样去实现吗？有想过，实现这个功能大概有多少种方法吗？哪一种比较快？哪一种性能会好点？或者是哪一种做法比较优雅？<br><a id="more"></a></p>
+<h6 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h6><p>比如，要实现下面这个设置界面的话，你会用哪种方式去实现？</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-18e762e784944ab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="需求.png"></p>
+<h6 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h6><p>有人说，这个界面那么简单，还用说嘛！！！有人脱口而出，或者说是习惯性的做法，说直接在布局中写啊。</p>
+<p>那好，既然这样，那我就把在布局中实现的代码贴上来，你看看究竟有什么特别之处。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br><span class="line">276</span><br><span class="line">277</span><br><span class="line">278</span><br><span class="line">279</span><br><span class="line">280</span><br><span class="line">281</span><br><span class="line">282</span><br><span class="line">283</span><br><span class="line">284</span><br><span class="line">285</span><br><span class="line">286</span><br><span class="line">287</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:background=&quot;@color/bazi_fragment_bg&quot;</span><br><span class="line">    android:orientation=&quot;vertical&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ScrollView</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;match_parent&quot;&gt;</span><br><span class="line"></span><br><span class="line">        &lt;LinearLayout</span><br><span class="line">            android:layout_width=&quot;match_parent&quot;</span><br><span class="line">            android:layout_height=&quot;match_parent&quot;</span><br><span class="line">            android:orientation=&quot;vertical&quot;&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &lt;LinearLayout</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;60dp&quot;</span><br><span class="line">                android:layout_marginTop=&quot;20dp&quot;</span><br><span class="line">                android:background=&quot;@android:color/white&quot;</span><br><span class="line">                android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginLeft=&quot;20dp&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/bazi_person_center_news&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;TextView</span><br><span class="line">                    android:layout_width=&quot;0dp&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_weight=&quot;1&quot;</span><br><span class="line">                    android:gravity=&quot;center|start&quot;</span><br><span class="line">                    android:text=&quot;功能1&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/person_center_right&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">            &lt;View</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;1dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;LinearLayout</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;60dp&quot;</span><br><span class="line">                android:background=&quot;@android:color/white&quot;</span><br><span class="line">                android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginLeft=&quot;20dp&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/bazi_person_center_news&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;TextView</span><br><span class="line">                    android:layout_width=&quot;0dp&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_weight=&quot;1&quot;</span><br><span class="line">                    android:gravity=&quot;center|start&quot;</span><br><span class="line">                    android:text=&quot;功能2&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/person_center_right&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">            &lt;View</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;1dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;LinearLayout</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;60dp&quot;</span><br><span class="line">                android:background=&quot;@android:color/white&quot;</span><br><span class="line">                android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginLeft=&quot;20dp&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/bazi_person_center_news&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;TextView</span><br><span class="line">                    android:layout_width=&quot;0dp&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_weight=&quot;1&quot;</span><br><span class="line">                    android:gravity=&quot;center|start&quot;</span><br><span class="line">                    android:text=&quot;功能3&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/person_center_right&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">            &lt;View</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;1dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;LinearLayout</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;60dp&quot;</span><br><span class="line">                android:background=&quot;@android:color/white&quot;</span><br><span class="line">                android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginLeft=&quot;20dp&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/bazi_person_center_news&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;TextView</span><br><span class="line">                    android:layout_width=&quot;0dp&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_weight=&quot;1&quot;</span><br><span class="line">                    android:gravity=&quot;center|start&quot;</span><br><span class="line">                    android:text=&quot;功能4&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/person_center_right&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">            &lt;View</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;1dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;LinearLayout</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;60dp&quot;</span><br><span class="line">                android:background=&quot;@android:color/white&quot;</span><br><span class="line">                android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginLeft=&quot;20dp&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/bazi_person_center_news&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;TextView</span><br><span class="line">                    android:layout_width=&quot;0dp&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_weight=&quot;1&quot;</span><br><span class="line">                    android:gravity=&quot;center|start&quot;</span><br><span class="line">                    android:text=&quot;功能5&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/person_center_right&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">            &lt;View</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;1dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;LinearLayout</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;60dp&quot;</span><br><span class="line">                android:background=&quot;@android:color/white&quot;</span><br><span class="line">                android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginLeft=&quot;20dp&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/bazi_person_center_news&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;TextView</span><br><span class="line">                    android:layout_width=&quot;0dp&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_weight=&quot;1&quot;</span><br><span class="line">                    android:gravity=&quot;center|start&quot;</span><br><span class="line">                    android:text=&quot;功能6&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/person_center_right&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line">            &lt;View</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;1dp&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;LinearLayout</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;60dp&quot;</span><br><span class="line">                android:background=&quot;@android:color/white&quot;</span><br><span class="line">                android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginLeft=&quot;20dp&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/bazi_person_center_news&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;TextView</span><br><span class="line">                    android:layout_width=&quot;0dp&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_weight=&quot;1&quot;</span><br><span class="line">                    android:gravity=&quot;center|start&quot;</span><br><span class="line">                    android:text=&quot;功能7&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/person_center_right&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/LinearLayout&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">            &lt;LinearLayout</span><br><span class="line">                android:layout_width=&quot;match_parent&quot;</span><br><span class="line">                android:layout_height=&quot;60dp&quot;</span><br><span class="line">                android:layout_marginTop=&quot;20dp&quot;</span><br><span class="line">                android:background=&quot;@android:color/white&quot;</span><br><span class="line">                android:orientation=&quot;horizontal&quot;&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginLeft=&quot;20dp&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/bazi_person_center_news&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;TextView</span><br><span class="line">                    android:layout_width=&quot;0dp&quot;</span><br><span class="line">                    android:layout_height=&quot;60dp&quot;</span><br><span class="line">                    android:layout_weight=&quot;1&quot;</span><br><span class="line">                    android:gravity=&quot;center|start&quot;</span><br><span class="line">                    android:text=&quot;功能8&quot; /&gt;</span><br><span class="line"></span><br><span class="line">                &lt;ImageView</span><br><span class="line">                    android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">                    android:layout_gravity=&quot;center&quot;</span><br><span class="line">                    android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">                    android:src=&quot;@drawable/person_center_right&quot; /&gt;</span><br><span class="line"></span><br><span class="line">            &lt;/LinearLayout&gt;</span><br><span class="line">        &lt;/LinearLayout&gt;</span><br><span class="line">    &lt;/ScrollView&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure>
+<p>看到了什么？代码量之多，嵌套之深！重要的是，其实他们都一样的布局啊！！！当然，这种方式 也是那些赶需求的人最爽的做法，为什么？它快啊！直接复制粘贴。。。</p>
+<p>那么，究竟有什么做法是可以稍微爽一点而且又有点优雅的呢？好吧，我说的优雅不是你们想的那个[优<em>雅</em>]，[呜呜专属表情.png]</p>
+<p>那么说说我的想法吧，既然它的一个特点是，布局的item都是相同的布局方式，想到没有？</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-f8720a6dc677db7a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>好吧，我想到的是用listView来代替这整个相似的布局，只需要一个item布局就能搞定的事情为什么要复制一大堆？</p>
+<p>说起listView，好像挺简单的，不过大家都在用ＲＶ来代替了，那么我这里也用ＲＶ来实现吧。</p>
+<p>直接look代码呗：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;match_parent&quot;</span><br><span class="line">    android:background=&quot;@color/fragment_bg&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;android.support.v7.widget.RecyclerView</span><br><span class="line">        android:background=&quot;@android:color/white&quot;</span><br><span class="line">        android:layout_marginTop=&quot;20dp&quot;</span><br><span class="line">        android:id=&quot;@+id/MainMeRV&quot;</span><br><span class="line">        android:layout_width=&quot;match_parent&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;/android.support.v7.widget.RecyclerView&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure></p>
+<p>子item的布局：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;</span><br><span class="line">&lt;LinearLayout xmlns:android=&quot;http://schemas.android.com/apk/res/android&quot;</span><br><span class="line">    android:layout_width=&quot;match_parent&quot;</span><br><span class="line">    android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">    xmlns:tools=&quot;http://schemas.android.com/tools&quot;</span><br><span class="line">    android:orientation=&quot;horizontal&quot;</span><br><span class="line">    android:layout_marginBottom=&quot;1dp&quot;&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ImageView</span><br><span class="line">        android:id=&quot;@+id/personCenterItemIcon&quot;</span><br><span class="line">        android:layout_gravity=&quot;center&quot;</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;60dp&quot;</span><br><span class="line">        android:layout_marginLeft=&quot;20dp&quot;</span><br><span class="line">        android:layout_marginRight=&quot;20dp&quot;</span><br><span class="line">        tools:src=&quot;@drawable/ic_launcher&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;TextView</span><br><span class="line">        android:id=&quot;@+id/personCenterItemTitle&quot;</span><br><span class="line">        android:layout_width=&quot;0dp&quot;</span><br><span class="line">        android:layout_weight=&quot;1&quot;</span><br><span class="line">        android:layout_height=&quot;60dp&quot;</span><br><span class="line">        android:gravity=&quot;center|start&quot;/&gt;</span><br><span class="line"></span><br><span class="line">    &lt;ImageView</span><br><span class="line">        android:layout_width=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_height=&quot;wrap_content&quot;</span><br><span class="line">        android:layout_gravity=&quot;center&quot;</span><br><span class="line">        android:src=&quot;@drawable/person_center_right&quot;</span><br><span class="line">        android:layout_marginRight=&quot;20dp&quot;/&gt;</span><br><span class="line"></span><br><span class="line">&lt;/LinearLayout&gt;</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-43f9b68dc87ce5d0.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>搞定。之后的操作就是设置Adapter和绑定数据之类的就不详细写了，大家都会。下面来说说其他的东西。</p>
+<p>不知大家有没有仔细的看到上面的第一张需求图中，每个item下面都会有一个分割线，而且这条线并不是填充屏幕宽度的。没看到？再看一次咯。<br><img src="http://upload-images.jianshu.io/upload_images/4463150-18e762e784944ab2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="需求.png"></p>
+<p>那么在直接用xml布局中实现的话，非常简单是吧，但是在RecyclerView中要实现列表的分割线，可不是一件简单的事（看用那种方式），有的人喜欢在每个item下面直接在增加一个 View ，当然也是能实现这个效果，但我不建议这样使用。</p>
+<p>在RV中实现分割线的其中一种做法是，继承RecyclerView.ItemDecoration实现onDraw方法：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line">import android.content.Context;</span><br><span class="line">import android.graphics.Canvas;</span><br><span class="line">import android.graphics.Rect;</span><br><span class="line">import android.graphics.drawable.Drawable;</span><br><span class="line">import android.os.Build;</span><br><span class="line">import android.support.v7.widget.RecyclerView;</span><br><span class="line">import android.view.View;</span><br><span class="line"></span><br><span class="line">public class DrawerDecoration extends RecyclerView.ItemDecoration &#123;</span><br><span class="line"></span><br><span class="line">    Drawable mDivider;</span><br><span class="line"></span><br><span class="line">    public DrawerDecoration(Context context) &#123;</span><br><span class="line">        mDivider = context.getResources().getDrawable(R.drawable.recyclerview_line);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void onDraw(Canvas c, RecyclerView parent, RecyclerView.State state) &#123;</span><br><span class="line">        int left = parent.getPaddingLeft();</span><br><span class="line">        int right = parent.getWidth() - parent.getPaddingRight();</span><br><span class="line"></span><br><span class="line">        int childCount = parent.getChildCount();</span><br><span class="line">        for (int i = 0; i &lt; childCount; i++) &#123;</span><br><span class="line">            View child = parent.getChildAt(i);</span><br><span class="line">            RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();</span><br><span class="line">            int top = child.getBottom() + params.bottomMargin;</span><br><span class="line">            int bottom = top + mDivider.getIntrinsicHeight();</span><br><span class="line">            mDivider.setBounds(left, top, right, bottom);</span><br><span class="line">            mDivider.draw(c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    public void getItemOffsets(Rect outRect, View view, RecyclerView parent, RecyclerView.State state) &#123;</span><br><span class="line">        outRect.bottom = mDivider.getIntrinsicHeight();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种常规的方式，做出的效果是，能在RV的每个item下面添加一条分割线，但是注意到的是，这条线的宽度是填充屏幕的，想要做出像需求图中的效果，就需要在drawer.setBounds()方法中操作相应的距离即可、<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mDivider.setBounds(parent.getLeft()+20, top, parent.getRight()-20, bottom);</span><br></pre></td></tr></table></figure></p>
+<p>这样做还有几个地方是有问题的：</p>
+<ol>
+<li>列表的最后一个item下面是不需要有分割线的，可以做判断不画最后一条</li>
+<li>如果注意到需求图的话，就知道最后的那个item距离上一个item是有一段距离的，怎么实现？</li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-2bfd73e57c97d588.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>我的实现是在画倒数第二个分割线的时候，把该分割线的高度设置为那一段距离，把宽度设置为填充屏幕。</p>
+<p>哦，你以为这样就对了吗？你看看效果就知道了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-45b9fd331921e274.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>看到了什么？没看到？</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-38d4a1d11475aefc.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>第8个item的文字位置，由于设置分割线把item的布局往下移动了，但是实际上文字的距离并没有进行位移。</p>
+<p>怎么办？</p>
+<p>难道不能这样去画那个分割线吗？那还有什么办法？</p>
+<p>要建两个不一样的布局，第一个是普通的item布局，第二个是上面有个margin的布局？然后通过adapter的个getViewType()方法判断是不是最后一个，然后设置不同的布局？</p>
+<p>其实好像不用那么麻烦，不过也有点麻烦，我的做法是，直接在adapter中判断是不是最后一个item，是的话直接给个topMargin等于分割线的高度就好啦。完美ing</p>
+<h6 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h6><p>如果需求中的布局是普通的列表一样，没有高度之分，也没有分割线的margin之类的，实现起来还是挺方便的。但是如果想对比较复杂一些的布局，用这种方式就不太好了。</p>
+<p>相对来说嘛，不同的需求，实现的方式可能不一样，所以在接到需求时，我们不仿去想想，究竟怎样实现才是好的实现。</p>
+<p>最后，感谢你的阅读，如果觉得哪里有问题的话，欢迎指出和批评建议。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android/" rel="tag"># android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/05/03/Android中使用Java8特性之Lambda/" rel="next" title="Android中使用Java8特性之Lambda">
+                <i class="fa fa-chevron-left"></i> Android中使用Java8特性之Lambda
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/07/02/只能输入英文加汉字/" rel="prev" title="Android 限制 EditText 只能输入英文加汉字">
+                Android 限制 EditText 只能输入英文加汉字 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/th.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">帅比</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">13</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#需求"><span class="nav-number">2.</span> <span class="nav-text">需求</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#分析"><span class="nav-number">3.</span> <span class="nav-text">分析</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#总结"><span class="nav-number">4.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
+  <script type="text/javascript" src="/_scripts/love.js"></script>
+</body>
+</html>
