@@ -1,0 +1,81 @@
+# Hexo Configuration
+## Docs: https://hexo.io/docs/configuration.html
+## Source: https://github.com/hexojs/hexo/
+
+# Site
+title: 非常好听的名字
+subtitle: 个人技术博客		
+description: 帅比		
+author: 			
+language: zh-Hans
+timezone:
+
+# URL
+## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
+url: http://yoursite.com
+root: /
+permalink: :year/:month/:day/:title/
+permalink_defaults:
+
+# Directory
+source_dir: source
+public_dir: public
+tag_dir: tags
+archive_dir: archives
+category_dir: categories
+code_dir: downloads/code
+i18n_dir: :lang
+skip_render:
+
+# Writing
+new_post_name: :title.md	# 新文章的文件名称
+default_layout: post		#预设布局
+titlecase: false		# 把标题转换为 title case
+external_link: true		# 在新标签中打开链接
+filename_case: 0		#把文件名称转换为 (1) 小写或 (2) 大写	0
+render_drafts: false		#显示草稿
+post_asset_folder: false	#启动 Asset 文件夹
+relative_link: false		#把链接改为与根目录的相对位址
+future: true			#显示未来的文章
+highlight:			#代码块的设置
+  enable: true			#是否开启
+  line_number: true		#每行的行号
+  auto_detect: false
+  tab_replace:
+
+# 分类 & 标签
+default_category: uncategorized #默认分类
+category_map:			#分类别名	 
+tag_map:			#标签别名	 
+
+# Archives 默认值为2，这里都修改为1，相应页面就只会列出标题，而非全文
+## 2: Enable pagination
+## 1: Disable pagination
+## 0: Fully Disable
+archive: 1
+category: 1
+tag: 1
+
+# 日期 / 时间格式
+## Hexo 使用 Moment.js 来解析和显示时间。
+## You can customize the date format as defined in
+## http://momentjs.com/docs/#/displaying/format/
+date_format: YYYY-MM-DD
+time_format: HH:mm:ss
+
+# 分页
+## Set per_page to 0 to disable pagination
+per_page: 5			#每页显示的文章量 (0 = 关闭分页功能)
+pagination_dir: page		#分页目录
+
+# 扩展
+## Plugins: https://hexo.io/plugins/
+## Themes: https://hexo.io/themes/
+theme: next			#当前主题名称。值为false时禁用主题
+
+# 配置Deployment
+## Docs: https://hexo.io/docs/deployment.html
+deploy:
+  type: git
+  repository: https://github.com/lamandys/lamandys.github.io.git
+  branch: master
