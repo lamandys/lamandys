@@ -79,18 +79,20 @@
 
 
 
-<meta name="description" content="在我们使用Android studio连接手机调试的时候，总是会出现找不到手机的问题，很可能的原因是ADB被占用，下面教大家来解决这个问题。">
+<meta name="description" content="还记得我们刚开始用git的时候，教程里的两行代码么：12git config --global user.name  xxxgit config --global user.email  xxx@xxx.xxx">
 <meta name="keywords" content="android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ADB无法使用解决办法.md">
-<meta property="og:url" content="http://yoursite.com/2017/02/06/ADB无法使用解决办法/index.html">
+<meta property="og:title" content="git为不同的项目配置不同的用户名和邮箱">
+<meta property="og:url" content="http://yoursite.com/2018/02/02/git为不同的项目配置不同的用户名和邮箱/index.html">
 <meta property="og:site_name" content="非常好听的名字">
-<meta property="og:description" content="在我们使用Android studio连接手机调试的时候，总是会出现找不到手机的问题，很可能的原因是ADB被占用，下面教大家来解决这个问题。">
+<meta property="og:description" content="还记得我们刚开始用git的时候，教程里的两行代码么：12git config --global user.name  xxxgit config --global user.email  xxx@xxx.xxx">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T07:18:56.000Z">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-0ff9124dc6eeb159.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-02-02T11:16:09.524Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ADB无法使用解决办法.md">
-<meta name="twitter:description" content="在我们使用Android studio连接手机调试的时候，总是会出现找不到手机的问题，很可能的原因是ADB被占用，下面教大家来解决这个问题。">
+<meta name="twitter:title" content="git为不同的项目配置不同的用户名和邮箱">
+<meta name="twitter:description" content="还记得我们刚开始用git的时候，教程里的两行代码么：12git config --global user.name  xxxgit config --global user.email  xxx@xxx.xxx">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4463150-0ff9124dc6eeb159.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
 
 
 
@@ -120,13 +122,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/06/ADB无法使用解决办法/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/02/git为不同的项目配置不同的用户名和邮箱/"/>
 
 
 
 
 
-  <title>ADB无法使用解决办法.md | 非常好听的名字</title>
+  <title>git为不同的项目配置不同的用户名和邮箱 | 非常好听的名字</title>
   
 
 
@@ -243,7 +245,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/06/ADB无法使用解决办法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/02/git为不同的项目配置不同的用户名和邮箱/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +262,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ADB无法使用解决办法.md</h1>
+          <h1 class="post-title" itemprop="name headline">git为不同的项目配置不同的用户名和邮箱</h1>
         
 
         <div class="post-meta">
@@ -272,8 +274,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-06T00:19:25+08:00">
-                2017-02-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-02T18:37:12+08:00">
+                2018-02-02
               </time>
             
 
@@ -310,11 +312,20 @@
       
 
       
-        <p>在我们使用Android studio连接手机调试的时候，总是会出现找不到手机的问题，很可能的原因是ADB被占用，下面教大家来解决这个问题。<br><a id="more"></a><br>命令行输入adb devices会出现提示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error: could not install *smartsocket* listener: cannot bind to 127.0.0.1:5037: 通常每个套接字地址(协议/网络地址/端口)只允许使用一次。 (10048)</span><br><span class="line">could not read ok from ADB Server</span><br></pre></td></tr></table></figure></p>
-<h6 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h6><p>输入命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano | findstr &quot;5037&quot;</span><br></pre></td></tr></table></figure></p>
-<p>会出现：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TCP    127.0.0.1:5037         0.0.0.0:0              LISTENING       2068</span><br></pre></td></tr></table></figure></p>
-<p>以win10为例，打开任务管理器，点击“详细信息“，找出”PID”选项卡中与上面最后数字相同的一列，然后结束相关进程，即可。</p>
-<p>重新插拔数据线，显示正常。</p>
+        <p>还记得我们刚开始用git的时候，教程里的两行代码么：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name  xxx</span><br><span class="line">git config --global user.email  xxx@xxx.xxx</span><br></pre></td></tr></table></figure></p>
+<a id="more"></a>
+<p>当时也不知道这样设置是为了什么，有什么作用，只知道把自己常用的邮箱填了上去。</p>
+<p>这行命令实际上是设置了当前电脑用户的全局git配置，即所有项目如果不再设置其他的配置，那么默认采用这个配置。</p>
+<p>实际上这个命令更改的是，当前用户的目录，window系统的是user目录下的.gitconfig文件，Mac系统下的就是～/.gitconfig这个文件。</p>
+<p>以Mac为例，window也是一样的。</p>
+<p>命令行进入到当前的目录，用命令cat可以查看该文件的详细内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1. cd ~</span><br><span class="line">2. ls -all</span><br><span class="line">3. cat .gitconfig</span><br></pre></td></tr></table></figure></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-0ff9124dc6eeb159.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="config.png"></p>
+<p>可以看到我们之前配置的内容就在这个文件中保存了。</p>
+<p>回到正题，我为什么要这样去搞呢？<br>由于我配置的用户名不是真实的，这样上传到GitHub上面的话就随心啦；但是对于公司内部的项目，在提交的时候如果你随便用的名字别人不知道是谁，所以得用真实的一个名字。</p>
+<p>两者似乎存在冲突，解决办法也是很简单，就是在项目的.git目录下增加自己的配置。</p>
+<p>我这里用命令行是因为.开头的文件都是隐藏的，而我又不想去显示它，所以只能这样咯：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">1. cd 项目的目录</span><br><span class="line">2. cd .git</span><br><span class="line">3. vim config</span><br><span class="line">4. 填写你的配置：</span><br><span class="line">[user]</span><br><span class="line">        name = lamandys</span><br><span class="line">        email = lsxt10@qq.com</span><br><span class="line">5. 保存退出</span><br></pre></td></tr></table></figure></p>
+<p>或者不这么操作的话，就是如果不使用vim命令的话，可以直接用命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config user.name  xxx  // 主要把那个global去掉就好啦</span><br></pre></td></tr></table></figure></p>
+<p>这样的话就可以修改我们在提交时的用户名了。</p>
 
       
     </div>
@@ -345,15 +356,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/02/01/获取apk包名的几种方法/" rel="next" title="获取apk包名的几种方法">
+                <i class="fa fa-chevron-left"></i> 获取apk包名的几种方法
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/26/Android图片上传之选择图片裁剪图片/" rel="prev" title="Android图片上传之选择图片裁剪图片">
-                Android图片上传之选择图片裁剪图片 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -405,17 +416,8 @@
       
 
       
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
-            站点概览
-          </li>
-        </ul>
-      
 
-      <section class="site-overview-wrap sidebar-panel">
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -498,22 +500,6 @@
         </div>
       </section>
 
-      
-      <!--noindex-->
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-
-            
-              
-            
-
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#解决办法"><span class="nav-number">1.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
-            
-
-          </div>
-        </section>
-      <!--/noindex-->
       
 
       
