@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="android maven," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="平时我们在开发的时候，必不可少的都有使用过很多的第三方库，比如某分享的sdk依赖：">
+<meta name="keywords" content="android maven">
+<meta property="og:type" content="article">
+<meta property="og:title" content="超简单的发布自己的开源库到jcenter教程">
+<meta property="og:url" content="http://yoursite.com/2018/03/07/超简单的发布自己的开源库到jcenter教程/index.html">
+<meta property="og:site_name" content="非常好听的名字">
+<meta property="og:description" content="平时我们在开发的时候，必不可少的都有使用过很多的第三方库，比如某分享的sdk依赖：">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-09c20eee7d731be8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-ca885207d32d58b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-4525bba8ae6a2486.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-b26b18c140cc0a51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-7327fe6ba09cfc7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-18bccf335c91fb6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-0ced15338a064ff6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-546f87e9e0f6e4fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-21469e2601e12188.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-5833a983cc3774bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-4e6dda285a9429a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-a4638cda5e23cd0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-872dc659f2b2abb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-8cf946c04ff7a168.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/4463150-04498651426b8587.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-03-07T17:03:10.961Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="超简单的发布自己的开源库到jcenter教程">
+<meta name="twitter:description" content="平时我们在开发的时候，必不可少的都有使用过很多的第三方库，比如某分享的sdk依赖：">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/4463150-09c20eee7d731be8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/07/超简单的发布自己的开源库到jcenter教程/"/>
+
+
+
+
+
+  <title>超简单的发布自己的开源库到jcenter教程 | 非常好听的名字</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">非常好听的名字</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/07/超简单的发布自己的开源库到jcenter教程/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="非常好听的名字">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">超简单的发布自己的开源库到jcenter教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-07T23:44:16+08:00">
+                2018-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>平时我们在开发的时候，必不可少的都有使用过很多的第三方库，比如某分享的sdk依赖：<br><a id="more"></a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">compile &apos;com.mmc.share:ShareSDK-Wechat:3.0.0&apos;</span><br><span class="line">compile &apos;com.mmc.share:ShareSDK-Wechat-Core:3.0.0&apos;</span><br><span class="line">compile &apos;com.mmc.share:ShareSDK-Wechat-Moments:3.0.0&apos;</span><br><span class="line">compile &apos;com.mmc.share:ShareSDK-QQ:3.0.0&apos;</span><br><span class="line">compile &apos;com.mmc.share:ShareSDK-QZone:3.0.0&apos;</span><br><span class="line">compile &apos;com.mmc.share:ShareSDK-SinaWeibo:3.0.0&apos;</span><br></pre></td></tr></table></figure></p>
+<p>那么，他们是怎么做到的呢？怎样才能把自己的代码分享给别人用？</p>
+<p>进入正题，下面一步步教你怎么像别人一样，把自己做的东西做出一个库，并可以分享给别人用。</p>
+<p>我们日常经常使用的maven仓库有jcenter和mavenCentral，高版本的android studio默认使用jcenter作为maven中央仓库，所以接下来讲的都是关于jcenter的操作。</p>
+<ol>
+<li><p>去<a href="https://bintray.com/" target="_blank" rel="noopener">bintray官网</a>注册一个账号,但是这里需要注意的是，不要点击start your free trial 的按钮去注册，而是点击右边的sign up here ,原因是绿色的那个注册的是企业的账号，完了一个月内步没有添加库到jcenter的功能。<br><img src="http://upload-images.jianshu.io/upload_images/4463150-09c20eee7d731be8.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>嗯，这里没有什么好讲的，直接填写相关信息后点鸡下面的按钮就行。<br><img src="http://upload-images.jianshu.io/upload_images/4463150-ca885207d32d58b5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>注册完激活后登录，接下来新建一个maven仓库<br><img src="http://upload-images.jianshu.io/upload_images/4463150-4525bba8ae6a2486.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ol>
+<li>继续填信息</li>
+</ol>
+</li>
+</ol>
+<ul>
+<li>name是你新建的仓库的名称</li>
+<li>type从下拉列表中选择maven</li>
+<li>再往下的是选择一个开源的协议，这里选择Apache-2.0，随意都行，但得对应代码中的协议，后面有解释</li>
+<li>填完就点击创建<br><img src="http://upload-images.jianshu.io/upload_images/4463150-b26b18c140cc0a51.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ul>
+<p>如无意外：如果不成功的话回去重新创建一次即可。<br><img src="http://upload-images.jianshu.io/upload_images/4463150-7327fe6ba09cfc7d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ol>
+<li><p>继续新建一个项目，刚才创建的是一个仓库，仓库下会有很多不同的项目，下面来创建一个我们测试的项目，点击add new package<br><img src="http://upload-images.jianshu.io/upload_images/4463150-18bccf335c91fb6c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>继续填写项目的详细信息</p>
+</li>
+</ol>
+<ul>
+<li>name是你这个项目的名字，如：image-util</li>
+<li>description是项目的介绍，没有*号标志的可以不填</li>
+<li>licenses默认选择的是你创建仓库时选择的协议，这里是Apache-2.0</li>
+<li>tags是这个项目的一些标签，可以多个</li>
+<li>Maturity不管，默认就行</li>
+<li>website，这里如果你的项目在GitHub上有代码，填git的网页地址，可不填</li>
+<li>issues，同上</li>
+<li>version contro这个是你源代码所在的仓库地址，比如git地址，如无随便填个网址即可。</li>
+<li>填完点击创建即可。<br><img src="http://upload-images.jianshu.io/upload_images/4463150-0ced15338a064ff6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ul>
+<ol>
+<li>创建成功，点击这里进入该项目的详细页面。<br><img src="http://upload-images.jianshu.io/upload_images/4463150-546f87e9e0f6e4fd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-21469e2601e12188.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="现在啥也没有.png"></p>
+<ol>
+<li>准备好你要上传的代码，打开Android studio<br>根目录的build.gradle文件中加入代码：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">dependencies &#123;</span><br><span class="line">        classpath &apos;com.android.tools.build:gradle:2.3.3&apos;//原来有的，下面的是新增的</span><br><span class="line">        classpath &apos;com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3&apos;</span><br><span class="line">        classpath &apos;com.github.dcendents:android-maven-gradle-plugin:1.4.1&apos;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>为了兼容格式，加入下面的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //注释中有汉字，需要这里处理</span><br><span class="line">    tasks.withType(Javadoc) &#123;</span><br><span class="line">        options &#123;</span><br><span class="line">            encoding &quot;UTF-8&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>首先要发布的代码作为一个单独的library，这个忽略不说了，再在该module中新建一个mavenpush.gradle的文件</li>
+</ol>
+<p>这里要明白一个定义，比如上面的依赖中<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">compile &apos;com.mmc.share:ShareSDK-Wechat:3.0.0&apos;</span><br></pre></td></tr></table></figure></p>
+<p>其中引号里面的内容以冒号分割开分为3个部分，第一部分com.mmc.share是groupID，第二部分ShareSDK-Wechat是开源库的名称，第三部分是该库的版本</p>
+<p>mavenpush.gradle的内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br></pre></td><td class="code"><pre><span class="line">apply plugin: &apos;com.github.dcendents.android-maven&apos;</span><br><span class="line">apply plugin: &apos;com.jfrog.bintray&apos;</span><br><span class="line"></span><br><span class="line">group = &apos;com.lamandys&apos; // 构建依赖的组</span><br><span class="line">version = &apos;1.0.0&apos;  // 上传版本号</span><br><span class="line"></span><br><span class="line">def siteUrl = &apos;https://github.com/bintray/bintray-examples&apos;</span><br><span class="line">def gitUrl = &apos;https://github.com/bintray/bintray-examples.git&apos; // git 地址</span><br><span class="line"></span><br><span class="line">Properties properties = new Properties()</span><br><span class="line">properties.load(project.rootProject.file(&apos;local.properties&apos;).newDataInputStream())</span><br><span class="line"></span><br><span class="line">install &#123;</span><br><span class="line">    repositories.mavenInstaller &#123;</span><br><span class="line">        pom &#123;</span><br><span class="line">            project &#123;</span><br><span class="line">                packaging &apos;aar&apos; //发布的格式，有jar和aar的形式</span><br><span class="line">                name &apos;image util library code and resource&apos; // 说明</span><br><span class="line">                url siteUrl </span><br><span class="line"></span><br><span class="line">                licenses &#123;</span><br><span class="line">                    license &#123;</span><br><span class="line">                        name &apos;The Apache Software License, Version 2.0&apos;</span><br><span class="line">                        url &apos;http://www.apache.org/licenses/LICENSE-2.0.txt&apos;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                developers &#123;</span><br><span class="line">                    developer &#123;</span><br><span class="line">                        id &apos;misslp&apos; // 注册bintray时填写的昵称</span><br><span class="line">                        name &apos;lan lp&apos; // 注册账号的姓和名</span><br><span class="line">                        email &apos;xzr23516@tqoai.com&apos;</span><br><span class="line">                    &#125;</span><br><span class="line"></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                scm &#123; //不用改</span><br><span class="line">                    connection gitUrl</span><br><span class="line">                    developerConnection gitUrl</span><br><span class="line">                    url siteUrl</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">bintray &#123;</span><br><span class="line">    user = &quot;misslp&quot; // 注册bintray时填写的昵称</span><br><span class="line">    key = &quot;aacd18f97563f2edae9bd40ee83780e15013e&quot; //每个账号的唯一key</span><br><span class="line">    configurations = [&apos;archives&apos;]</span><br><span class="line"></span><br><span class="line">    pkg &#123;</span><br><span class="line">        userOrg = &apos;misslp&apos; // 个人的账号跟user一样即可，企业的账号填组织的名字</span><br><span class="line">        repo = &apos;maven&apos; // 创建仓库的名字</span><br><span class="line">        name = &apos;image-util&apos; // 开源库的名字，和group组成整个依赖关系</span><br><span class="line">        desc = &apos;这个是图片处理的工具类集合库&apos;// 说明</span><br><span class="line"></span><br><span class="line">        // 不用改</span><br><span class="line">        websiteUrl = siteUrl</span><br><span class="line">        issueTrackerUrl = siteUrl</span><br><span class="line">        vcsUrl = gitUrl</span><br><span class="line"></span><br><span class="line">        licenses = [&apos;Apache-2.0&apos;]// 选择的开源库是什么</span><br><span class="line">        labels = [&apos;aar&apos;, &apos;image&apos;,&apos;android&apos;] // 该库标签</span><br><span class="line"></span><br><span class="line">        publicDownloadNumbers = true //允许公开下载的数量</span><br><span class="line">        publish = true // 是否公开</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task sourcesJar(type: Jar) &#123;</span><br><span class="line">    from android.sourceSets.main.java.srcDirs</span><br><span class="line">    classifier = &apos;sources&apos;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task javadoc(type: Javadoc) &#123;</span><br><span class="line">    source = android.sourceSets.main.java.srcDirs</span><br><span class="line">    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">task javadocJar(type: Jar, dependsOn: javadoc) &#123;</span><br><span class="line">    classifier = &apos;javadoc&apos;</span><br><span class="line">    from javadoc.destinationDir</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">artifacts &#123;</span><br><span class="line">    // 这里上传两个，完整的结构，不然到时add to jcenter审核不通过</span><br><span class="line">    archives javadocJar</span><br><span class="line">    archives sourcesJar</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<ol>
+<li>命令行执行，gradlew install bintrayUpload，或者直接图形界面执行：<br><img src="http://upload-images.jianshu.io/upload_images/4463150-5833a983cc3774bf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ol>
+<p><img src="http://upload-images.jianshu.io/upload_images/4463150-4e6dda285a9429a1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="出现这个即可.png"></p>
+<ol>
+<li><p>再到刚才的页面刷新，出现下面类似的即表示上传成功：<br><img src="http://upload-images.jianshu.io/upload_images/4463150-a4638cda5e23cd0a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>此时的最后一步，点击右边的add to jcenter按钮，之后填写描述点击发送即可提交申请。<br><img src="http://upload-images.jianshu.io/upload_images/4463150-872dc659f2b2abb9.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>申请通过后，直接在Android中引入即可像以往一样使用了。<br><img src="http://upload-images.jianshu.io/upload_images/4463150-8cf946c04ff7a168.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>如果在提交申请后，想要马上去使用这个库怎么办？<br><img src="http://upload-images.jianshu.io/upload_images/4463150-04498651426b8587.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+</ol>
+<p>复制上面的地址，打开Android studio项目根目录的build.gradle文件，加入以下代码即可使用了。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">allprojects &#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        jcenter()</span><br><span class="line">        maven &#123; url &apos;https://dl.bintray.com/misslp/maven&apos;&#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>emmm，就是这么简单，第一次操作的话需要耐心点，熟悉后其实很简单的啦～</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/android-maven/" rel="tag"># android maven</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/02/git为不同的项目配置不同的用户名和邮箱/" rel="next" title="git为不同的项目配置不同的用户名和邮箱">
+                <i class="fa fa-chevron-left"></i> git为不同的项目配置不同的用户名和邮箱
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/th.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">帅比</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">16</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
+  <script type="text/javascript" src="/_scripts/love.js"></script>
+</body>
+</html>
