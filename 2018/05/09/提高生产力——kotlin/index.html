@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="随着今年Google把kotlin语言作为Android开发的主要语言后，各种kotlin的教程遍地开花，Android studio也支持自动引入kotlin的支持，再也不用像以前那样使用那么麻烦了。">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="提高生产力——kotlin">
+<meta property="og:url" content="http://yoursite.com/2018/05/09/提高生产力——kotlin/index.html">
+<meta property="og:site_name" content="非常好听的名字">
+<meta property="og:description" content="随着今年Google把kotlin语言作为Android开发的主要语言后，各种kotlin的教程遍地开花，Android studio也支持自动引入kotlin的支持，再也不用像以前那样使用那么麻烦了。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-11T01:37:25.588Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="提高生产力——kotlin">
+<meta name="twitter:description" content="随着今年Google把kotlin语言作为Android开发的主要语言后，各种kotlin的教程遍地开花，Android studio也支持自动引入kotlin的支持，再也不用像以前那样使用那么麻烦了。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/09/提高生产力——kotlin/"/>
+
+
+
+
+
+  <title>提高生产力——kotlin | 非常好听的名字</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">非常好听的名字</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/09/提高生产力——kotlin/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="非常好听的名字">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">提高生产力——kotlin</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-09T20:40:17+08:00">
+                2018-05-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>随着今年Google把kotlin语言作为Android开发的主要语言后，各种kotlin的教程遍地开花，Android studio也支持自动引入kotlin的支持，再也不用像以前那样使用那么麻烦了。</p>
+<a id="more"></a>
+<p>之前的一篇博客中有提及到kotlin语言开发的入门级教程，现在回头看，感觉很糟糕，不知道具体说的是什么。今次就把Kotlin相对于Java的优势汇总，具体的用法下次再开篇。</p>
+<h3 id="更简洁的字符串"><a href="#更简洁的字符串" class="headerlink" title="更简洁的字符串"></a>更简洁的字符串</h3><p>Kotlin中的字符串基本Java中的类似，有一点区别是加入了三个引号”””来方便长篇字符的编写。 而在Java中，这些都需要转义，先看看java中的式例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">public void testString1() &#123;</span><br><span class="line">        String str1 = &quot;line1\n&quot; +&quot;line2\n&quot; +&quot;line3&quot;;</span><br><span class="line">        String js = &quot;function myFunction()\n&quot; +</span><br><span class="line">                &quot;&#123;\n&quot; +</span><br><span class="line">                &quot;    document.getElementById(\&quot;demo\&quot;).innerHTML=\&quot;test text\&quot;;\n&quot; +</span><br><span class="line">                &quot;&#125;&quot;;</span><br><span class="line">        System.out.println(str1);</span><br><span class="line">        System.out.println(js);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>kotlin除了有单个双引号的字符串，还对字符串的加强，引入了三个引号，”””中可以包含换行、反斜杠等等特殊字符：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fun testString() &#123;</span><br><span class="line">    val str1 = &quot;&quot;&quot;line1\n</span><br><span class="line">        line2</span><br><span class="line">        line3</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">    val js = &quot;&quot;&quot;</span><br><span class="line">        function myFunction()</span><br><span class="line">        &#123;</span><br><span class="line">            document.getElementById(&quot;demo&quot;).innerHTML=&quot;test text&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">        &quot;&quot;&quot;.trimIndent()</span><br><span class="line">    println(str1)</span><br><span class="line">    println(js)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同时，Kotlin中引入了字符串模版，方便字符串的拼接，可以用$符号拼接变量和表达式<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fun testString2() &#123;</span><br><span class="line">    val strings = arrayListOf(&quot;abc&quot;, &quot;efd&quot;, &quot;gfg&quot;)</span><br><span class="line">    println(&quot;First content is $strings&quot;)</span><br><span class="line">    println(&quot;First content is $&#123;strings[0]&#125;&quot;)</span><br><span class="line">    println(&quot;First content is $&#123;if (strings.size &gt; 0) strings[0] else &quot;null&quot;&#125;&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>值得注意的是，在Kotlin中，美元符号$是特殊字符，在字符串中不能直接显示，必须经过转义，方法1是用反斜杠，方法二是${‘$’}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fun testString3() &#123;</span><br><span class="line">    println(&quot;First content is \$strings&quot;)</span><br><span class="line">    println(&quot;First content is $&#123;&apos;$&apos;&#125;strings&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="表达式"><a href="#表达式" class="headerlink" title="表达式"></a>表达式</h3><h4 id="java中的三元运算符："><a href="#java中的三元运算符：" class="headerlink" title="java中的三元运算符："></a>java中的三元运算符：</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">public int max2(int a, int b) &#123;</span><br><span class="line">    return a &gt; b ? a : b;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>kotlin中没有这个表达式，可用if-else代替：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun int max2(a: Int,b: Int) = if (a &gt; b) a else b</span><br></pre></td></tr></table></figure></p>
+<h4 id="用when来取代Java中的switch或者if-else"><a href="#用when来取代Java中的switch或者if-else" class="headerlink" title="用when来取代Java中的switch或者if-else"></a>用when来取代Java中的switch或者if-else</h4><p>java中的switch：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public String getPoint(char grade) &#123;</span><br><span class="line">        switch (grade) &#123;</span><br><span class="line">            case &apos;A&apos;:</span><br><span class="line">                return &quot;GOOD&quot;;</span><br><span class="line">            case &apos;B&apos;:</span><br><span class="line">            case &apos;C&apos;:</span><br><span class="line">                return &quot;OK&quot;;</span><br><span class="line">            case &apos;D&apos;:</span><br><span class="line">                return &quot;BAD&quot;;</span><br><span class="line">            default:</span><br><span class="line">                return &quot;UN_KNOW&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>用Kotlin去简化后的操作：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">fun getPoint(grade: Char) = when (grade) &#123;</span><br><span class="line">    &apos;A&apos; -&gt; &quot;GOOD&quot;</span><br><span class="line">    &apos;B&apos;, &apos;C&apos; -&gt; &#123;</span><br><span class="line">        &quot;这一行你写什么都不返回的，最后一行才真正是返回的内容&quot;</span><br><span class="line">        &quot;OK&quot;</span><br><span class="line">    &#125;</span><br><span class="line">    &apos;D&apos; -&gt; &quot;BAD&quot;</span><br><span class="line">    else -&gt; &quot;UN_KNOW&quot; // 相当于default</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的b和c之间有一行文字，它是不影响整体的逻辑结构，when的每个分支的最后一行才是当前分支的值。<br>另外，最后的else相当于Java中的default字段。</p>
+<p>同样的，when语句还可以取代java中的if/else if，其是表达式有值，并且更佳简洁，先看看java中的if-else：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">public String getPoint2(Integer point) &#123;</span><br><span class="line">        if (point &gt; 100) &#123;</span><br><span class="line">            return &quot;GOOD&quot;;</span><br><span class="line">        &#125; else if (point &gt; 60) &#123;</span><br><span class="line">            return &quot;OK&quot;;</span><br><span class="line">        &#125; else if (point.hashCode() == 0x100) &#123;</span><br><span class="line">            //...</span><br><span class="line">            return &quot;STH&quot;;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            return &quot;UN_KNOW&quot;;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>再看看kotlin的版本，使用不带参数的when:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">fun getPoint2(grade: Int) = when &#123;</span><br><span class="line">    grade &gt; 90 -&gt; &quot;GOOD&quot;</span><br><span class="line">    grade &gt; 60 -&gt; &quot;OK&quot;</span><br><span class="line">    grade.hashCode() == 0x100 -&gt; &quot;STH&quot;</span><br><span class="line">    else -&gt; &quot;UN_KNOW&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="更好调用的函数：显式参数名-默认参数值"><a href="#更好调用的函数：显式参数名-默认参数值" class="headerlink" title="更好调用的函数：显式参数名/默认参数值"></a>更好调用的函数：显式参数名/默认参数值</h3><p>Kotlin的函数更加好调用，主要是表现在两个方面：</p>
+<ol>
+<li>显式的标示参数名，可以方便代码阅读；</li>
+<li>函数可以有默认参数值，可以大大减少Java中的函数重载</li>
+</ol>
+<p>例如一个请求接口的方法，在java中的实现是这样的：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">public void requestData(final Context context, String deviceSn, String userId) &#123;</span><br><span class="line">        String url = &quot;https://www.baidu.com&quot;;</span><br><span class="line">        GetRequest&lt;String&gt; getRequest = Http.get(url);</span><br><span class="line">        getRequest.execute(new StringCallback() &#123;</span><br><span class="line">            @Override</span><br><span class="line">            public void onSuccess(Response&lt;String&gt; response) &#123;</span><br><span class="line">                if (response.code() == 200) &#123;</span><br><span class="line">                  // do somthing</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            @Override</span><br><span class="line">            public void onError(Response&lt;String&gt; response) &#123;</span><br><span class="line">                super.onError(response);</span><br><span class="line">                // do somthing</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>有时候我们默认的参数中不想传递，用一个默认值，或者说是我需要一个只有一个参数的方法，其他的两个参数都拿默认值，在java中就要去重新写两个不同参数的重载方法，而在kotlin中就很友好的一个方法可以搞定了：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">fun requestData(context: Context, deviceSn: String = &quot;123456&quot;, userId: String = &quot;5678&quot;)&#123;</span><br><span class="line">    val url = &quot;https://www.baidu.com&quot;</span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>类似这样的操作中，deviceSn和userId都有一个默认值，我们在调用该方法的时候可以这样做：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">requestData(context)</span><br><span class="line">requestData(context,&quot;123456&quot;)</span><br><span class="line">requestData(context,&quot;123456&quot;,&quot;5678&quot;)</span><br><span class="line">requestData(context,deviceSn = &quot;123456&quot;,userId = &quot;5678&quot;)</span><br></pre></td></tr></table></figure></p>
+<p>可以看到最后的一个调用，在参数中可以写明是什么参数，这样有助于阅读方便。另外这样有了默认参数后，在使用函数时，如果不传入该参数，默认会使用默认的值，这样可以避免Java中大量的函数重载。</p>
+<h3 id="扩展函数和属性"><a href="#扩展函数和属性" class="headerlink" title="扩展函数和属性"></a>扩展函数和属性</h3><h4 id="扩展函数"><a href="#扩展函数" class="headerlink" title="扩展函数"></a>扩展函数</h4><p>扩展函数究竟是什么，当初怎么看都不懂。扩展函数和扩展属性是Kotlin非常方便实用的一个功能，它可以让我们随意的扩展第三方的库，你如果觉得别人给的SDK的Api不好用，或者不能满足你的需求，这时候你可以用扩展函数完全去自定义。下面举个例子说明：</p>
+<p>比如String类中，我们想获取最后一个字符，可是没有这个方法，怎么办？Java中一般就是写个utils去获取，这里用kotlin来解释扩展函数究竟是什么：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fun String.lastChar(): Char = this.get(this.length - 1)</span><br></pre></td></tr></table></figure></p>
+<p>这样定义好lastChar()函数后，之后只需要import进来后，就可以用String类直接调用该函数了，跟调用它自己的方法没有区别。这样可以避免重复代码和一些静态工具类，而且代码更加简洁明了。还有一个很常用的扩展函数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">fun Context.toast(msg: String,duration: Int = Toast.LENGTH_SHORT) &#123;</span><br><span class="line">    Toast.makeText(this,msg,duration).show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这样定义好后，就可以直接调用toast(“测试消息”)来进行提示了，方便得很。</p>
+<h4 id="扩展属性"><a href="#扩展属性" class="headerlink" title="扩展属性"></a>扩展属性</h4><p>扩展函数知道了，那么扩展属性是什么？其实道理都一样的，函数是函数调用，属性就是属性获取，好吧，看例子：</p>
+<p>假如我想实现String和StringBuilder通过属性去直接获得最后字符，怎么实现？<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">val String.lastChar: Char</span><br><span class="line">    get() = get(length - 1)</span><br><span class="line"></span><br><span class="line">var StringBuilder.lastChar: Char</span><br><span class="line">    get() = get(length - 1)C</span><br><span class="line">    set(value: Char) &#123;</span><br><span class="line">        setCharAt(length - 1, value)</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>定义好扩展属性后，之后只需import完了就跟使用自己的属性一样方便了。</p>
+<h4 id="Why？Kotlin为什么能实现扩展函数和属性这样的特性？"><a href="#Why？Kotlin为什么能实现扩展函数和属性这样的特性？" class="headerlink" title="Why？Kotlin为什么能实现扩展函数和属性这样的特性？"></a>Why？Kotlin为什么能实现扩展函数和属性这样的特性？</h4><p>在Kotlin中要理解一些语法，只要认识到Kotlin语言最后需要编译为class字节码，Java也是编译为class执行，也就是可以大致理解为Kotlin需要转成Java一样的语法结构， Kotlin就是一种强大的语法糖而已，Java不具备的功能Kotlin也不能越界的。</p>
+<p>我们看看将上面的扩展函数转成Java后的代码：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">* 扩展函数会转化为一个静态的函数，同时这个静态函数的第一个参数就是该类的实例对象</span><br><span class="line">* */</span><br><span class="line">public static final char lastChar(@NotNull String $receiver) &#123;</span><br><span class="line">    Intrinsics.checkParameterIsNotNull($receiver, &quot;$receiver&quot;);</span><br><span class="line">    return $receiver.charAt($receiver.length() - 1);</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">* 获取的扩展属性会转化为一个静态的get函数，同时这个静态函数的第一个参数就是该类的实例对象</span><br><span class="line">* */</span><br><span class="line">public static final char getLastChar(@NotNull StringBuilder $receiver) &#123;</span><br><span class="line">    Intrinsics.checkParameterIsNotNull($receiver, &quot;$receiver&quot;);</span><br><span class="line">    return $receiver.charAt($receiver.length() - 1);</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line">* 设置的扩展属性会转化为一个静态的set函数，同时这个静态函数的第一个参数就是该类的实例对象</span><br><span class="line">* */</span><br><span class="line">public static final void setLastChar(@NotNull StringBuilder $receiver, char value) &#123;</span><br><span class="line">    Intrinsics.checkParameterIsNotNull($receiver, &quot;$receiver&quot;);</span><br><span class="line">    $receiver.setCharAt($receiver.length() - 1, value);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>由上面的代码可以看出，扩展函数实际上最终还是转换为java中的静态方法，并且是final的，不能被override，扩展属性同理。</p>
+<h3 id="利用局部函数抽取重复代码"><a href="#利用局部函数抽取重复代码" class="headerlink" title="利用局部函数抽取重复代码"></a>利用局部函数抽取重复代码</h3><p>Kotlin中提供了函数的嵌套，在函数内部还可以定义新的函数。这样我们可以在函数中嵌套这些提前的函数，来抽取重复代码。例如下面的功能：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class User(val id: Int, val name: String, val address: String, val email: String)</span><br><span class="line"></span><br><span class="line">fun saveUser(user: User) &#123;</span><br><span class="line">    if (user.name.isEmpty()) &#123;</span><br><span class="line">        throw IllegalArgumentException(&quot;Can&apos;t save user $&#123;user.id&#125;: empty Name&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    if (user.address.isEmpty()) &#123;</span><br><span class="line">        throw IllegalArgumentException(&quot;Can&apos;t save user $&#123;user.id&#125;: empty Address&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">    if (user.email.isEmpty()) &#123;</span><br><span class="line">        throw IllegalArgumentException(&quot;Can&apos;t save user $&#123;user.id&#125;: empty Email&quot;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>上面的代码在判断name、address等是否为空的处理其实很类似。这时候，我们可以利用在函数内部嵌套的声明一个通用的判空函数将相同的代码抽取到一起：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">fun saveUser2(user: User) &#123;</span><br><span class="line">    fun validate(value: String, fildName: String) &#123;</span><br><span class="line">        if (value.isEmpty()) &#123;</span><br><span class="line">            throw IllegalArgumentException(&quot;Can&apos;t save user $&#123;user.id&#125;: empty $fildName&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    validate(user.name, &quot;Name&quot;)</span><br><span class="line">    validate(user.address, &quot;Address&quot;)</span><br><span class="line">    validate(user.email, &quot;Email&quot;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>除了利用嵌套函数去抽取，此时，其实也可以用扩展函数来抽取，如下所示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fun User.validateAll() &#123;</span><br><span class="line">    fun validate(value: String, fildName: String) &#123;</span><br><span class="line">        if (value.isEmpty()) &#123;</span><br><span class="line">            throw IllegalArgumentException(&quot;Can&apos;t save user $id: empty $fildName&quot;)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    validate(name, &quot;Name&quot;)</span><br><span class="line">    validate(address, &quot;Address&quot;)</span><br><span class="line">    validate(email, &quot;Email&quot;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">fun saveUser3(user: User) &#123;</span><br><span class="line">    user.validateAll()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="使用数据类来快速实现model类"><a href="#使用数据类来快速实现model类" class="headerlink" title="使用数据类来快速实现model类"></a>使用数据类来快速实现model类</h3><p>在java中要声明一个model类需要实现很多的代码，首先需要将变量声明为private，然后需要实现get和set方法，还要实现对应的hashcode equals toString方法等，例如：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line">public static class User &#123;</span><br><span class="line"></span><br><span class="line">        private String name;</span><br><span class="line">        private int age;</span><br><span class="line">        private int gender;</span><br><span class="line">        private String address;</span><br><span class="line">        </span><br><span class="line">        public String getName() &#123;</span><br><span class="line">            return name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setName(String name) &#123;</span><br><span class="line">            this.name = name;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public int getAge() &#123;</span><br><span class="line">            return age;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setAge(int age) &#123;</span><br><span class="line">            this.age = age;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public int getGender() &#123;</span><br><span class="line">            return gender;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setGender(int gender) &#123;</span><br><span class="line">            this.gender = gender;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public String getAddress() &#123;</span><br><span class="line">            return address;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        public void setAddress(String address) &#123;</span><br><span class="line">            this.address = address;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public String toString() &#123;</span><br><span class="line">            return &quot;User&#123;&quot; +</span><br><span class="line">                    &quot;name=&apos;&quot; + name + &apos;\&apos;&apos; +</span><br><span class="line">                    &quot;, age=&quot; + age +</span><br><span class="line">                    &quot;, gender=&quot; + gender +</span><br><span class="line">                    &quot;, address=&apos;&quot; + address + &apos;\&apos;&apos; +</span><br><span class="line">                    &apos;&#125;&apos;;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public boolean equals(Object o) &#123;</span><br><span class="line">            if (this == o) return true;</span><br><span class="line">            if (o == null || getClass() != o.getClass()) return false;</span><br><span class="line"></span><br><span class="line">            User user = (User) o;</span><br><span class="line"></span><br><span class="line">            if (age != user.age) return false;</span><br><span class="line">            if (gender != user.gender) return false;</span><br><span class="line">            if (name != null ? !name.equals(user.name) : user.name != null) return false;</span><br><span class="line">            return address != null ? address.equals(user.address) : user.address == null;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        @Override</span><br><span class="line">        public int hashCode() &#123;</span><br><span class="line">            int result = name != null ? name.hashCode() : 0;</span><br><span class="line">            result = 31 * result + age;</span><br><span class="line">            result = 31 * result + gender;</span><br><span class="line">            result = 31 * result + (address != null ? address.hashCode() : 0);</span><br><span class="line">            return result;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>而如果用kotlin，只需要一行代码就可以做到。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">* Kotlin会为类的参数自动实现get set方法</span><br><span class="line">* */</span><br><span class="line">class User(val name: String, val age: Int, val gender: Int, var address: String)</span><br><span class="line"></span><br><span class="line">/*</span><br><span class="line">* 用data关键词来声明一个数据类，除了会自动实现get set，还会自动生成equals hashcode toString</span><br><span class="line">* */</span><br><span class="line">data class User2(val name: String, val age: Int, val gender: Int, var address: String)</span><br></pre></td></tr></table></figure></p>
+<p>是不是很方便呢。</p>
+<!-- https://github.com/heimashi/kotlin_tips -->
+<p>先写到这里吧，剩下的有时间再补充。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/10/使用 Skeleton Screen 提升用户感知体验/" rel="next" title="使用 Skeleton Screen 提升用户感知体验">
+                <i class="fa fa-chevron-left"></i> 使用 Skeleton Screen 提升用户感知体验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/th.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">帅比</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#更简洁的字符串"><span class="nav-number">1.</span> <span class="nav-text">更简洁的字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#表达式"><span class="nav-number">2.</span> <span class="nav-text">表达式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#java中的三元运算符："><span class="nav-number">2.1.</span> <span class="nav-text">java中的三元运算符：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#用when来取代Java中的switch或者if-else"><span class="nav-number">2.2.</span> <span class="nav-text">用when来取代Java中的switch或者if-else</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更好调用的函数：显式参数名-默认参数值"><span class="nav-number">3.</span> <span class="nav-text">更好调用的函数：显式参数名/默认参数值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展函数和属性"><span class="nav-number">4.</span> <span class="nav-text">扩展函数和属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展函数"><span class="nav-number">4.1.</span> <span class="nav-text">扩展函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#扩展属性"><span class="nav-number">4.2.</span> <span class="nav-text">扩展属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Why？Kotlin为什么能实现扩展函数和属性这样的特性？"><span class="nav-number">4.3.</span> <span class="nav-text">Why？Kotlin为什么能实现扩展函数和属性这样的特性？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#利用局部函数抽取重复代码"><span class="nav-number">5.</span> <span class="nav-text">利用局部函数抽取重复代码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用数据类来快速实现model类"><span class="nav-number">6.</span> <span class="nav-text">使用数据类来快速实现model类</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
+  <script type="text/javascript" src="/_scripts/love.js"></script>
+</body>
+</html>
