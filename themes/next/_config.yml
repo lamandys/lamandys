@@ -27,7 +27,7 @@ favicon:
   #ms_browserconfig: /images/browserconfig.xml
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "lsxt lamandys Android android"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -107,7 +107,7 @@ menu_icons:
 
 
 # ---------------------------------------------------------------
-# Scheme Settings
+# Scheme Settings 主题设置
 # ---------------------------------------------------------------
 
 # Schemes
@@ -153,7 +153,7 @@ links_layout: block
 #links:
   #Title: http://example.com/
 
-# Sidebar Avatar
+# Sidebar Avatar 左下边的头像
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
 avatar: /images/th.jpg
@@ -171,7 +171,7 @@ toc:
 # Creative Commons 4.0 International License.
 # http://creativecommons.org/
 # Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
-#creative_commons: by-nc-sa
+#creative_commons: zero
 #creative_commons:
 
 sidebar:
@@ -207,7 +207,8 @@ sidebar:
 # ---------------------------------------------------------------
 
 # Automatically scroll page to section which is under <!-- more --> mark.
-scroll_to_more: true
+# 自动移动文章高度到更多后面的内容处
+scroll_to_more: false
 
 # Automatically saving scroll position on each post/page in cookies.
 save_scroll: false
@@ -217,6 +218,7 @@ excerpt_description: true
 
 # Automatically Excerpt. Not recommend.
 # Please use <!-- more --> in the post to control excerpt accurately.
+# 自动获取摘要内容
 auto_excerpt:
   enable: false
   length: 150
@@ -232,9 +234,9 @@ post_meta:
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
   item_text: true
-  wordcount: false
-  min2read: false
-  totalcount: false
+  wordcount: true  #字数统计
+  min2read: true #阅读时长
+  totalcount: true #总字数统计
   separated_meta: true
 
 # Wechat Subscriber
@@ -551,19 +553,19 @@ firestore:
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
 busuanzi_count:
   # count values only if the other configs are false
-  enable: false
+  enable: true
   # custom uv span for the whole site
-  site_uv: true
-  site_uv_header: <i class="fa fa-user"></i>
-  site_uv_footer:
+  site_uv: false
+  site_uv_header: <i class="fa fa-user">&nbsp;本站访客人数</i>
+  site_uv_footer: 人
   # custom pv span for the whole site
-  site_pv: true
-  site_pv_header: <i class="fa fa-eye"></i>
-  site_pv_footer:
+  site_pv: false
+  site_pv_header: <i class="fa fa-eye">&nbsp;本站总访问量</i>
+  site_pv_footer: 次
   # custom pv span for one page only
   page_pv: true
-  page_pv_header: <i class="fa fa-file-o"></i>
-  page_pv_footer:
+  page_pv_header: <i class="fa fa-eye">&nbsp;&nbsp;本文总阅读量</i>
+  page_pv_footer: 次
 
 
 # Tencent analytics ID
@@ -696,9 +698,6 @@ pace: false
 # pace_theme: pace-theme-center-simple
 pace_theme: pace-theme-minimal
 
-# Canvas-nest
-canvas_nest: false
-
 # three_waves
 three_waves: false
 
@@ -774,9 +773,9 @@ vendors:
   pace:
   pace_css:
 
-  # Internal version: 1.0.0
+  # Internal version: 1.0.0 那个线条的背景开关
   # https://github.com/hustcc/canvas-nest.js
-  canvas_nest:
+  canvas_nest: true
 
   # three
   three:
