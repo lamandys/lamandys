@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="老项目里想加入分页的功能？要推翻以前写的一切逻辑？想引入上拉加载下拉刷新库又怕影响到其他代码逻辑？来试试这个不需要怎么更改代码逻辑就能实现的简单的分页效果吧！">
+<meta name="keywords" content="Android">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何简单的为recyclerview增加上拉加载功能">
+<meta property="og:url" content="http://yoursite.com/2018/05/11/如何简单的为recyclerview增加上拉加载功能/index.html">
+<meta property="og:site_name" content="非常好听的名字">
+<meta property="og:description" content="老项目里想加入分页的功能？要推翻以前写的一切逻辑？想引入上拉加载下拉刷新库又怕影响到其他代码逻辑？来试试这个不需要怎么更改代码逻辑就能实现的简单的分页效果吧！">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-27T03:51:50.577Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="如何简单的为recyclerview增加上拉加载功能">
+<meta name="twitter:description" content="老项目里想加入分页的功能？要推翻以前写的一切逻辑？想引入上拉加载下拉刷新库又怕影响到其他代码逻辑？来试试这个不需要怎么更改代码逻辑就能实现的简单的分页效果吧！">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/11/如何简单的为recyclerview增加上拉加载功能/"/>
+
+
+
+
+
+  <title>如何简单的为recyclerview增加上拉加载功能 | 非常好听的名字</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">非常好听的名字</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/11/如何简单的为recyclerview增加上拉加载功能/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="非常好听的名字">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">如何简单的为recyclerview增加上拉加载功能</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-11T10:16:51+08:00">
+                2018-05-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-eye">&nbsp;&nbsp;本文总阅读量</i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>次
+            </span>
+          
+
+          <!-- 如果是开启了字数统计的话就把这个放在同一行上并增加一个分隔符 -->
+          
+              <span class="post-meta-divider">|</span>
+          
+
+          
+            <span class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,247 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  11 分钟
+                </span>
+              
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>老项目里想加入分页的功能？要推翻以前写的一切逻辑？想引入上拉加载下拉刷新库又怕影响到其他代码逻辑？来试试这个不需要怎么更改代码逻辑就能实现的简单的分页效果吧！<br><a id="more"></a></p>
+<h3 id="为什么要自己手动去实现这个功能"><a href="#为什么要自己手动去实现这个功能" class="headerlink" title="为什么要自己手动去实现这个功能"></a>为什么要自己手动去实现这个功能</h3><p>也许有人会问，现在网上那么多轮子，每一个都比自己写的要好得多，而且都还经过大量的功能测试的，那为什么还要去自己实现这么一个功能呢？</p>
+<p>其实也很好理解，现在大部分的功能在实现的时候也会去考虑是否使用别人做的轮子去用，有时候也的确非常的方便。但是对于一些古老的项目，里面的代码牵连着比较复杂的功能逻辑结构，如果要把之前写的一套去除的话，那工作量不可言喻。</p>
+<h3 id="自己实现和别人的轮子比谁更好？"><a href="#自己实现和别人的轮子比谁更好？" class="headerlink" title="自己实现和别人的轮子比谁更好？"></a>自己实现和别人的轮子比谁更好？</h3><p>这个我只能说，其实并不是所有的轮子都适合每个项目去用的。当然，可能我写的这个东西在GitHub或者是其他的网站上有着相似的功能或者就是一模一样的，只不过是我这个是我自己写的而已，也并不适用于其他的项目，这里仅提供一种实现的思路，也仅此而已。</p>
+<h3 id="实现前要考虑什么问题？"><a href="#实现前要考虑什么问题？" class="headerlink" title="实现前要考虑什么问题？"></a>实现前要考虑什么问题？</h3><p>首先，我去写这个东西的前提是在旧项目中需要的，所以不能对现有的代码逻辑有过多的改动，对于接口和加载更多的新功能可以改动外，adapter里面的逻辑我觉得是不能更改的。所以最重要的就是在不改动原有adapter的逻辑前提下去实现。</p>
+<p>其次，如果项目中有删除item功能的操作话，也许需要考虑删除后item变动的影响，我这个项目中没有删除的功能，只是展示出来，所以下面的功能实现暂不考虑。</p>
+<h3 id="如何动手？"><a href="#如何动手？" class="headerlink" title="如何动手？"></a>如何动手？</h3><p>动手之前需要考虑下，既然不能影响到原有的布局，假如原有的adapter有了一个头部个底部不一样的item，即是headerview和footerview，那么怎么才能在原有的基础上再新增一个底部的布局呢？</p>
+<p>最常用的并且是最容易想得到的就是再在下面根据type来新增一个，在原有的列表数据上新增一个item，type是loadmore类型的。我们也不去想什么高大上的操作了，能实现出效果的才是硬道理，毕竟我们并没有太多的时间去进行完善的开发。好了，开干！</p>
+<p>为了可以更好的使用，我这里使用外部传递view进来的方式，想要什么图案样式的自己定义好再传进来，当然我也没有做动画的效果，仅仅只是简单的图片。定义一个footerview和没有数据时展示的view<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> View mFooterView, mNoMoreDataView;</span><br></pre></td></tr></table></figure></p>
+<p>定义加载更多的类型<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> ITEM_TYPE_FOOTER = <span class="number">98</span>;</span><br></pre></td></tr></table></figure></p>
+<p>定义一个baseAdapter,不详细说了，因为是简单的增加这个功能而已，可能有bug<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.mmc.fengshui.pass.order.adapter;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> android.content.Context;</span><br><span class="line"><span class="keyword">import</span> android.support.annotation.IntDef;</span><br><span class="line"><span class="keyword">import</span> android.support.v7.widget.RecyclerView;</span><br><span class="line"><span class="keyword">import</span> android.text.TextUtils;</span><br><span class="line"><span class="keyword">import</span> android.view.LayoutInflater;</span><br><span class="line"><span class="keyword">import</span> android.view.View;</span><br><span class="line"><span class="keyword">import</span> android.view.ViewGroup;</span><br><span class="line"><span class="keyword">import</span> android.widget.FrameLayout;</span><br><span class="line"><span class="keyword">import</span> android.widget.Toast;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> com.mmc.fengshui.R;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.Retention;</span><br><span class="line"><span class="keyword">import</span> java.lang.annotation.RetentionPolicy;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> oms.mmc.util.MMCUtil;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 作者：子川</span></span><br><span class="line"><span class="comment"> * 时间：2018/5/9 下午12:17</span></span><br><span class="line"><span class="comment"> * 邮箱：lantianhua@linghit.com</span></span><br><span class="line"><span class="comment"> * 说明：recyclerView适配器封装</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="class"><span class="keyword">class</span> <span class="title">RecyclerViewAdapterWrapper</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">Adapter</span>&lt;<span class="title">RecyclerView</span>.<span class="title">ViewHolder</span>&gt; </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 布局中的头部item</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> ITEM_TYPE_HEADER = <span class="number">99</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 布局中的脚部item</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> <span class="keyword">int</span> ITEM_TYPE_FOOTER = <span class="number">98</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 头部view，脚部view，还有就是没有更多数据时的view</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> View mHeaderView, mFooterView, mNoMoreDataView;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否正在加载更多</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isLoadingMore = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否没有更多数据了</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isNoMoreData = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 上面的两种状态</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_LOAD_MORD = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">int</span> STATE_NO_MORE_DATA = <span class="number">2</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 接口形式代替枚举</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="meta">@IntDef</span>(&#123;STATE_LOAD_MORD, STATE_NO_MORE_DATA&#125;)</span><br><span class="line">    <span class="meta">@Retention</span>(RetentionPolicy.SOURCE)</span><br><span class="line">    <span class="keyword">public</span> <span class="meta">@interface</span> ILoadMoreState &#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">final</span> RecyclerView.<span class="function">ViewHolder <span class="title">onCreateViewHolder</span><span class="params">(ViewGroup parent, <span class="keyword">int</span> viewType)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mHeaderView != <span class="keyword">null</span> &amp;&amp; viewType == ITEM_TYPE_HEADER) &#123;</span><br><span class="line">            <span class="comment">// 头部view功能没有测试过，具体使用后者再处理</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> HeaderOrFooterViewHolder(mHeaderView);</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (mFooterView != <span class="keyword">null</span> &amp;&amp; viewType == ITEM_TYPE_FOOTER) &#123;</span><br><span class="line">            <span class="comment">// 底部的控制，创建一个空的视图，根据状态去加载不同的view视图显示和隐藏</span></span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">new</span> HeaderOrFooterViewHolder(createNewPlaceHolderView(parent.getContext()));</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 返回到之前的状态</span></span><br><span class="line">            <span class="keyword">return</span> onCreateHolderView(parent, viewType);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 创建一个空的布局视图</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> View <span class="title">createNewPlaceHolderView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        FrameLayout frameLayout = <span class="keyword">new</span> FrameLayout(context);</span><br><span class="line">        ViewGroup.LayoutParams lp = getLayoutParams(context);</span><br><span class="line">        lp.height = ViewGroup.LayoutParams.WRAP_CONTENT;</span><br><span class="line">        frameLayout.setLayoutParams(lp);</span><br><span class="line">        <span class="keyword">return</span> frameLayout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">abstract</span> RecyclerView.<span class="function">ViewHolder <span class="title">onCreateHolderView</span><span class="params">(ViewGroup parent, <span class="keyword">int</span> viewType)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">void</span> <span class="title">onBindHolderView</span><span class="params">(RecyclerView.ViewHolder holder, <span class="keyword">int</span> position)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">getItemType</span><span class="params">(<span class="keyword">int</span> position)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">abstract</span> <span class="keyword">int</span> <span class="title">getRealItemCount</span><span class="params">()</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">void</span> <span class="title">onBindViewHolder</span><span class="params">(RecyclerView.ViewHolder holder, <span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isHeaderViewPos(position)) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (isFooterViewPos(position)) &#123;</span><br><span class="line">            ViewGroup root = ((ViewGroup) ((HeaderOrFooterViewHolder) holder).itemView);</span><br><span class="line">            Context context = root.getContext();</span><br><span class="line">            <span class="keyword">if</span> (isNoMoreData) &#123;</span><br><span class="line">                root.setVisibility(View.VISIBLE);</span><br><span class="line">                root.removeAllViews();</span><br><span class="line">                root.addView(getNoMoreView(context), getLayoutParams(context));</span><br><span class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isLoadingMore) &#123;</span><br><span class="line">                root.setVisibility(View.VISIBLE);</span><br><span class="line">                root.removeAllViews();</span><br><span class="line">                root.addView(mFooterView, getLayoutParams(context));</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                root.setVisibility(View.GONE);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        onBindHolderView(holder, position - getHeaderCount());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> View <span class="title">getNoMoreView</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (mNoMoreDataView != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> mNoMoreDataView;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> LayoutInflater.from(context).inflate(R.layout.activity_recyclerview_nomoredata, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RecyclerViewAdapterWrapper <span class="title">setLoadMoreState</span><span class="params">(@ILoadMoreState <span class="keyword">int</span> state)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (state == STATE_LOAD_MORD) &#123;</span><br><span class="line">            isLoadingMore = <span class="keyword">true</span>;</span><br><span class="line">            isNoMoreData = <span class="keyword">false</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (state == STATE_NO_MORE_DATA) &#123;</span><br><span class="line">            isLoadingMore = <span class="keyword">false</span>;</span><br><span class="line">            isNoMoreData = <span class="keyword">true</span>;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            isLoadingMore = <span class="keyword">false</span>;</span><br><span class="line">            isNoMoreData = <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getItemCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> getHeaderCount() + getFooterCount() + getRealItemCount();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">getItemViewType</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isHeaderViewPos(position)) &#123;</span><br><span class="line">            <span class="keyword">return</span> ITEM_TYPE_HEADER;</span><br><span class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (isFooterViewPos(position)) &#123;</span><br><span class="line">            <span class="keyword">return</span> ITEM_TYPE_FOOTER;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> getItemType(position - getHeaderCount());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RecyclerViewAdapterWrapper <span class="title">setHeaderView</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mHeaderView = view;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RecyclerViewAdapterWrapper <span class="title">setHeaderView</span><span class="params">(Context context, <span class="keyword">int</span> layoutRes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mHeaderView = LayoutInflater.from(context).inflate(layoutRes, <span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RecyclerViewAdapterWrapper <span class="title">setFooterView</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mFooterView = view;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RecyclerViewAdapterWrapper <span class="title">setFooterView</span><span class="params">(Context context, <span class="keyword">int</span> layoutRes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mFooterView = LayoutInflater.from(context).inflate(layoutRes, <span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RecyclerViewAdapterWrapper <span class="title">setNoMoreDataView</span><span class="params">(View view)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mNoMoreDataView = view;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> RecyclerViewAdapterWrapper <span class="title">setNoMoreDataView</span><span class="params">(Context context, <span class="keyword">int</span> layoutRes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.mNoMoreDataView = LayoutInflater.from(context).inflate(layoutRes, <span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isHeaderViewPos</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> position &lt; getHeaderCount();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">isFooterViewPos</span><span class="params">(<span class="keyword">int</span> position)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> position &gt;= getHeaderCount() + getRealItemCount();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> ViewGroup.<span class="function">LayoutParams <span class="title">getLayoutParams</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">new</span> ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, MMCUtil.dipTopx(context, <span class="number">35</span>));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getHeaderCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mHeaderView == <span class="keyword">null</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">int</span> <span class="title">getFooterCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mFooterView == <span class="keyword">null</span> ? <span class="number">0</span> : <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="class"><span class="keyword">class</span> <span class="title">HeaderOrFooterViewHolder</span> <span class="keyword">extends</span> <span class="title">RecyclerView</span>.<span class="title">ViewHolder</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">HeaderOrFooterViewHolder</span><span class="params">(View itemView)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>(itemView);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>嗯，就这样，看一下就能懂了。</p>
+<p>因为这个功能是连着SwipeRefreshLayout来使用的，实际是为SwipeRefreshLayout增加上拉加载的功能，看代码：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwipeRefreshWithLoadMoreLayout</span> <span class="keyword">extends</span> <span class="title">SwipeRefreshLayout</span> </span>&#123;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * RecyclerView对象</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> RecyclerView mRecyclerView;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否正在加载更多</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isLoadingMore = <span class="keyword">false</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 是否允许加载更多</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">boolean</span> isEnableLoadMore = <span class="keyword">true</span>;</span><br><span class="line">    <span class="comment">/**</span></span><br><span class="line"><span class="comment">     * 加载更多监听</span></span><br><span class="line"><span class="comment">     */</span></span><br><span class="line">    <span class="keyword">private</span> IOnLoadMoreListener onLoadMoreListener;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SwipeRefreshWithLoadMoreLayout</span><span class="params">(Context context)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(context, <span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SwipeRefreshWithLoadMoreLayout</span><span class="params">(Context context, AttributeSet attrs)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(context, attrs);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">onLayout</span><span class="params">(<span class="keyword">boolean</span> changed, <span class="keyword">int</span> left, <span class="keyword">int</span> top, <span class="keyword">int</span> right, <span class="keyword">int</span> bottom)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>.onLayout(changed, left, top, right, bottom);</span><br><span class="line">        getRecyclerView();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">getRecyclerView</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> childCount = getChildCount();</span><br><span class="line">        <span class="keyword">if</span> (childCount &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (getChildAt(<span class="number">0</span>) <span class="keyword">instanceof</span> RecyclerView) &#123;</span><br><span class="line">                mRecyclerView = (RecyclerView) getChildAt(<span class="number">0</span>);</span><br><span class="line">                mRecyclerView.addOnScrollListener(onScrollListener);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> mTmpDy = -<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> RecyclerView.OnScrollListener onScrollListener = <span class="keyword">new</span> RecyclerView.OnScrollListener() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrollStateChanged</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> newState)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">super</span>.onScrollStateChanged(recyclerView, newState);</span><br><span class="line">            <span class="keyword">if</span> (newState == RecyclerView.SCROLL_STATE_IDLE) &#123;</span><br><span class="line">                <span class="comment">// 1表示是否能上拉，-1表示是否能下拉</span></span><br><span class="line">                <span class="keyword">boolean</span> isBottom = !recyclerView.canScrollVertically(RecyclerView.VERTICAL);</span><br><span class="line">                <span class="keyword">if</span> (mTmpDy &gt; <span class="number">0</span> &amp;&amp; isEnableLoadMore &amp;&amp; isBottom &amp;&amp; onLoadMoreListener != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    isLoadingMore = <span class="keyword">true</span>;</span><br><span class="line">                    onLoadMoreListener.onLoadMore();</span><br><span class="line">                    <span class="comment">// 限制只执行一次该方法</span></span><br><span class="line">                    mTmpDy = -<span class="number">1</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onScrolled</span><span class="params">(RecyclerView recyclerView, <span class="keyword">int</span> dx, <span class="keyword">int</span> dy)</span> </span>&#123;</span><br><span class="line">            <span class="comment">// dy &gt; 0 表示上拉的动作，反之则下拉</span></span><br><span class="line">            <span class="keyword">super</span>.onScrolled(recyclerView, dx, dy);</span><br><span class="line">            mTmpDy = dy;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">IOnLoadMoreListener</span> </span>&#123;</span><br><span class="line">        <span class="function"><span class="keyword">void</span> <span class="title">onLoadMore</span><span class="params">()</span></span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SwipeRefreshWithLoadMoreLayout <span class="title">setEnableLoadMore</span><span class="params">(<span class="keyword">boolean</span> enable)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isEnableLoadMore = enable;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SwipeRefreshWithLoadMoreLayout <span class="title">setIsLoadingMore</span><span class="params">(<span class="keyword">boolean</span> isLoadingMore)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.isLoadingMore = isLoadingMore;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SwipeRefreshWithLoadMoreLayout <span class="title">setOnLoadMoreListener</span><span class="params">(IOnLoadMoreListener listener)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.onLoadMoreListener = listener;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isLoadingMore</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> isLoadingMore;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SwipeRefreshWithLoadMoreLayout <span class="title">setLoadMoreLayout</span><span class="params">(RecyclerView.Adapter adapter, <span class="keyword">int</span> layoutRes)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isEnableLoadMore &amp;&amp; adapter <span class="keyword">instanceof</span> RecyclerViewAdapterWrapper) &#123;</span><br><span class="line">            RecyclerViewAdapterWrapper adapterWrapper = ((RecyclerViewAdapterWrapper) adapter);</span><br><span class="line">            adapterWrapper.setFooterView(getContext(), layoutRes);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> SwipeRefreshWithLoadMoreLayout <span class="title">setLoadMoreNoMoreDataLayout</span><span class="params">(RecyclerView.Adapter adapter, <span class="keyword">int</span> layout)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (isEnableLoadMore &amp;&amp; adapter <span class="keyword">instanceof</span> RecyclerViewAdapterWrapper) &#123;</span><br><span class="line">            RecyclerViewAdapterWrapper adapterWrapper = ((RecyclerViewAdapterWrapper) adapter);</span><br><span class="line">            adapterWrapper.setNoMoreDataView(getContext(), layout);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>嗯，很简单是吧，不多说了，没时间解释，有时间优化后再补充。</p>
+<h3 id="如何使用"><a href="#如何使用" class="headerlink" title="如何使用"></a>如何使用</h3><ol>
+<li>按照常规的做法，新建adapter，但是继承的是上面的baseAdapter</li>
+<li>因为SwipeRefreshLayout有setRefresh的方法，所以需要上啦加载的话调用setLoadMore方法即可</li>
+<li>自定义视图时使用setLoadMoreLayout方法</li>
+<li>还有一些方法要用的话看代码吧，也不复杂<br></li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"># Android</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/09/提高生产力——kotlin/" rel="next" title="提高生产力——kotlin">
+                <i class="fa fa-chevron-left"></i> 提高生产力——kotlin
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/th.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">帅比</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#为什么要自己手动去实现这个功能"><span class="nav-number">1.</span> <span class="nav-text">为什么要自己手动去实现这个功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自己实现和别人的轮子比谁更好？"><span class="nav-number">2.</span> <span class="nav-text">自己实现和别人的轮子比谁更好？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现前要考虑什么问题？"><span class="nav-number">3.</span> <span class="nav-text">实现前要考虑什么问题？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何动手？"><span class="nav-number">4.</span> <span class="nav-text">如何动手？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#如何使用"><span class="nav-number">5.</span> <span class="nav-text">如何使用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">24.8k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three.min.js"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+</body>
+</html>
