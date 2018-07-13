@@ -352,39 +352,39 @@
 
       
         <h5 id="说明"><a href="#说明" class="headerlink" title="说明"></a>说明</h5><p>这里记录的所有命令，都是平时比较常用的。当然，也许还有一些也是比较常用的命令，这里并没有列出来。<br>然后，这里只是稍微的提及到相关的知识，具体的使用不会的寄几解决啦。<br><a id="more"></a></p>
-<h5 id="一、git配置"><a href="#一、git配置" class="headerlink" title="一、git配置"></a>一、git配置</h5><p>1、设置用户名和邮箱<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;xxx&quot;</span><br><span class="line">git config --global user.email xxx@xx.xx</span><br></pre></td></tr></table></figure></p>
-<h5 id="二、基本操作"><a href="#二、基本操作" class="headerlink" title="二、基本操作"></a>二、基本操作</h5><p>1、初始化,进入工作目录，执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure></p>
-<p>2、开始跟踪所有文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br></pre></td></tr></table></figure></p>
-<p>3、添加单独文件，如test.md文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add test.md</span><br></pre></td></tr></table></figure></p>
-<p>4、执行一次提交<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;这是提交的说明&quot;</span><br></pre></td></tr></table></figure></p>
-<p>5、检查当前文件状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git status</span><br></pre></td></tr></table></figure></p>
-<p>6、查看差异<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git diff</span><br></pre></td></tr></table></figure></p>
-<p>7、克隆网上的资源到本地<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone xxx</span><br></pre></td></tr></table></figure></p>
-<h5 id="三、git-stash"><a href="#三、git-stash" class="headerlink" title="三、git stash"></a>三、git stash</h5><p>1、保存当前的工作进度。会分别对暂存区和工作区的状态进行保存。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash</span><br></pre></td></tr></table></figure></p>
-<p>2、显示所有已经保存的列表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash list</span><br></pre></td></tr></table></figure></p>
-<p>3、恢复所有暂存列表中的第一项，也是最新的那项，恢复后并删除此项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop</span><br></pre></td></tr></table></figure></p>
-<p>4、恢复列表中指定的某一项，并删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop [&lt;stash&gt;]</span><br></pre></td></tr></table></figure></p>
-<p>5、恢复所有暂存列表中的第一项，也是最新的那项，但不删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply</span><br></pre></td></tr></table></figure></p>
-<p>6、恢复列表中指定的某一项，但不删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply [&lt;stash&gt;]</span><br></pre></td></tr></table></figure></p>
-<p>7、删除最新的进度，也是列表中的第一个<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop</span><br></pre></td></tr></table></figure></p>
-<p>8、删除指定的某一项<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop [&lt;stash&gt;]</span><br></pre></td></tr></table></figure></p>
-<p>9、清除列表的所有记录<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash clear</span><br></pre></td></tr></table></figure></p>
-<h5 id="三、git-merge"><a href="#三、git-merge" class="headerlink" title="三、git merge"></a>三、git merge</h5><p>1、默认的fast-forward方式，把另一分支的历史copy过来，指针指向最新<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge</span><br></pre></td></tr></table></figure></p>
-<p>2、–no-ff 方式，把指针指向合并分支的头，但不把分支的信息copy过来，一旦分支删除，则丢失信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --no-ff</span><br></pre></td></tr></table></figure></p>
-<p>3、–squash 方式，把另一分支信息压缩成一个，合并<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --squash</span><br></pre></td></tr></table></figure></p>
-<h5 id="四、远程仓库"><a href="#四、远程仓库" class="headerlink" title="四、远程仓库"></a>四、远程仓库</h5><p>1、显示当前的远程仓库地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote -v</span><br></pre></td></tr></table></figure></p>
-<p>2、添加远程仓库地址<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin https://xxx.xxx/xxxx</span><br></pre></td></tr></table></figure></p>
-<p>3、提交到远程仓库，master是分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure></p>
-<h5 id="五、打标签"><a href="#五、打标签" class="headerlink" title="五、打标签"></a>五、打标签</h5><p>1、显示标签，只能看到标签名字，看不到标注信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure></p>
-<p>2、显示标签的详细信息，V1.0是某个标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show V1.0</span><br></pre></td></tr></table></figure></p>
-<p>3、打标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -a V1.0 -m &quot;这是1.0版本标签的说明&quot;</span><br></pre></td></tr></table></figure></p>
-<h5 id="六、分支"><a href="#六、分支" class="headerlink" title="六、分支"></a>六、分支</h5><p>1、在当前分支上新建另一分支test<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch test</span><br></pre></td></tr></table></figure></p>
-<p>2、切换到test分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout test</span><br></pre></td></tr></table></figure></p>
-<p>3、新建分支test并切换到新分支，相当于上面两条的合体<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b test</span><br></pre></td></tr></table></figure></p>
-<p>4、删除分支test<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d test</span><br></pre></td></tr></table></figure></p>
-<p>5、列出所有的分支<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure></p>
-<h5 id="七、其他常用"><a href="#七、其他常用" class="headerlink" title="七、其他常用"></a>七、其他常用</h5><p>1、改变最近一次提交<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit --amend</span><br></pre></td></tr></table></figure></p>
-<p>2、合并多次的commit到一个，比如3个，具体的使用自行解决，稍微提及<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -i HEAD~3</span><br></pre></td></tr></table></figure></p>
+<h5 id="一、git配置"><a href="#一、git配置" class="headerlink" title="一、git配置"></a>一、git配置</h5><p>1、设置用户名和邮箱<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git<span class="built_in"> config </span>--global user.name <span class="string">"xxx"</span></span><br><span class="line">git<span class="built_in"> config </span>--global user.email xxx@xx.xx</span><br></pre></td></tr></table></figure></p>
+<h5 id="二、基本操作"><a href="#二、基本操作" class="headerlink" title="二、基本操作"></a>二、基本操作</h5><p>1、初始化,进入工作目录，执行<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git init</span></span><br></pre></td></tr></table></figure></p>
+<p>2、开始跟踪所有文件<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span><span class="bash"> .</span></span><br></pre></td></tr></table></figure></p>
+<p>3、添加单独文件，如test.md文件<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">add</span><span class="bash"> test.md</span></span><br></pre></td></tr></table></figure></p>
+<p>4、执行一次提交<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git</span> commit -m <span class="string">"这是提交的说明"</span></span><br></pre></td></tr></table></figure></p>
+<p>5、检查当前文件状态<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git status</span></span><br></pre></td></tr></table></figure></p>
+<p>6、查看差异<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git diff</span></span><br></pre></td></tr></table></figure></p>
+<p>7、克隆网上的资源到本地<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">clone</span> <span class="title">xxx</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="三、git-stash"><a href="#三、git-stash" class="headerlink" title="三、git stash"></a>三、git stash</h5><p>1、保存当前的工作进度。会分别对暂存区和工作区的状态进行保存。<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git stash</span></span><br></pre></td></tr></table></figure></p>
+<p>2、显示所有已经保存的列表<br><figure class="highlight applescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="built_in">list</span></span><br></pre></td></tr></table></figure></p>
+<p>3、恢复所有暂存列表中的第一项，也是最新的那项，恢复后并删除此项<br><figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="keyword">pop</span></span><br></pre></td></tr></table></figure></p>
+<p>4、恢复列表中指定的某一项，并删除<br><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash pop <span class="meta">[&lt;stash&gt;]</span></span><br></pre></td></tr></table></figure></p>
+<p>5、恢复所有暂存列表中的第一项，也是最新的那项，但不删除<br><figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="built_in">apply</span></span><br></pre></td></tr></table></figure></p>
+<p>6、恢复列表中指定的某一项，但不删除<br><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash apply <span class="meta">[&lt;stash&gt;]</span></span><br></pre></td></tr></table></figure></p>
+<p>7、删除最新的进度，也是列表中的第一个<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git stash drop</span></span><br></pre></td></tr></table></figure></p>
+<p>8、删除指定的某一项<br><figure class="highlight fsharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash drop <span class="meta">[&lt;stash&gt;]</span></span><br></pre></td></tr></table></figure></p>
+<p>9、清除列表的所有记录<br><figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git stash <span class="built_in">clear</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="三、git-merge"><a href="#三、git-merge" class="headerlink" title="三、git merge"></a>三、git merge</h5><p>1、默认的fast-forward方式，把另一分支的历史copy过来，指针指向最新<br><figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">merge</span></span><br></pre></td></tr></table></figure></p>
+<p>2、–no-ff 方式，把指针指向合并分支的头，但不把分支的信息copy过来，一旦分支删除，则丢失信息<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">merge</span> <span class="comment">--no-ff</span></span><br></pre></td></tr></table></figure></p>
+<p>3、–squash 方式，把另一分支信息压缩成一个，合并<br><figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">merge</span> <span class="comment">--squash</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="四、远程仓库"><a href="#四、远程仓库" class="headerlink" title="四、远程仓库"></a>四、远程仓库</h5><p>1、显示当前的远程仓库地址<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git remote -v</span></span><br></pre></td></tr></table></figure></p>
+<p>2、添加远程仓库地址<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote <span class="keyword">add</span> origin https:<span class="comment">//xxx.xxx/xxxx</span></span><br></pre></td></tr></table></figure></p>
+<p>3、提交到远程仓库，master是分支<br><figure class="highlight maxima"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="built_in">push</span> -u <span class="built_in">origin</span> master</span><br></pre></td></tr></table></figure></p>
+<h5 id="五、打标签"><a href="#五、打标签" class="headerlink" title="五、打标签"></a>五、打标签</h5><p>1、显示标签，只能看到标签名字，看不到标注信息<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">tag</span></span><br></pre></td></tr></table></figure></p>
+<p>2、显示标签的详细信息，V1.0是某个标签<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">show </span><span class="built_in">V1</span>.<span class="number">0</span></span><br></pre></td></tr></table></figure></p>
+<p>3、打标签<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">tag</span> <span class="title">-a</span> V1.<span class="number">0</span> -m <span class="string">"这是1.0版本标签的说明"</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="六、分支"><a href="#六、分支" class="headerlink" title="六、分支"></a>六、分支</h5><p>1、在当前分支上新建另一分支test<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">branch </span>test</span><br></pre></td></tr></table></figure></p>
+<p>2、切换到test分支<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout <span class="built_in">test</span></span><br></pre></td></tr></table></figure></p>
+<p>3、新建分支test并切换到新分支，相当于上面两条的合体<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -<span class="selector-tag">b</span> test</span><br></pre></td></tr></table></figure></p>
+<p>4、删除分支test<br><figure class="highlight armasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">git</span> <span class="keyword">branch </span>-d test</span><br></pre></td></tr></table></figure></p>
+<p>5、列出所有的分支<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git branch</span></span><br></pre></td></tr></table></figure></p>
+<h5 id="七、其他常用"><a href="#七、其他常用" class="headerlink" title="七、其他常用"></a>七、其他常用</h5><p>1、改变最近一次提交<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">commit</span> <span class="comment">--amend</span></span><br></pre></td></tr></table></figure></p>
+<p>2、合并多次的commit到一个，比如3个，具体的使用自行解决，稍微提及<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -<span class="selector-tag">i</span> HEAD~<span class="number">3</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -680,9 +680,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -719,16 +716,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 

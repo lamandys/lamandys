@@ -356,35 +356,35 @@
 <p>不同的手机显示的效果有可能会有好大的差别，但是有时候你会发现，其实它们的分辨率是一样的，但是为什么显示出来的效果会不一样呢？答案是dpi这个东西，像素密度越大，所占的空间比较越小。比如说大部分的手机分辨率是1080x1920的dpi是在400左右的，但是vivo的某些机型dpi却是380左右。当然显示就会存在差别。</p>
 <p>这里不说怎么适配各个屏幕显示效果的问题，只说说怎么样才能在720p的手机显示1080p的效果，还有模仿实际真机的显示效果。</p>
 <p>比如现在我有一台手机是720x1280，dpi是320的手机，屏幕显示效果正常，那么如果线上的版本有人反馈说在1080x1920，dpi是401的手机上显示效果有问题，那么该如何去操作才能在这台720x1280的手机去查看1080x1920显示的效果呢？</p>
-<p>首先，可以去各大应用市场下载 <strong>终端模拟器</strong> 并安装在手机上，注意没有root的手机是不能修改分辨率的。<br>接着输入以下命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">wm size 1080x1920</span><br><span class="line">wm density 401</span><br></pre></td></tr></table></figure></p>
+<p>首先，可以去各大应用市场下载 <strong>终端模拟器</strong> 并安装在手机上，注意没有root的手机是不能修改分辨率的。<br>接着输入以下命令：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">wm size <span class="number">1080</span>x1920</span><br><span class="line">wm density <span class="number">401</span></span><br></pre></td></tr></table></figure></p>
 <p>解释：</p>
 <ol>
 <li>su是申请root权限的，修改手机的分辨率当然要权限的嘛。</li>
-<li>wm size 1080x1920是把手机分辨率改成1080x1920，wm是windowmanager，还有下面的常用操作：<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wm size // 查看手机的分辨率</span><br><span class="line">wm size reset // 重置手机分辨率</span><br><span class="line">wm density  // 查看手机的密度值</span><br><span class="line">wm density reset // 重置手机的密度值</span><br></pre></td></tr></table></figure>
+<li>wm size 1080x1920是把手机分辨率改成1080x1920，wm是windowmanager，还有下面的常用操作：<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wm <span class="built_in">size</span> <span class="comment">// 查看手机的分辨率</span></span><br><span class="line">wm <span class="built_in">size</span> reset <span class="comment">// 重置手机分辨率</span></span><br><span class="line">wm density  <span class="comment">// 查看手机的密度值</span></span><br><span class="line">wm density reset <span class="comment">// 重置手机的密度值</span></span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p>当你想在某手机型号上查看显示效果时，你只需要知道这个手机的分辨率和dpi值就能修改了，非常的方便。其实如果手机连接了电脑的情况下是不需要为手机安装任何软件的，只需要在cmd命令行中执行上面的命令也可以达到想要的效果。</p>
 <h5 id="下面附带一些常用的adb命令"><a href="#下面附带一些常用的adb命令" class="headerlink" title="下面附带一些常用的adb命令"></a>下面附带一些常用的adb命令</h5><ol>
 <li><p>查看当前连接的手机（模拟器）设备</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb devices</span><br></pre></td></tr></table></figure>
+<figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">adb devices</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>杀死和启动adb服务</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb kill-server</span><br><span class="line">adb start-server</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="keyword">kill</span>-<span class="keyword">server</span></span><br><span class="line">adb <span class="keyword">start</span>-<span class="keyword">server</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>安装应用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb install apk_file // 默认的安装，会清除数据</span><br><span class="line">adb install -r apk_file // 覆盖安装</span><br></pre></td></tr></table></figure>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb install apk_file <span class="comment">// 默认的安装，会清除数据</span></span><br><span class="line">adb install -r apk_file <span class="comment">// 覆盖安装</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>卸载应用</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb uninstall apk_packageName</span><br></pre></td></tr></table></figure>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">adb</span> uninstall apk_packageName</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>当有的手机在卸载完应用后再安装应用会提示应用已存在，实际上是因为卸载后数据有残留，只需操作下面的即可（要root）</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb shell  // 进入手机里面</span><br><span class="line">su</span><br><span class="line">cd /data/data/</span><br><span class="line">rm -r package_name</span><br></pre></td></tr></table></figure>
+<figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="keyword">shell</span>  <span class="comment">// 进入手机里面</span></span><br><span class="line"><span class="keyword">su</span></span><br><span class="line"><span class="keyword">cd</span> /data/data/</span><br><span class="line"><span class="keyword">rm</span> -r package_name</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>列出所有的包名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb shell</span><br><span class="line">pm list packages</span><br></pre></td></tr></table></figure>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">adb <span class="keyword">shell</span><span class="bash"></span></span><br><span class="line"><span class="bash">pm list packages</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>查看手机最顶栈的activity是哪个</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db shell dumpsys activity top</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">db <span class="keyword">shell</span><span class="bash"> dumpsys activity top</span></span><br></pre></td></tr></table></figure></li>
 </ol>
 
       
@@ -681,9 +681,6 @@
 
 
 
-  
-  
-
 
 
 
@@ -720,16 +717,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three.min.js"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/three/three-waves.min.js"></script>
   
 
 
