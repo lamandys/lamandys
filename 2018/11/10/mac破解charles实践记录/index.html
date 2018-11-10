@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="android," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -79,18 +79,26 @@
 
 
 
-<meta name="description" content="在我们使用Android studio连接手机调试的时候，总是会出现找不到手机的问题，很可能的原因是ADB被占用，下面教大家来解决这个问题。">
-<meta name="keywords" content="android">
+<meta name="description" content="简介Charles这个工具，如果大家还不知道是用来做什么的话，那你可以出门左拐了，毕竟这篇文章并不是来介绍这个工具是怎么用的。 好吧，还是简单的介绍一下吧，Charles其实是一款代理服务器抓包软件，等同于windows平台的Fiddler软件，不过Charles是用java编写的，所以能够跨平台使用。">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ADB无法使用解决办法.md">
-<meta property="og:url" content="http://yoursite.com/2017/02/06/ADB无法使用解决办法/index.html">
+<meta property="og:title" content="mac破解charles实践记录">
+<meta property="og:url" content="http://yoursite.com/2018/11/10/mac破解charles实践记录/index.html">
 <meta property="og:site_name" content="非常好听的名字">
-<meta property="og:description" content="在我们使用Android studio连接手机调试的时候，总是会出现找不到手机的问题，很可能的原因是ADB被占用，下面教大家来解决这个问题。">
+<meta property="og:description" content="简介Charles这个工具，如果大家还不知道是用来做什么的话，那你可以出门左拐了，毕竟这篇文章并不是来介绍这个工具是怎么用的。 好吧，还是简单的介绍一下吧，Charles其实是一款代理服务器抓包软件，等同于windows平台的Fiddler软件，不过Charles是用java编写的，所以能够跨平台使用。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T07:18:56.000Z">
+<meta property="og:image" content="http://yoursite.com/2018/11/10/mac破解charles实践记录/1.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/10/mac破解charles实践记录/2.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/10/mac破解charles实践记录/1541852951809.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/10/mac破解charles实践记录/1541853088978.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/10/mac破解charles实践记录/1541853056490.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/10/mac破解charles实践记录/1541854181046.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/11/10/mac破解charles实践记录/1541854290406.jpg">
+<meta property="og:updated_time" content="2018-11-10T13:05:44.972Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ADB无法使用解决办法.md">
-<meta name="twitter:description" content="在我们使用Android studio连接手机调试的时候，总是会出现找不到手机的问题，很可能的原因是ADB被占用，下面教大家来解决这个问题。">
+<meta name="twitter:title" content="mac破解charles实践记录">
+<meta name="twitter:description" content="简介Charles这个工具，如果大家还不知道是用来做什么的话，那你可以出门左拐了，毕竟这篇文章并不是来介绍这个工具是怎么用的。 好吧，还是简单的介绍一下吧，Charles其实是一款代理服务器抓包软件，等同于windows平台的Fiddler软件，不过Charles是用java编写的，所以能够跨平台使用。">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/10/mac破解charles实践记录/1.png">
 
 
 
@@ -120,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2017/02/06/ADB无法使用解决办法/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/11/10/mac破解charles实践记录/"/>
 
 
 
 
 
-  <title>ADB无法使用解决办法.md | 非常好听的名字</title>
+  <title>mac破解charles实践记录 | 非常好听的名字</title>
   
 
 
@@ -243,7 +251,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2017/02/06/ADB无法使用解决办法/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/11/10/mac破解charles实践记录/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="">
@@ -260,7 +268,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ADB无法使用解决办法.md</h1>
+          <h1 class="post-title" itemprop="name headline">mac破解charles实践记录</h1>
         
 
         <div class="post-meta">
@@ -272,8 +280,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-02-06T00:19:25+08:00">
-                2017-02-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-10T19:02:35+08:00">
+                2018-11-10
               </time>
             
 
@@ -314,7 +322,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  199 字
+                  1,079 字
                 </span>
               
 
@@ -330,7 +338,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  1 分钟
+                  4 分钟
                 </span>
               
             </span>
@@ -351,11 +359,39 @@
       
 
       
-        <p>在我们使用Android studio连接手机调试的时候，总是会出现找不到手机的问题，很可能的原因是ADB被占用，下面教大家来解决这个问题。<br><a id="more"></a><br>命令行输入adb devices会出现提示：<br><figure class="highlight subunit"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">error: </span>could not install *smartsocket* listener: cannot bind to 127.0.0.1:5037: 通常每个套接字地址(协议/网络地址/端口)只允许使用一次。 (10048)</span><br><span class="line">could not read ok from ADB Server</span><br></pre></td></tr></table></figure></p>
-<h6 id="解决办法"><a href="#解决办法" class="headerlink" title="解决办法"></a>解决办法</h6><p>输入命令：<br><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -ano <span class="string">| findstr "</span><span class="number">5037</span><span class="string">"</span></span><br></pre></td></tr></table></figure></p>
-<p>会出现：<br><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">TCP</span>    127<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.1</span><span class="selector-pseudo">:5037</span>         0<span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:0</span>              <span class="selector-tag">LISTENING</span>       2068</span><br></pre></td></tr></table></figure></p>
-<p>以win10为例，打开任务管理器，点击“详细信息“，找出”PID”选项卡中与上面最后数字相同的一列，然后结束相关进程，即可。</p>
-<p>重新插拔数据线，显示正常。</p>
+        <h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>Charles这个工具，如果大家还不知道是用来做什么的话，那你可以出门左拐了，毕竟这篇文章并不是来介绍这个工具是怎么用的。</p>
+<p>好吧，还是简单的介绍一下吧，Charles其实是一款代理服务器抓包软件，等同于windows平台的Fiddler软件，不过Charles是用java编写的，所以能够跨平台使用。<br><a id="more"></a></p>
+<h3 id="Charles的主要功能"><a href="#Charles的主要功能" class="headerlink" title="Charles的主要功能"></a>Charles的主要功能</h3><ul>
+<li>截取Http 和 Https 网络封包</li>
+<li>支持重发网络请求，方便后端调试</li>
+<li>修改网络请求参数</li>
+<li>支持网络请求的截获并动态修改</li>
+<li>支持模拟慢速网络，主要是模仿手机上的2G/3G/4G的访问流程。</li>
+<li>可以抓手机端访问的资源（如果是配置HOST的环境，手机可以借用host配置进入测试环境）</li>
+</ul>
+<h3 id="破解原因（仅供学习用途）"><a href="#破解原因（仅供学习用途）" class="headerlink" title="破解原因（仅供学习用途）"></a>破解原因（仅供学习用途）</h3><p>Charles 是收费软件，可以免费试用 30 天。试用期过后，未付费的用户仍然可以继续使用，但是每次使用时间不能超过 30 分钟，并且启动时将会有 10 秒种的延时。因此，该付费方案对广大用户还是相当友好的，即使你长期不付费，也能使用完整的软件功能。只是当你需要长时间进行封包调试时，会因为 Charles 强制关闭而遇到影响。<br><img src="/2018/11/10/mac破解charles实践记录/1.png" alt="未破解"></p>
+<h3 id="动手"><a href="#动手" class="headerlink" title="动手"></a>动手</h3><ol>
+<li><p>在破解之前，可以在网上看到有一大堆的文章，各种版本的破解软件，使得你下载下来的版本未必是当前最新的版本，或者你并不清楚别人家修改的破解文件会不会是不安全的文件，所以这次我们自己动手，自己修改破解。</p>
+</li>
+<li><p>首先去官网下载最新的安装包，里面有各个平台的最新包，自行选择即可，这里我用mac平台来说明。<br>官网地址下载：<a href="https://www.charlesproxy.com/download" target="_blank" rel="noopener">https://www.charlesproxy.com/download</a></p>
+</li>
+<li><p>按照正常的流程安装完成后，我们可以在应用程序中，找到Charles后，右键显示包内容<br><img src="/2018/11/10/mac破解charles实践记录/2.jpg" alt="未破解"></p>
+</li>
+<li><p>找到Java文件夹中的charles.jar文件，我们用jd-gui打开charles.jar之后，如图可以看到指向SplashWindow.class这个文件，双击打开。<br><img src="/2018/11/10/mac破解charles实践记录/1541852951809.jpg" alt="未破解"><br><img src="/2018/11/10/mac破解charles实践记录/1541853088978.jpg" alt="未破解"><br><img src="/2018/11/10/mac破解charles实践记录/1541853056490.jpg" alt="未破解"></p>
+</li>
+<li><p>最终我们可以看到，是否注册是指向showRegistrationStatus这个方法的，当KKPK#lcJx方法为true的时候，就会显示注册信息，否则显示还没注册。</p>
+</li>
+<li><p>我们不管KKPK#lcJx方法做了什么操作，只需要把这个方法的返回值设置为true即可，n那我们究竟怎么才能修改这个jar包里面的内容呢？方法有很多种，不管用什么方法，能达到效果即可。下面我用一种比较常规的方法去更改：</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span>. 我们看到，KKPK所在类的包名为com<span class="selector-class">.xk72</span><span class="selector-class">.charles</span>， 所以我们新建包名路径为com<span class="selector-class">.xk72</span><span class="selector-class">.charles</span>。</span><br><span class="line"></span><br><span class="line"><span class="number">2</span>. 复制KKPK这个类的所有内容进来，并修改</span><br><span class="line"></span><br><span class="line"><span class="number">3</span>. 编译，使得该文件变为class文件</span><br><span class="line"></span><br><span class="line"><span class="number">4</span>. 最后使用jar uvf命令覆盖回去即可。</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>经过以上几个步骤即可把更改后的文件替换到jar包中<br><img src="/2018/11/10/mac破解charles实践记录/1541854181046.jpg" alt="更改后"></p>
+</li>
+<li><p>最后把charles.jar文件替换原来的文件即可，打开时的页面：<br><img src="/2018/11/10/mac破解charles实践记录/1541854290406.jpg" alt="破解后"></p>
+</li>
+</ol>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>我们平时需要某个东西的时候，上网上搜索时会发现各个不一样的答案，直接拿来用倒是个不错的主意。不过因为互联网太复杂，为了一些不必要的麻烦，有时候能自己动手就自己动手，自己才是最可靠的人。</p>
+<p>ps:另外我在学习的时候，有时候你看了几篇文章，就会觉得我学会了这种心态，但是到自己实际的操作中，可能会遇到各种各样的问题。解决问题的过程，其实学到的东西更多，所以建议不管你学什么都好，看了文章之后，不自己动手实现的东西，终究不会有太深刻的理解。</p>
+<h3 id="声明"><a href="#声明" class="headerlink" title="声明"></a>声明</h3><p>此文章仅用作记录自己的操作，供学习使用，切勿用于非法用途，如有侵权，请告知删文，感谢。</p>
 
       
     </div>
@@ -373,7 +409,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag"># android</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
         </div>
       
@@ -386,15 +422,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2018/05/11/如何简单的为recyclerview增加上拉加载功能/" rel="next" title="如何简单的为recyclerview增加上拉加载功能">
+                <i class="fa fa-chevron-left"></i> 如何简单的为recyclerview增加上拉加载功能
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/02/26/Android图片上传之选择图片裁剪图片/" rel="prev" title="Android图片上传之选择图片裁剪图片">
-                Android图片上传之选择图片裁剪图片 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -549,7 +585,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-6"><a class="nav-link" href="#解决办法"><span class="nav-number">1.</span> <span class="nav-text">解决办法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Charles的主要功能"><span class="nav-number">2.</span> <span class="nav-text">Charles的主要功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#破解原因（仅供学习用途）"><span class="nav-number">3.</span> <span class="nav-text">破解原因（仅供学习用途）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动手"><span class="nav-number">4.</span> <span class="nav-text">动手</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明"><span class="nav-number">6.</span> <span class="nav-text">声明</span></a></li></ol></div>
             
 
           </div>
