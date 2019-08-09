@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="android," />
+  <meta name="keywords" content="Android," />
 
 
 
@@ -80,14 +80,14 @@
 
 
 <meta name="description" content="说明这里记录的所有命令，都是平时比较常用的。当然，也许还有一些也是比较常用的命令，这里并没有列出来。然后，这里只是稍微的提及到相关的知识，具体的使用不会的寄几解决啦。">
-<meta name="keywords" content="android">
+<meta name="keywords" content="Android">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Git常用命令">
 <meta property="og:url" content="http://yoursite.com/2017/10/29/Git常用命令/index.html">
 <meta property="og:site_name" content="非常好听的名字">
 <meta property="og:description" content="说明这里记录的所有命令，都是平时比较常用的。当然，也许还有一些也是比较常用的命令，这里并没有列出来。然后，这里只是稍微的提及到相关的知识，具体的使用不会的寄几解决啦。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-01-09T07:22:36.000Z">
+<meta property="og:updated_time" content="2019-08-09T10:47:10.714Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Git常用命令">
 <meta name="twitter:description" content="说明这里记录的所有命令，都是平时比较常用的。当然，也许还有一些也是比较常用的命令，这里并没有列出来。然后，这里只是稍微的提及到相关的知识，具体的使用不会的寄几解决啦。">
@@ -314,7 +314,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  765 字
+                  870 字
                 </span>
               
 
@@ -330,7 +330,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  4 分钟
                 </span>
               
             </span>
@@ -385,6 +385,8 @@
 <p>5、列出所有的分支<br><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">git branch</span></span><br></pre></td></tr></table></figure></p>
 <h5 id="七、其他常用"><a href="#七、其他常用" class="headerlink" title="七、其他常用"></a>七、其他常用</h5><p>1、改变最近一次提交<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git <span class="keyword">commit</span> <span class="comment">--amend</span></span><br></pre></td></tr></table></figure></p>
 <p>2、合并多次的commit到一个，比如3个，具体的使用自行解决，稍微提及<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git rebase -<span class="selector-tag">i</span> HEAD~<span class="number">3</span></span><br></pre></td></tr></table></figure></p>
+<p>3、commit后想发现错了？回退？还没push<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">// 回退到<span class="keyword">commit</span>之前，并把代码放进缓存区</span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--soft HEAD~1</span></span><br><span class="line"></span><br><span class="line">// 回退到指定<span class="keyword">commit</span>之前，并把代码放进缓存区，</span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--soft commitId</span></span><br><span class="line"></span><br><span class="line">// 强制回到<span class="keyword">commit</span>前并清空代码区</span><br><span class="line">git <span class="keyword">reset</span> <span class="comment">--hard commitId</span></span><br></pre></td></tr></table></figure></p>
+<p>4、commit后发现错了？并push了？<br><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">先操作<span class="number">3</span>的步骤，再执行</span><br><span class="line">git push origin <span class="keyword">master</span> <span class="title">--force</span></span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -402,7 +404,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/android/" rel="tag"># android</a>
+            <a href="/tags/Android/" rel="tag"># Android</a>
           
         </div>
       
@@ -521,7 +523,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">11</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -621,7 +623,7 @@
     
       <span class="post-meta-item-text">Site words total count&#58;</span>
     
-    <span title="Site words total count">26.2k</span>
+    <span title="Site words total count">26.6k</span>
   
 </div>
 
