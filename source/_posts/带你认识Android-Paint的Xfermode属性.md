@@ -1,7 +1,7 @@
 ---
-title: Paint的Xfermode属性知多少
+title: 带你认识Android-Paint的Xfermode属性
 date: 2018-01-05 14:21:26
-tags: android
+tags: Android
 ---
 ###### xfermode是什么
 > Xfermode is the base class for objects that are called to implement custom "transfer-modes" in the drawing pipeline. The static function Create(Modes) can be called to return an instance of any of the predefined subclasses as specified in the Modes enum. When an Xfermode is assigned to an Paint, then objects drawn with that paint have the xfermode applied.

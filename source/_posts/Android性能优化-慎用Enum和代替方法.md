@@ -1,7 +1,7 @@
 ---
-title: Android性能优化慎用Enum的代替方法
+title: Android性能优化-慎用Enum和代替方法
 date: 2017-10-25 23:13:23
-tags: android
+tags: Android
 ---
 ###### 1. 为什么要用枚举？
 在开发中我们是不是经常都自己定义一些固定不变的静态常量来作为其他方法的参数或者是判断的条件？比如：

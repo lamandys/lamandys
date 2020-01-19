@@ -1,7 +1,7 @@
 ---
 title: 获取apk包名的几种方法
 date: 2018-02-01 00:19:25
-tags: android
+tags: [Android,ADB]
 ---
 
 ##### 通过adb shell进入到手机data/data目录下，查看包名（需要root）

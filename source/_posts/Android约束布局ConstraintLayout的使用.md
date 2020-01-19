@@ -1,7 +1,7 @@
 ---
-title: ConstraintLayout从相识到白头
+title: Android约束布局ConstraintLayout的使用
 date: 2017-11-26 19:07:05
-tags: android
+tags: Android
 ---
 [ConstraintLayout](https://developer.android.com/reference/android/support/constraint/ConstraintLayout.html) 又名约束布局，出世于谷歌的大怀抱中，公布在2016年谷歌大会，现如今已经不是那个弱小病多的小子了，它被越来越多的人所认识。
 <!--more-->

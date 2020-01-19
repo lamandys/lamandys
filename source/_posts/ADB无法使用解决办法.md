@@ -1,7 +1,7 @@
 ---
 title: ADB无法使用解决办法.md
 date: 2017-02-06 00:19:25
-tags: android
+tags: Android
 ---
 
 在我们使用Android studio连接手机调试的时候，总是会出现找不到手机的问题，很可能的原因是ADB被占用，下面教大家来解决这个问题。

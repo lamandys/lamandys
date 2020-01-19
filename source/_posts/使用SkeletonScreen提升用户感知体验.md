@@ -1,5 +1,5 @@
 ---
-title: 使用 Skeleton Screen 提升用户感知体验
+title: 使用SkeletonScreen提升用户感知体验
 date: 2018-04-10 17:29:46
 tags: Android
 ---

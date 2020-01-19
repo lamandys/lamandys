@@ -1,7 +1,7 @@
 ---
 title: git为不同的项目配置不同的用户名和邮箱
 date: 2018-02-02 18:37:12
-tags: android
+tags: Android
 ---
 还记得我们刚开始用git的时候，教程里的两行代码么：
 ```

@@ -1,7 +1,7 @@
 ---
 title: 超简单的发布自己的开源库到jcenter教程
 date: 2018-03-07 23:44:16
-tags: android maven
+tags: [Android,maven]
 ---
 平时我们在开发的时候，必不可少的都有使用过很多的第三方库，比如某分享的sdk依赖：
 <!--more-->

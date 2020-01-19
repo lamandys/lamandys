@@ -1,7 +1,7 @@
 ---
-title: Android中使用Java8特性之Lambda
+title: Android中使用Java8特性-Lambda
 date: 2017-05-03 00:27:36
-tags: android
+tags: Android
 ---
 ##### 前言
 早在几年前，Java8就已经发布了正式版本，可是到现在为止，在Android的开发中，大部分人还是一直使用的是Java6和Java7的属性和方法，这使得有时候在开发过程中难免会出现一些问题。

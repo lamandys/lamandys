@@ -73,7 +73,7 @@ seo: false
 # subtitle: Subtitle
 index_with_subtitle: false
 
-# 那个公仔，Gantzert_Felixander ,Epsilon2.1,haru,miku,ni-j,nico,nito,
+# 那个公仔，那个公仔，那个公仔，Gantzert_Felixander ,Epsilon2.1,haru,miku,ni-j,nico,nito,
 # nipsilon,nietzsche,shizuku,tsumiki,wanko,z16,hibiki,koharu,haruto,
 # Unitychan,tororo,hijiki
 # https://github.com/EYHN/hexo-helper-live2d
@@ -235,7 +235,7 @@ post_meta:
 post_wordcount:
   item_text: true
   wordcount: true  #字数统计
-  min2read: true #阅读时长
+  min2read: false #阅读时长
   totalcount: true #总字数统计
   separated_meta: true
 

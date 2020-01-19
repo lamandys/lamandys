@@ -1,7 +1,7 @@
 ---
-title: 提高生产力——kotlin
+title: kotlin语言的优点
 date: 2018-05-09 20:40:17
-tags: Android
+tags: kotlin
 ---
 随着今年Google把kotlin语言作为Android开发的主要语言后，各种kotlin的教程遍地开花，Android studio也支持自动引入kotlin的支持，再也不用像以前那样使用那么麻烦了。
 

@@ -1,7 +1,7 @@
 ---
 title: Git常用命令
 date: 2017-10-29 00:30:35
-tags: android
+tags: Android
 ---
 ##### 说明
 这里记录的所有命令，都是平时比较常用的。当然，也许还有一些也是比较常用的命令，这里并没有列出来。
@@ -150,4 +150,22 @@ git commit --amend
 2、合并多次的commit到一个，比如3个，具体的使用自行解决，稍微提及
 ```
 git rebase -i HEAD~3
+```
+
+3、commit后想发现错了？回退？还没push
+```
+// 回退到commit之前，并把代码放进缓存区
+git reset --soft HEAD~1
+
+// 回退到指定commit之前，并把代码放进缓存区，
+git reset --soft commitId
+
+// 强制回到commit前并清空代码区
+git reset --hard commitId
+```
+
+4、commit后发现错了？并push了？
+```
+先操作3的步骤，再执行
+git push origin master --force
 ```

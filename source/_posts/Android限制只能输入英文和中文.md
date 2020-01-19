@@ -1,8 +1,8 @@
 ---
 layout: android
-title: Android 限制 EditText 只能输入英文加汉字
+title: Android限制只能输入英文和中文
 date: 2017-07-02 21:57:09
-tags: android
+tags: Android
 ---
 ###### 前言
 在实际的开发当中,如果有一个需求是: 
