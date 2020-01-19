@@ -230,13 +230,13 @@ post_meta:
   updated_at: false #更新于
   categories: true #分类
 
-# Post wordcount display settings
+# 针对每篇文章的统计
 # Dependencies: https://github.com/willin/hexo-wordcount
 post_wordcount:
   item_text: true
-  wordcount: true  #字数统计
-  min2read: true #阅读时长
-  totalcount: true #总字数统计
+  wordcount: true     #单篇 字数统计
+  min2read: true      #单篇 阅读时长
+  totalcount: true    #网站 字数统计
   separated_meta: true
 
 # Wechat Subscriber
@@ -257,6 +257,12 @@ post_copyright:
   license: CC BY-NC-SA 3.0
   license_url: https://creativecommons.org/licenses/by-nc-sa/3.0/
 
+
+# 搞怪网页标题
+title_trick:
+  enable: true
+  leave: "(つェ⊂)我好像失宠了~"
+  enter: "(*´∇｀*) 我又回来啦~"
 
 # ---------------------------------------------------------------
 # Misc Theme Settings
@@ -555,15 +561,15 @@ busuanzi_count:
   # count values only if the other configs are false
   enable: true
   # custom uv span for the whole site
-  site_uv: true
+  site_uv: false
   site_uv_header: <i class="fa fa-user">&nbsp;本站访客人数</i>
   site_uv_footer: 人
   # custom pv span for the whole site
-  site_pv: true
+  site_pv: false
   site_pv_header: <i class="fa fa-eye">&nbsp;本站总访问量</i>
   site_pv_footer: 次
   # custom pv span for one page only
-  page_pv: true
+  page_pv: false
   page_pv_header: <i class="fa fa-eye">&nbsp;&nbsp;本文总阅读量</i>
   page_pv_footer: 次
 

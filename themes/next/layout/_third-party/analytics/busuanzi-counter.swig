@@ -11,6 +11,7 @@
   {% endif %}
 
   {% if theme.busuanzi_count.site_pv %}
+    <span class="post-meta-divider">|</span>
     <span class="site-pv">
       {{ theme.busuanzi_count.site_pv_header }}
       <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>

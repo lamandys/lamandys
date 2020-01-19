@@ -91,5 +91,8 @@
   {{ live2d() }}
   <!-- 页面点击小红心 -->
   <script type="text/javascript" src="/js/src/love.js"></script>
+
+  <!-- 搞怪标题 -->
+  {% include '_custom/custom.swig' %}
 </body>
 </html>
