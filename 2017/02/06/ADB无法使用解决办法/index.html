@@ -14,6 +14,13 @@
 
 
 
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
 
 
 
@@ -37,10 +44,6 @@
 
 
 
-
-  
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
 
 
 
@@ -101,7 +104,7 @@
     scheme: 'Pisces',
     version: '5.1.4',
     sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
-    fancybox: true,
+    fancybox: false,
     tabs: true,
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     duoshuo: {
@@ -298,42 +301,20 @@
             </span>
           
 
-          <!-- 如果是开启了字数统计的话就把这个放在同一行上并增加一个分隔符 -->
           
               <span class="post-meta-divider">|</span>
-          
-
-          
-            <span class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
+              <span class="post-wordcount">
+              <span class="post-meta-item-icon">
                   <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
+              </span>
+              
+                  <span class="post-meta-item-text">字数统计</span>
+              
+              <span title="字数统计">
                   199 字
-                </span>
-              
+              </span>
+          
 
-              
-                <span class="post-meta-divider">|</span>
-              
-
-              
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
-                
-                <span title="阅读时长">
-                  1 分钟
-                </span>
-              
-            </span>
           
 
           
@@ -574,7 +555,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2020</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -602,10 +583,22 @@
 
         
 <div class="busuanzi-count">
-  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
   
+    <span class="site-uv">
+      <i class="fa fa-user">&nbsp;本站访客人数</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      人
+    </span>
+  
 
+  
+    <span class="site-pv">
+      <i class="fa fa-eye">&nbsp;本站总访问量</i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      次
+    </span>
   
 </div>
 
@@ -642,8 +635,6 @@
 
 
 
-  
-
 
 
 
@@ -678,11 +669,6 @@
   
   
     <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
   
 
 
