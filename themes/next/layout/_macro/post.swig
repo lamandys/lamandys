@@ -220,44 +220,31 @@
             </span>
           {% endif %}
 
-          <!-- 如果是开启了字数统计的话就把这个放在同一行上并增加一个分隔符 -->
-          {% if theme.post_wordcount.wordcount and theme.post_wordcount.min2read %}
+          {% if theme.post_wordcount.wordcount %}
               <span class="post-meta-divider">|</span>
+              <span class="post-wordcount">
+              <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+              </span>
+              {% if theme.post_wordcount.item_text %}
+                  <span class="post-meta-item-text">{{ __('post.wordcount') }}</span>
+              {% endif %}
+              <span title="{{ __('post.wordcount') }}">
+                  {{ wordcount(post.content) }} 字
+              </span>
           {% endif %}
 
-          {% if theme.post_wordcount.wordcount or theme.post_wordcount.min2read %}
-            <span class="post-wordcount">
-              {% if theme.post_wordcount.wordcount %}
-                {% if not theme.post_wordcount.separated_meta %}
-                  <span class="post-meta-divider">|</span>
-                {% endif %}
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                {% if theme.post_wordcount.item_text %}
-                  <span class="post-meta-item-text">{{ __('post.wordcount') }}&#58;</span>
-                {% endif %}
-                <span title="{{ __('post.wordcount') }}">
-                  {{ wordcount(post.content) }} 字
-                </span>
+          {% if theme.post_wordcount.min2read %}
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              {% if theme.post_wordcount.item_text %}
+                <span class="post-meta-item-text">{{ __('post.min2read') }} &asymp;</span>
               {% endif %}
-
-              {% if theme.post_wordcount.wordcount and theme.post_wordcount.min2read %}
-                <span class="post-meta-divider">|</span>
-              {% endif %}
-
-              {% if theme.post_wordcount.min2read %}
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-clock-o"></i>
-                </span>
-                {% if theme.post_wordcount.item_text %}
-                  <span class="post-meta-item-text">{{ __('post.min2read') }} &asymp;</span>
-                {% endif %}
-                <span title="{{ __('post.min2read') }}">
-                  {{ min2read(post.content) }} 分钟
-                </span>
-              {% endif %}
-            </span>
+              <span title="{{ __('post.min2read') }}">
+                {{ min2read(post.content) }} 分钟
+              </span>
           {% endif %}
 
           {% if post.description and (not theme.excerpt_description or not is_index) %}

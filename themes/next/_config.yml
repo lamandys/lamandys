@@ -118,7 +118,7 @@ scheme: Pisces
 
 
 # ---------------------------------------------------------------
-# Sidebar Settings
+# Sidebar Settings 旁边的导航栏
 # ---------------------------------------------------------------
 
 # Social Links.
@@ -158,24 +158,24 @@ links_layout: block
 # in site  directory(source/uploads): /uploads/avatar.gif
 avatar: /images/th.jpg
 
-# Table Of Contents in the Sidebar
+# 侧栏中的目录
 toc:
   enable: true
 
-  # Automatically add list number to toc.
+  # 自动将清单编号添加到目录。
   number: true
 
-  # If true, all words will placed on next lines if header width longer then sidebar width.
+  # 如果为true，则如果标题宽度长于边栏宽度，则所有单词将放在下一行。
   wrap: false
 
-# Creative Commons 4.0 International License.
+# 知识共享4.0国际许可。
 # http://creativecommons.org/
 # Available: by | by-nc | by-nc-nd | by-nc-sa | by-nd | by-sa | zero
 #creative_commons: zero
 #creative_commons:
 
 sidebar:
-  # Sidebar Position, available value: left | right (only for Pisces | Gemini).
+  # 边栏位置，可用值：left | right (only for Pisces | Gemini).
   position: left
   #position: right
 
@@ -189,7 +189,7 @@ sidebar:
   #display: hide
   #display: remove
 
-  # Sidebar offset from top menubar in pixels (only for Pisces | Gemini).
+  # 侧边栏与顶部菜单栏的偏移量,单位px (only for Pisces | Gemini).
   offset: 12
 
   # Back to top in sidebar (only for Pisces | Gemini).
@@ -223,12 +223,12 @@ auto_excerpt:
   enable: false
   length: 150
 
-# Post meta display settings
+# 上传的时候，显示什么内容
 post_meta:
-  item_text: true
-  created_at: true
-  updated_at: false
-  categories: true
+  item_text: true 
+  created_at: true #创建于
+  updated_at: false #更新于
+  categories: true #分类
 
 # Post wordcount display settings
 # Dependencies: https://github.com/willin/hexo-wordcount
@@ -262,22 +262,22 @@ post_copyright:
 # Misc Theme Settings
 # ---------------------------------------------------------------
 
-# Reduce padding / margin indents on devices with narrow width.
+# 减少宽度较窄的设备上的填充/边距缩进。
 mobile_layout_economy: false
 
-# Android Chrome header panel color ($black-deep).
+# Android Chrome标题面板颜色（$ black-deep）。
 android_chrome_color: "#222"
 
 # Custom Logo.
-# !!Only available for Default Scheme currently.
+# !!目前仅适用于默认方案。
 # Options:
-#   enabled: [true/false] - Replace with specific image
+#   enabled: [true/false] - 替换为特定图片
 #   image: url-of-image   - Images's url
 custom_logo:
   enabled: false
   image:
 
-# Code Highlight theme
+# 代码高亮显示主题
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
@@ -285,15 +285,15 @@ highlight_theme:  night eighties
 
 
 # ---------------------------------------------------------------
-# Font Settings
-# - Find fonts on Google Fonts (https://www.google.com/fonts)
-# - All fonts set here will have the following styles:
+# 字体设置
+# - 在Google字体上查找字体 (https://www.google.com/fonts)
+# - 此处设置的所有字体将具有以下样式：
 #     light, light italic, normal, normal italic, bold, bold italic
-# - Be aware that setting too much fonts will cause site running slowly
-# - Introduce in 5.0.1
+# - 请注意，设置过多的字体会导致网站运行缓慢
+# - 在5.0.1中引入
 # ---------------------------------------------------------------
-# CAUTION! Safari Version 10.1.2 bug: https://github.com/iissnan/hexo-theme-next/issues/1844
-# To avoid space between header and sidebar in Pisces / Gemini themes recommended to use Web Safe fonts for `global` (and `logo`):
+# 警告！ Safari版本10.1.2错误：https：//github.com/iissnan/hexo-theme-next/issues/1844
+# 为了避免Pisces/Gemini主题的页眉和侧边栏之间有空格，建议对“ global”（和“ logo”）使用Web Safe字体：
 # Arial | Tahoma | Helvetica | Times New Roman | Courier New | Verdana | Georgia | Palatino | Garamond | Comic Sans MS | Trebuchet MS
 # ---------------------------------------------------------------
 font:
@@ -344,7 +344,7 @@ font:
 # Third Party Services Settings
 # ---------------------------------------------------------------
 
-# MathJax Support
+# MathJax支持
 mathjax:
   enable: false
   per_page: false
@@ -490,7 +490,7 @@ needmoreshare2:
 # user_id must NOT be null when admin_enable is true!
 # you can visit http://dev.duoshuo.com get duoshuo user id.
 duoshuo_info:
-  ua_enable: true
+  ua_enable: false
   admin_enable: false
   user_id: 0
   #admin_nickname: Author
@@ -549,17 +549,17 @@ firestore:
   projectId: #required
   bluebird: false #enable this if you want to include bluebird 3.5.1(core version) Promise polyfill
 
-# Show PV/UV of the website/page with busuanzi.
-# Get more information on http://ibruce.info/2015/04/04/busuanzi/
+# 用busuanzi显示网站/页面的PV / UV。
+# 在http://ibruce.info/2015/04/04/busuanzi/上获取更多信息
 busuanzi_count:
   # count values only if the other configs are false
   enable: true
   # custom uv span for the whole site
-  site_uv: false
+  site_uv: true
   site_uv_header: <i class="fa fa-user">&nbsp;本站访客人数</i>
   site_uv_footer: 人
   # custom pv span for the whole site
-  site_pv: false
+  site_pv: true
   site_pv_header: <i class="fa fa-eye">&nbsp;本站总访问量</i>
   site_pv_footer: 次
   # custom pv span for one page only
@@ -575,11 +575,11 @@ busuanzi_count:
 # tencent_mta:
 
 
-# Enable baidu push so that the blog will push the url to baidu automatically which is very helpful for SEO
+# 启用百度推送，以便博客将网址自动推送到百度，这对于SEO非常有帮助
 baidu_push: false
 
-# Google Calendar
-# Share your recent schedule to others via calendar page
+# Google日历
+# 通过日历页面与他人共享您最近的日程安排
 #
 # API Documentation:
 # https://developers.google.com/google-apps/calendar/v3/reference/events/list
@@ -595,7 +595,7 @@ calendar:
   singleEvents: true
   maxResults: 250
 
-# Algolia Search
+# Algolia 搜索
 algolia_search:
   enable: false
   hits:
@@ -609,10 +609,10 @@ algolia_search:
 # Dependencies: https://github.com/flashlab/hexo-generator-search
 local_search:
   enable: false
-  # if auto, trigger search by changing input
-  # if manual, trigger search by pressing enter key or search button
+  # 如果为自动，则通过更改输入触发搜索
+  # 如果是手动的，请按Enter键或搜索按钮触发搜索
   trigger: auto
-  # show top n results per article, show all results by setting to -1
+  # 显示每篇文章的前n个结果，通过设置为-1显示所有结果
   top_n_per_article: 1
 
 
@@ -620,14 +620,14 @@ local_search:
 # Tags Settings
 # ---------------------------------------------------------------
 
-# External URL with BASE64 encrypt & decrypt.
+# 带有BASE64的外部URL加密和解密。
 # Usage: {% exturl text url "title" %}
 # Alias: {% extlink text url "title" %}
 exturl: false
 
 # Note tag (bs-callout).
 note:
-  # Note tag style values:
+  # 注意标记样式值：
   #  - simple    bs-callout old alert style. Default.
   #  - modern    bs-callout new (v2-v3) alert style.
   #  - flat      flat callout style with background, like on Mozilla or StackOverflow.
@@ -676,18 +676,18 @@ motion:
     sidebar: slideUpIn
 
 # Fancybox
-fancybox: true
+fancybox: false
 
-# Progress bar in the top during page loading.
-pace: false
+# 页面加载过程中，进度条位于顶部。
+pace: true
 # Themes list:
-#pace-theme-big-counter
-#pace-theme-bounce
-#pace-theme-barber-shop
-#pace-theme-center-atom
-#pace-theme-center-circle
-#pace-theme-center-radar
-#pace-theme-center-simple
+#pace-theme-big-counter 右上角非常大的百分比加载
+#pace-theme-bounce 右上角一个球逐渐远去
+#pace-theme-barber-shop 整个页面覆盖一层蓝色
+#pace-theme-center-atom 页面中间一个兰花转
+#pace-theme-center-circle 中间一个圆圈在Y轴旋转
+#pace-theme-center-radar wifi扫描的效果
+#pace-theme-center-simple 中间进度条的效果
 #pace-theme-corner-indicator
 #pace-theme-fill-left
 #pace-theme-flash
@@ -698,7 +698,7 @@ pace: false
 # pace_theme: pace-theme-center-simple
 pace_theme: pace-theme-minimal
 
-# three_waves
+# three_waves 好多水珠网跟随鼠标动
 three_waves: false
 
 # canvas_lines
@@ -775,7 +775,7 @@ vendors:
 
   # Internal version: 1.0.0 那个线条的背景开关
   # https://github.com/hustcc/canvas-nest.js
-  canvas_nest: true
+  canvas_nest: false
 
   # three
   three:
