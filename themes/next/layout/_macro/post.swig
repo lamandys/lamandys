@@ -213,6 +213,7 @@
              </span>
           {% endif %}
 
+          <!-- 本文阅读量 -->
           {% if not is_index and theme.busuanzi_count.enable and theme.busuanzi_count.page_pv %}
             <span class="post-meta-divider">|</span>
             <span class="page-pv">{{ theme.busuanzi_count.page_pv_header }}
@@ -220,6 +221,7 @@
             </span>
           {% endif %}
 
+          <!-- 字数统计 -->
           {% if theme.post_wordcount.wordcount %}
               <span class="post-meta-divider">|</span>
               <span class="post-wordcount">
