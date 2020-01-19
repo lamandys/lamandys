@@ -781,7 +781,7 @@ vendors:
 
   # Internal version: 1.0.0 那个线条的背景开关
   # https://github.com/hustcc/canvas-nest.js
-  canvas_nest: false
+  canvas_nest: true
 
   # three
   three:

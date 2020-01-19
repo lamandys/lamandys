@@ -1,12 +1,57 @@
 // Custom styles.
-.header {width: 80%;}
-.container .main-inner {width: 80%;}
-.content-wrap {width: calc(100% - 260px);}
+//.header {width: 80%;}
+//.container .main-inner {width: 80%;}
+//.content-wrap {width: calc(100% - 260px);}
 
-.post {
-   margin-top: -30px;
-   margin-bottom: 90px;
-   padding: 25px 25px 10px 25px;
-   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
-   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
-  }
+//.post {
+  // margin-top: -30px;
+   //margin-bottom: 90px;
+   //padding: 25px 25px 10px 25px;
+   //-webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+   //-moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+  //}
+
+ // 修改主体透明度
+.content-wrap {
+  // background: rgba(255,255,255,0.7);
+  -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+  -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+}
+
+// 修改菜单栏透明度
+.header-inner {
+  // background: rgba(255,255,255,0.7);
+  -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+  -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+}
+// 侧边栏
+.sidebar-inner {
+  // background: rgba(255,255,255,0.7);
+  -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+  -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+}
+
+// 添加背景图片
+//body {
+//  background: url(https://source.unsplash.com/random/1600x900?wallpapers);
+//  background-size: cover;
+//  background-repeat: no-repeat;
+//  background-attachment: fixed;
+//  background-position: 50% 50%;
+//}
+
+// 文章分割线长度
+.posts-expand .post-eof {
+    display: block;
+    margin: 60px auto 50px; //文章间距
+    width: 8%;  //分割线长度
+    height: 1px;
+    background: $grey-light;
+    text-align: center;
+}
+
+
+// 文章正文与标题的间距
+.posts-expand .post-meta {
+	margin: 10px 0 10px 0;
+}
