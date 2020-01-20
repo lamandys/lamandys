@@ -1,15 +1,16 @@
-// Custom styles.
-//.header {width: 80%;}
-//.container .main-inner {width: 80%;}
-//.content-wrap {width: calc(100% - 260px);}
+// 主页文章添加阴影效果
+.post-normal-home {
+   margin-top: -40px;
+   margin-bottom: 60px;
+   padding: 25px 25px 0px 25px;
+   -webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
+   -moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
+}
 
-//.post {
-  // margin-top: -30px;
-   //margin-bottom: 90px;
-   //padding: 25px 25px 10px 25px;
-   //-webkit-box-shadow: 0 0 5px rgba(202, 203, 203, .5);
-   //-moz-box-shadow: 0 0 5px rgba(202, 203, 204, .5);
-  //}
+// 配合上面设置文章的阴影效果
+.post-body {
+  padding-bottom: 30px;
+}
 
  // 修改主体透明度
 .content-wrap {
@@ -43,9 +44,9 @@
 // 文章分割线长度
 .posts-expand .post-eof {
     display: block;
-    margin: 60px auto 50px; //文章间距
-    width: 8%;  //分割线长度
-    height: 1px;
+ //   margin: 60px auto 50px; //文章间距
+    width: 0%;  //分割线长度
+    height: 0px;
     background: $grey-light;
     text-align: center;
 }

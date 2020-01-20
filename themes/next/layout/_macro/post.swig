@@ -9,12 +9,16 @@
   {% if post.sticky > 0 %}
     {% set post_class = post_class + ' ' + 'post-sticky' %}
   {% endif %}
+  {% set post_block = 'post-block' %}
+  {% if is_home() %} 
+    {% set post_block = post_block + ' ' + 'post-normal-home' %}
+  {% endif %}
 
   <article class="{{ post_class }}" itemscope itemtype="http://schema.org/Article">
   {##################}
   {### POST BLOCK ###}
   {##################}
-  <div class="post-block">
+  <div class="{{ post_block }}">
     <link itemprop="mainEntityOfPage" href="{{ config.url }}{{ url_for(post.path) }}">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
