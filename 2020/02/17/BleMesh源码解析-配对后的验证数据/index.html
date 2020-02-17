@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,Bluetooth,Mesh,BLE," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="上篇文章Android蓝牙Mesh知识 讲述了蓝牙Mesh的基本知识和使用流程，对如何使用Bluetooth进行组建Mesh网络有了一定的了解，下面来看看BleMesh这个demo相关的知识，我们来分析它的源码，看看链接成功后是如何进行数据验证的。">
+<meta name="keywords" content="Android,Bluetooth,Mesh,BLE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BleMesh源码解析-配对后的验证数据">
+<meta property="og:url" content="http://yoursite.com/2020/02/17/BleMesh源码解析-配对后的验证数据/index.html">
+<meta property="og:site_name" content="非常好听的名字">
+<meta property="og:description" content="上篇文章Android蓝牙Mesh知识 讲述了蓝牙Mesh的基本知识和使用流程，对如何使用Bluetooth进行组建Mesh网络有了一定的了解，下面来看看BleMesh这个demo相关的知识，我们来分析它的源码，看看链接成功后是如何进行数据验证的。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/02/17/BleMesh源码解析-配对后的验证数据/1.jpg">
+<meta property="og:updated_time" content="2020-02-17T09:53:14.516Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BleMesh源码解析-配对后的验证数据">
+<meta name="twitter:description" content="上篇文章Android蓝牙Mesh知识 讲述了蓝牙Mesh的基本知识和使用流程，对如何使用Bluetooth进行组建Mesh网络有了一定的了解，下面来看看BleMesh这个demo相关的知识，我们来分析它的源码，看看链接成功后是如何进行数据验证的。">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/17/BleMesh源码解析-配对后的验证数据/1.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/17/BleMesh源码解析-配对后的验证数据/"/>
+
+
+
+
+
+  <title>BleMesh源码解析-配对后的验证数据 | 非常好听的名字</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">非常好听的名字</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/17/BleMesh源码解析-配对后的验证数据/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="非常好听的名字">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BleMesh源码解析-配对后的验证数据</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-17T10:58:23+08:00">
+                2020-02-17
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          <!-- 本文阅读量 -->
+          
+
+          <!-- 字数统计 -->
+          
+              <span class="post-meta-divider">|</span>
+              <span class="post-wordcount">
+              <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                  <span class="post-meta-item-text">字数统计</span>
+              
+              <span title="字数统计">
+                  1,266 字
+              </span>
+          
+
+          
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">
+                6 分钟
+              </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>上篇文章<a href="http://lsxt10.cn/2020/01/20/Android%E8%93%9D%E7%89%99Mesh%E7%9F%A5%E8%AF%86" target="_blank" rel="noopener">Android蓝牙Mesh知识</a> 讲述了蓝牙Mesh的基本知识和使用流程，对如何使用Bluetooth进行组建Mesh网络有了一定的了解，下面来看看<a href="https://github.com/wl1244hotmai/BLE-Mesh" target="_blank" rel="noopener">BleMesh</a>这个demo相关的知识，我们来分析它的源码，看看链接成功后是如何进行数据验证的。</p>
+<a id="more"></a>
+<p><img src="/2020/02/17/BleMesh源码解析-配对后的验证数据/../BleMesh源码解析-配对后的验证数据/1.jpg" width="800" height="534" alt="与文无关，侵权必删"></p>
+<h4 id="如何接收数据？"><a href="#如何接收数据？" class="headerlink" title="如何接收数据？"></a>如何接收数据？</h4><p>上次有说到，接收数据会回调 <strong>onCharacteristicWrite</strong> 方法，那么想要接收对方发送过来的数据，首先肯定得让对方发送吧，先来看看对方是如何发送数据的。</p>
+<h4 id="什么时候进行数据发送？"><a href="#什么时候进行数据发送？" class="headerlink" title="什么时候进行数据发送？"></a>什么时候进行数据发送？</h4><p>说到发送数据，在两个客户端互相连接成功后，首先要做的当然是发送身份验证信息，<!--当前本地已连接设备的**设备网络表**给对方， 为什么呢？原因是对方刚刚和你连接上，有可能是刚刚加入到这个Mesh网络的新成员，它还不知道这个网络中有谁在里面。
+或者是它处于某一个偏远的地方，它本身也连接了几个自己这边没有连接的网络，所以需要把我们已经连接的网络表发送给对方。
+什么时候发送？ -->来看看代码：<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">            <span class="keyword">public</span> <span class="function"><span class="keyword">void</span> <span class="title">onReadRemoteRssi</span><span class="params">(BluetoothGatt gatt, <span class="keyword">int</span> rssi, <span class="keyword">int</span> status)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">if</span> (status == BluetoothGatt.GATT_SUCCESS &amp;&amp; transportCallback != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    transportCallback.identifierUpdated(mDeviceType,</span><br><span class="line">                            gatt.getDevice().getAddress(),</span><br><span class="line">                            Transport.ConnectionStatus.CONNECTED,</span><br><span class="line">                            extraInfo);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们知道，当两个设备连接成功后会读取对方的Rssi，即是信号强度，读取成功后，就可以回调本地的通知，发现这台新的设备已经上线，处于CONNECTED的状态。再来进一步看看下面做了什么：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> identifierUpdated(Transport transport,</span><br><span class="line">                                               <span class="keyword">String</span> identifier,</span><br><span class="line">                                               Transport.ConnectionStatus status,</span><br><span class="line">                                               <span class="built_in">boolean</span> peerIsHost,</span><br><span class="line">                                               Map&lt;<span class="keyword">String</span>, <span class="keyword">Object</span>&gt; extraInfo) &#123;</span><br><span class="line">        <span class="keyword">switch</span> (status) &#123;</span><br><span class="line">            <span class="keyword">case</span> CONNECTED:</span><br><span class="line">                ...</span><br><span class="line">                <span class="keyword">if</span> (peerIsHost &amp;&amp; shouldIdentifyPeer(identifier)) &#123;</span><br><span class="line">                    Log.d(<span class="string">"SessionManager"</span>, <span class="string">"Queuing identity to "</span> + identifier);</span><br><span class="line">                    <span class="keyword">if</span> (!identifierSenders.containsKey(identifier)) &#123;</span><br><span class="line">                        identifierSenders.put(identifier, <span class="keyword">new</span> SessionMessageSerializer(localIdentityMessage));</span><br><span class="line">                    &#125; <span class="keyword">else</span></span><br><span class="line">                        Log.w(<span class="string">"SessionManager"</span>, <span class="string">"Outgoing messages already exist for unidentified peer "</span> + identifier);</span><br><span class="line">                &#125;</span><br><span class="line">                ...</span><br><span class="line">                SessionMessageSerializer sender = identifierSenders.<span class="built_in">get</span>(identifier);</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (sender != <span class="keyword">null</span> &amp;&amp; sender.getCurrentMessage() != <span class="keyword">null</span>) &#123;</span><br><span class="line"></span><br><span class="line">                    <span class="built_in">boolean</span> sendingIdentity = sender.getCurrentMessage() <span class="keyword">instanceof</span> IdentityMessage;</span><br><span class="line"></span><br><span class="line">                    <span class="comment">// 将要发送的内容转化为byte数组</span></span><br><span class="line">                    <span class="built_in">byte</span>[] toSend = sender.getNextChunk(transport.getLongWriteBytes());</span><br><span class="line">                    <span class="keyword">if</span> (toSend == <span class="keyword">null</span>) <span class="keyword">return</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">if</span> (transport.sendData(toSend, identifier)) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (sendingIdentity) &#123;</span><br><span class="line">                            Log.d(<span class="string">"SessionManager"</span>, <span class="string">"Sent identity to "</span> + identifier);</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125; <span class="keyword">else</span></span><br><span class="line">                        Log.w(<span class="string">"SessionManager"</span>, <span class="string">"Failed to send "</span> + sender.getCurrentMessage().getType() + <span class="string">" message to new peer "</span> + identifier);</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> DISCONNECTED:</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>已去除无关部分，我们来看看主要的代码。</p>
+<ol>
+<li>通过identifierSenders保存了发送消息的对象，来获取当前的消息，类型是身份验证消息。</li>
+<li>把消息转为byte数组进行发送。</li>
+</ol>
+<h4 id="CurrentMessage是什么？"><a href="#CurrentMessage是什么？" class="headerlink" title="CurrentMessage是什么？"></a>CurrentMessage是什么？</h4><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="meta">@Nullable</span> <span class="function">SessionMessage <span class="title">getCurrentMessage</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="function"><span class="keyword">return</span> messages.<span class="title">peek</span><span class="params">()</span></span>;</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<p>messages又是什么？哦，是个队列！<br><figure class="highlight abnf"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">private ArrayDeque&lt;SessionMessage&gt; messages<span class="comment">;</span></span><br></pre></td></tr></table></figure></p>
+<p>那，这个消息什么时候添加进来的呢？<br><figure class="highlight aspectj"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">SessionMessageSerializer</span><span class="params">(<span class="keyword">final</span> SessionMessage message)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>(<span class="keyword">new</span> ArrayList&lt;SessionMessage&gt;() &#123;&#123; add(message); &#125;&#125;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">SessionMessageSerializer</span><span class="params">(List&lt;SessionMessage&gt; messages)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.messages = <span class="keyword">new</span> ArrayDeque&lt;&gt;();</span><br><span class="line">        <span class="keyword">this</span>.messages.addAll(messages);</span><br><span class="line">        <span class="keyword">this</span>.completedMessages = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">        marker = <span class="number">0</span>;</span><br><span class="line">        serializeCount = <span class="number">0</span>;</span><br><span class="line">        ackCount = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>原来是在构造SessionMessageSerializer的时候，把消息传递进来的，SessionMessage是一个抽象类，IdentityMessage是它的实现类。<br><figure class="highlight stata"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (peerIsHost &amp;&amp; shouldIdentifyPeer(identifier)) &#123;</span><br><span class="line">                    <span class="keyword">Log</span>.<span class="built_in">d</span>(<span class="string">"SessionManager"</span>, <span class="string">"Queuing identity to "</span> + identifier);</span><br><span class="line">                    <span class="keyword">if</span> (!identifierSenders.containsKey(identifier)) &#123;</span><br><span class="line">                        identifierSenders.put(identifier, new SessionMessageSerializer(localIdentityMessage));</span><br><span class="line">                    &#125; <span class="keyword">else</span></span><br><span class="line">                        <span class="keyword">Log</span>.<span class="built_in">w</span>(<span class="string">"SessionManager"</span>, <span class="string">"Outgoing messages already exist for unidentified peer "</span> + identifier);</span><br><span class="line">                &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们再回头看看identifierUpdated这个方法里面，shouldIdentifyPeer表示当前这个identifier是否需要发送IdentifyMessage?<br>localIdentityMessage是什么？<br><figure class="highlight haxe"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">localIdentityMessage = <span class="keyword">new</span> <span class="type">IdentityMessage</span>(<span class="built_in">this</span>.context, <span class="built_in">this</span>.localPeer);</span><br></pre></td></tr></table></figure></p>
+<p>localIdentityMessage就是IdentityMessage，localPeer是本地的蓝牙对象，保存了唯一的macAddress。<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">public IdentityMessage(Context context,<span class="built_in"> Peer </span>peer) &#123;</span><br><span class="line">        super();</span><br><span class="line">        this.peer = peer;</span><br><span class="line">        init();</span><br><span class="line">        serializeAndCacheHeaders();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private void init() &#123;</span><br><span class="line">       <span class="built_in"> type </span>= <span class="string">"identity"</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    protected void serializeAndCacheHeaders() &#123;</span><br><span class="line">        <span class="keyword">if</span> (serializedHeaders == <span class="literal">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (headers == <span class="literal">null</span>) headers = populateHeaders();</span><br><span class="line">            JSONObject jsonHeaders = new JSONObject(headers);</span><br><span class="line">            serializedHeaders = jsonHeaders.toString().getBytes();</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">     protected HashMap&lt;String, Object&gt; populateHeaders() &#123;</span><br><span class="line">        HashMap&lt;String, Object&gt; headerMap = new HashMap&lt;&gt;();</span><br><span class="line">        headerMap.put(HEADER_TYPE, type);</span><br><span class="line">        headerMap.put(HEADER_BODY_LENGTH, bodyLengthBytes);</span><br><span class="line">        headerMap.put(HEADER_ID, id);</span><br><span class="line">        headerMap.put(HEADER_MAC_ADDRESS, mac_address);</span><br><span class="line"></span><br><span class="line">        return headerMap;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Override</span><br><span class="line">    protected HashMap&lt;String, Object&gt; populateHeaders() &#123;</span><br><span class="line">        HashMap&lt;String, Object&gt; headerMap = super.populateHeaders();</span><br><span class="line"></span><br><span class="line">        headerMap.put(HEADER_ALIAS, peer.getAlias());</span><br><span class="line"></span><br><span class="line">        return headerMap;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>可以看出，IdentityMessage只是一个Json，里面有type类型，有body的长度信息，有消息的ID，有这个用户的mac地址，上层有alias。至此，CurrentMessage完毕。</p>
+<h4 id="数据发送了，对方收到会做什么？"><a href="#数据发送了，对方收到会做什么？" class="headerlink" title="数据发送了，对方收到会做什么？"></a>数据发送了，对方收到会做什么？</h4><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> onComplete(SessionMessageDeserializer receiver, SessionMessage message, Exception e) &#123;</span><br><span class="line">        <span class="keyword">String</span> senderIdentifier = identifierReceivers.inverse().<span class="built_in">get</span>(receiver);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (e == <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">if</span> (message <span class="keyword">instanceof</span> IdentityMessage) &#123;</span><br><span class="line"></span><br><span class="line">                <span class="comment">//set the rssi for direct remote device.</span></span><br><span class="line">                Peer peer = ((IdentityMessage) message).getPeer();</span><br><span class="line">                <span class="keyword">if</span> (identifierRssis.<span class="built_in">size</span>() &gt; <span class="number">0</span> &amp;&amp; identifierRssis.<span class="built_in">get</span>(senderIdentifier) != <span class="keyword">null</span>) &#123;</span><br><span class="line">                    peer.setRssi(-identifierRssis.<span class="built_in">get</span>(senderIdentifier)); <span class="comment">//change minus rssi to absolute value</span></span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">                peerIdentifiers.put(peer, senderIdentifier);</span><br><span class="line">                identifiedPeers.put(senderIdentifier, peer);</span><br><span class="line"></span><br><span class="line">                ...</span><br><span class="line"></span><br><span class="line">                <span class="keyword">if</span> (newIdentity) &#123;</span><br><span class="line">                    <span class="keyword">if</span> (!sentIdentityToSender)</span><br><span class="line">                        sendMessage(localIdentityMessage, peer);</span><br><span class="line">                    <span class="keyword">else</span> <span class="keyword">if</span> (peerIdentifiers.<span class="built_in">get</span>(peer).<span class="built_in">size</span>() == <span class="number">1</span>)</span><br><span class="line">                        callback.directPeerStatusUpdated(peer, Transport.ConnectionStatus.CONNECTED, hostIdentifiers.contains(senderIdentifier));</span><br><span class="line">                &#125;</span><br><span class="line"></span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>从上面可以看到，收到IdentityMessage的消息后，把对方的Peer这个对象保存下来，并调用directPeerStatusUpdated方法通知做其他的事情。<br>另外，如果是第一次收到对方发送过来的IdentityMessage验证信息，则需要也向对方发送一条IdentityMessage消息，在发送成功的时候回调directPeerStatusUpdated方法。<br>其中，identifiedPeers保存着已经连接的对象列表，后面需要的时候可以通过对方的macAddress来获取，然后可以向对方发送消息。<br>至此，配对后双方需要验证的信息流程结束。</p>
+<p>上面说到的如何发送数据，由于篇幅问题，将再开一篇讲解，谢谢！上面的流程如果只看文章会显得很枯燥，建议下载源码后，再对比分析，对认识流程有很大的帮助。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
+          
+            <a href="/tags/Bluetooth/" rel="tag"><i class="fa fa-tag"></i> Bluetooth</a>
+          
+            <a href="/tags/Mesh/" rel="tag"><i class="fa fa-tag"></i> Mesh</a>
+          
+            <a href="/tags/BLE/" rel="tag"><i class="fa fa-tag"></i> BLE</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/01/20/Android蓝牙Mesh知识/" rel="next" title="Android蓝牙Mesh知识">
+                <i class="fa fa-chevron-left"></i> Android蓝牙Mesh知识
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/th.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">帅比</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">14</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#如何接收数据？"><span class="nav-number">1.</span> <span class="nav-text">如何接收数据？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#什么时候进行数据发送？"><span class="nav-number">2.</span> <span class="nav-text">什么时候进行数据发送？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CurrentMessage是什么？"><span class="nav-number">3.</span> <span class="nav-text">CurrentMessage是什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据发送了，对方收到会做什么？"><span class="nav-number">4.</span> <span class="nav-text">数据发送了，对方收到会做什么？</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">网站总字数&#58;</span>
+    
+    <span title="网站总字数">30.5k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+  <!-- 搞怪标题 -->
+   
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我好像失宠了~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 我又回来啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+</body>
+</html>
