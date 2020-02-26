@@ -1,0 +1,862 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Android,Bluetooth,BLE,BleMesh," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="什么是设备多跳？由于设备硬件的限制，一台中心设备所支持连接外围设备的最大连接数为6到7台，根据设备厂商的设计的设备性能不同，这个数量也有所改变。假如一台设备的最大连接数为7台，那么在一个50人的聊天群中，剩下的设备是如何和这台中心设备进行信息互通的呢？">
+<meta name="keywords" content="Android,Bluetooth,BLE,BleMesh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="BleMesh源码解析-如何实现设备多跳">
+<meta property="og:url" content="http://yoursite.com/2020/02/26/BleMesh源码解析-如何实现设备多跳/index.html">
+<meta property="og:site_name" content="非常好听的名字">
+<meta property="og:description" content="什么是设备多跳？由于设备硬件的限制，一台中心设备所支持连接外围设备的最大连接数为6到7台，根据设备厂商的设计的设备性能不同，这个数量也有所改变。假如一台设备的最大连接数为7台，那么在一个50人的聊天群中，剩下的设备是如何和这台中心设备进行信息互通的呢？">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2020/02/26/BleMesh源码解析-如何实现设备多跳/q.jpg">
+<meta property="og:updated_time" content="2020-02-26T10:37:02.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="BleMesh源码解析-如何实现设备多跳">
+<meta name="twitter:description" content="什么是设备多跳？由于设备硬件的限制，一台中心设备所支持连接外围设备的最大连接数为6到7台，根据设备厂商的设计的设备性能不同，这个数量也有所改变。假如一台设备的最大连接数为7台，那么在一个50人的聊天群中，剩下的设备是如何和这台中心设备进行信息互通的呢？">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/26/BleMesh源码解析-如何实现设备多跳/q.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":12,"b2t":true,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/02/26/BleMesh源码解析-如何实现设备多跳/"/>
+
+
+
+
+
+  <title>BleMesh源码解析-如何实现设备多跳 | 非常好听的名字</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">非常好听的名字</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">个人技术博客</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/BleMesh源码解析-如何实现设备多跳/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/th.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="非常好听的名字">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">BleMesh源码解析-如何实现设备多跳</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-26T22:21:48+08:00">
+                2020-02-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          <!-- 本文阅读量 -->
+          
+
+          <!-- 字数统计 -->
+          
+              <span class="post-meta-divider">|</span>
+              <span class="post-wordcount">
+              <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                  <span class="post-meta-item-text">字数统计</span>
+              
+              <span title="字数统计">
+                  1,612 字
+              </span>
+          
+
+          
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              
+              <span title="阅读时长">
+                6 分钟
+              </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>什么是设备多跳？由于设备硬件的限制，一台中心设备所支持连接外围设备的最大连接数为6到7台，根据设备厂商的设计的设备性能不同，这个数量也有所改变。<br>假如一台设备的最大连接数为7台，那么在一个50人的聊天群中，剩下的设备是如何和这台中心设备进行信息互通的呢？</p>
+<a id="more"></a>
+<p><img src="/2020/02/26/BleMesh源码解析-如何实现设备多跳/../BleMesh源码解析-如何实现设备多跳/q.jpg" width="800" height="416" alt="与文无关，侵权必删"></p>
+<h4 id="验证成功后做了什么？"><a href="#验证成功后做了什么？" class="headerlink" title="验证成功后做了什么？"></a>验证成功后做了什么？</h4><p>我们继续上篇文章最后的流程，上次说到验证成功会回调<strong>directPeerStatusUpdated</strong>这个方法。我们来看看这个方法做了什么：<br><figure class="highlight groovy"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line">    <span class="keyword">public</span> <span class="keyword">void</span> directPeerStatusUpdated(<span class="meta">@NonNull</span> <span class="keyword">final</span> Peer peer, <span class="meta">@NonNull</span> <span class="keyword">final</span> Transport.ConnectionStatus newStatus, <span class="keyword">final</span> <span class="keyword">boolean</span> isHost) &#123;</span><br><span class="line">        GraphMessage mGraphMessage;</span><br><span class="line">        <span class="keyword">switch</span> (newStatus) &#123;</span><br><span class="line">            <span class="keyword">case</span> <span class="string">CONNECTED:</span></span><br><span class="line">                mPeersGraph.newDirectRemote(peer);</span><br><span class="line">                mGraphMessage = GraphMessage.createOutgoing(<span class="literal">null</span>, GraphMessage.ACTION_JOIN, GraphMessage.SINGLE_CAST, mPeersGraph);</span><br><span class="line">                sessionManager.sendMessage(mGraphMessage, peer);</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">case</span> <span class="string">DISCONNECTED:</span></span><br><span class="line">               	...</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们先来看看newStatus==CONNECTED的代码：</p>
+<ol>
+<li>peer就是验证成功的对象，是对方。</li>
+<li>mPeersGraph是本地的一个设备表，内部是LinkedHashMap，保存着各个在线的设备信息。</li>
+<li>mPeersGraph.newDirectRemote(peer)就是把新来的peer对象添加到本地中的设备信息中。</li>
+<li>创建一条GraphMessage消息，把本地的mPeersGraph设备信息表结构信息发给新连接成功的peer对象。</li>
+</ol>
+<p><strong>directPeerStatusUpdated</strong>这个方法做的事情就是这么简单，我收到了名叫“小明”的用户连接成功的消息，那么我先把他的信息保存在本地，然后把我本地的信息发给小明。</p>
+<h4 id="小明接收后做了什么？"><a href="#小明接收后做了什么？" class="headerlink" title="小明接收后做了什么？"></a>小明接收后做了什么？</h4><p>好，上面分析到我把本地的信息都发给了小明，小明什么时候接收到了呢？之前我们有说过，接收信息的方法是<strong>onCharacteristicChanged</strong>,经过一系列的回调，最终会回调到<strong>BleMeshService#messageReceivedFromPeer</strong>方法。<br>我们看看主要的代码：<br><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">switch</span> (message.getType()) &#123;</span><br><span class="line">            <span class="keyword">case</span> GraphMessage.HEADER_TYPE:</span><br><span class="line">                <span class="keyword">final</span> GraphMessage remoteGraphMessage = (GraphMessage) message;</span><br><span class="line">                <span class="keyword">if</span> (remoteGraphMessage.getAction() == GraphMessage.ACTION_JOIN) &#123;</span><br><span class="line">                    <span class="comment">// 对方传递过来的用户表结构</span></span><br><span class="line">                    PeersGraph remoteGraph = remoteGraphMessage.getPeersGraph();</span><br><span class="line">                    mPeersGraph.mergeGarph(sender, remoteGraph);</span><br><span class="line">                    remoteGraph.getEdgeMatrix().<span class="keyword">get</span>(sender.getMacAddress()).put(</span><br><span class="line">                            localPeer.getMacAddress(),</span><br><span class="line">                            mPeersGraph.getEdgeMatrix().<span class="keyword">get</span>(sender.getMacAddress()).<span class="keyword">get</span>(localPeer.getMacAddress())</span><br><span class="line">                    );</span><br><span class="line">                    <span class="comment">// 如果是 SINGLE_CAST 表示消息是别人仅发给自己的，别人收不到的,此时需要创建一条广播信息通知大家更新设备表</span></span><br><span class="line">                    <span class="keyword">if</span> (remoteGraphMessage.getCast() == GraphMessage.SINGLE_CAST) &#123;</span><br><span class="line">                        <span class="comment">// 添加消息源发送人</span></span><br><span class="line">                        <span class="built_in">Map</span>&lt;<span class="built_in">String</span>, <span class="built_in">Object</span>&gt; extra = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">                        extra.put(GraphMessage.HEADER_ORIGIN_MAC, sender.getMacAddress());</span><br><span class="line">                        <span class="comment">// 再通知其他用户，发送该用户结构表，让别人也合并</span></span><br><span class="line">                        GraphMessage broadcastGraphMessage = GraphMessage.createOutgoing(extra,</span><br><span class="line">                                GraphMessage.ACTION_JOIN,</span><br><span class="line">                                GraphMessage.BROADCAST,</span><br><span class="line">                                remoteGraph);</span><br><span class="line">                        sessionManager.broadcastMessage(broadcastGraphMessage, sender);</span><br><span class="line">                    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                    	...</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">                <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure></p>
+<p>我们来分析一下主要的代码：</p>
+<ol>
+<li>首先判断消息是不是GraphMessage消息类型再进一步处理</li>
+<li>getPeersGraph()拿到传递过来的设备信息表对象信息，并merge到本地的信息中</li>
+<li>如果消息的cast==GraphMessage.SINGLE_CAST，表示这条消息只是对方发给自己一个人的消息，自己收到后还需要去通知其他人，此时我肯定是新加入的那个人，发信息给我的那个人肯定是首先收到我连接成功的那个人，还有很多其他的人是不知道我进入的，所以需要发信息通知他们。</li>
+<li>继续新建GraphMessage消息，此时的cast就是GraphMessage.BROADCAST了，是群通知其他的人。</li>
+</ol>
+<p>归纳起来就是小明收到了我发给他个人的消息，把我本地的设备信息合并到他本地后，发送群消息把我的设备信息表群发给大家（为什么是我的？因为我的设备信息表中是最全面的）</p>
+<h4 id="其他人收到信息后如何处理？"><a href="#其他人收到信息后如何处理？" class="headerlink" title="其他人收到信息后如何处理？"></a>其他人收到信息后如何处理？</h4><p>还是这个方法，因为最终会回调到<strong>BleMeshService#messageReceivedFromPeer</strong>方法，此时判断的消息还是GraphMessage：<br><figure class="highlight processing"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">case</span> GraphMessage.HEADER_TYPE:</span><br><span class="line">    <span class="keyword">final</span> GraphMessage remoteGraphMessage = (GraphMessage) message;</span><br><span class="line">    <span class="keyword">if</span> (remoteGraphMessage.getAction() == GraphMessage.ACTION_JOIN) &#123;</span><br><span class="line">    	...</span><br><span class="line">        mPeersGraph.mergeGarph(sender, remoteGraph);</span><br><span class="line">        ...</span><br><span class="line">        <span class="comment">// 如果之前处理过这条消息的话就不再处理啦</span></span><br><span class="line">        <span class="keyword">if</span> (graphMessageIds.contains(remoteGraphMessage.getID())) &#123;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (remoteGraphMessage.getCast() == GraphMessage.SINGLE_CAST) &#123;</span><br><span class="line">            ...</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="comment">// 添加当前的消息ID，防止下次继续处理相同的东西</span></span><br><span class="line">            graphMessageIds.<span class="built_in">add</span>(message.getID());</span><br><span class="line">            <span class="comment">// 收到了别人的广播信息，继续用当前的消息通知其他人，此时需要去除消息源发件人和此消息发送人</span></span><br><span class="line">            <span class="built_in">boolean</span> isContain = remoteGraphMessage.getExtraHeaders().containsKey(GraphMessage.HEADER_ORIGIN_MAC);</span><br><span class="line">            <span class="keyword">String</span> originMessageSender = isContain ? (<span class="keyword">String</span>) remoteGraphMessage.getExtraHeaders().<span class="built_in">get</span>(GraphMessage.HEADER_ORIGIN_MAC) : <span class="string">""</span>;</span><br><span class="line">            sessionManager.broadcastMessage(message, originMessageSender, sender.getMacAddress());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">break</span>;</span><br></pre></td></tr></table></figure></p>
+<p>解读：</p>
+<ol>
+<li>if之前的处理都跟之前的是一样的，唯一不同的是if判断进入了else部分</li>
+<li>假如“小红”是这个网络中的一员，当他收到小明的信息后，也是把携带过去的设备信息合并到他本地中，然后继续把这条消息群通知给在网内的其他成员。</li>
+</ol>
+<h4 id="总结："><a href="#总结：" class="headerlink" title="总结："></a>总结：</h4><ol>
+<li>就这样的流程，一直到最后一个人收到这个信息后，继续发消息通知其他的人，但是其他的人已经处理过了这条消息，则不再处理。</li>
+<li>此时所有的网内成员的本地设备信息表中的信息都是一致的，都有其他剩下的人的信息，相当于自己保存了其他所有人的信息。</li>
+<li>现在假如A和Z不是相互连接的，即是A和Z不处于同一个范围内，相差的距离已经超出了蓝牙传输的距离，那么他们如何通讯呢？</li>
+<li>上面已经分析了本地设备网络表的发送原理，其实是一样的，不同的是，普通的消息传递，是以两个设备连接后的rssi信号的大小来计算两个设备的最短路径</li>
+<li>例如A发送信息给Z，A会通过rssi计算它自己连接的设备中，哪个是最优的距离，比如是H，那么A就会发信息给H</li>
+<li>当H收到了A发过来的信息，并且知道了目标用户不是他，他就会继续计算最优路径，比如Q，H就会向Q转发该信息</li>
+<li>以此类推，直到这条信息传递到Z，才会终止发送，此时就实现了从A到Z的一个过程，这个过程就叫做多跳</li>
+<li>最优路径怎么算？这个是算法的问题了，不在此文章的范畴。</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag"><i class="fa fa-tag"></i> Android</a>
+          
+            <a href="/tags/Bluetooth/" rel="tag"><i class="fa fa-tag"></i> Bluetooth</a>
+          
+            <a href="/tags/BLE/" rel="tag"><i class="fa fa-tag"></i> BLE</a>
+          
+            <a href="/tags/BleMesh/" rel="tag"><i class="fa fa-tag"></i> BleMesh</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/02/17/BleMesh源码解析-配对后的验证数据/" rel="next" title="BleMesh源码解析-配对后的验证数据">
+                <i class="fa fa-chevron-left"></i> BleMesh源码解析-配对后的验证数据
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/th.jpg"
+                alt="" />
+            
+              <p class="site-author-name" itemprop="name"></p>
+              <p class="site-description motion-element" itemprop="description">帅比</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">25</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.google.com" target="_blank" title="Google">
+                      
+                        <i class="fa fa-fw fa-google"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.youtube.com" target="_blank" title="YouTube">
+                      
+                        <i class="fa fa-fw fa-youtube"></i></a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="http://weibo.com" target="_blank" title="Weibo">
+                      
+                        <i class="fa fa-fw fa-weibo"></i></a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#验证成功后做了什么？"><span class="nav-number">1.</span> <span class="nav-text">验证成功后做了什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小明接收后做了什么？"><span class="nav-number">2.</span> <span class="nav-text">小明接收后做了什么？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他人收到信息后如何处理？"><span class="nav-number">3.</span> <span class="nav-text">其他人收到信息后如何处理？</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结："><span class="nav-number">4.</span> <span class="nav-text">总结：</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+        <div class="back-to-top">
+          <i class="fa fa-arrow-up"></i>
+          
+        </div>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 一念苍井便成空 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"></span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">网站总字数&#58;</span>
+    
+    <span title="网站总字数">32.1k</span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+<div id="hexo-helper-live2d">
+  <canvas id="live2dcanvas" width="150" height="300"></canvas>
+</div>
+<style>
+  #live2dcanvas{
+    position: fixed;
+    width: 150px;
+    height: 300px;
+    opacity:0.7;
+    right: 0px;
+    z-index: 999;
+    pointer-events: none;
+    bottom: -20px;
+  }
+</style>
+<script type="text/javascript" src="/live2d/device.min.js"></script>
+<script type="text/javascript">
+const loadScript = function loadScript(c,b){var a=document.createElement("script");a.type="text/javascript";"undefined"!=typeof b&&(a.readyState?a.onreadystatechange=function(){if("loaded"==a.readyState||"complete"==a.readyState)a.onreadystatechange=null,b()}:a.onload=function(){b()});a.src=c;document.body.appendChild(a)};
+(function(){
+  if((typeof(device) != 'undefined') && (device.mobile())){
+    document.getElementById("live2dcanvas").style.width = '75px';
+    document.getElementById("live2dcanvas").style.height = '150px';
+  }else
+    if (typeof(device) === 'undefined') console.error('Cannot find current-device script.');
+  loadScript("/live2d/script.js", function(){loadlive2d("live2dcanvas", "/live2d/assets/z16.model.json", 0.5);});
+})();
+</script>
+
+  <!-- 页面点击小红心 -->
+  <script type="text/javascript" src="/js/src/love.js"></script>
+
+  <!-- 搞怪标题 -->
+   
+<script>
+  var OriginTitile = document.title;
+  var titleTime;
+  document.addEventListener("visibilitychange", function() {
+    if (document.hidden) {
+      document.title = "(つェ⊂)我好像失宠了~" + OriginTitile;
+      clearTimeout(titleTime);
+    } else {
+      document.title = "(*´∇｀*) 我又回来啦~" + OriginTitile;
+      titleTime = setTimeout(function() {
+        document.title = OriginTitile;
+      }, 2000);
+    }
+  });
+</script>
+
+
+</body>
+</html>
